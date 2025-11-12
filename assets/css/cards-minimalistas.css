@@ -1,0 +1,775 @@
+/**
+ * Cards Minimalistas de Productos - Diseño Horizontal
+ * Replica el diseño original: imagen 72px izquierda + contenido derecha
+ */
+
+:root {
+    --bg-primary: #fafafa;
+    --bg-card: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 20px 40px -3px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================================
+   GRID DE PRODUCTOS
+   ============================================================================ */
+body.design-minimalist ul.products,
+body.design-minimalist .productos-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ============================================================================
+    CARD DE PRODUCTO - DISEÑO HORIZONTAL
+    ============================================================================ */
+body.design-minimalist .producto-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    border: 1px solid transparent;
+    min-height: 88px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body.design-minimalist .producto-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+    border-color: transparent;
+}
+
+body.design-minimalist .producto-card:hover .card-acciones {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Cards especiales: Destacado, Nuevo, Popular - Bordes mínimos */
+body.design-minimalist .producto-card.destacado {
+    border: 0.5px solid rgba(249, 115, 22, 0.15);
+    box-shadow: var(--shadow-sm);
+}
+
+body.design-minimalist .producto-card.nuevo {
+    border: 0.5px solid rgba(40, 167, 69, 0.15);
+    box-shadow: var(--shadow-sm);
+}
+
+body.design-minimalist .producto-card.popular {
+    border: 0.5px solid rgba(168, 85, 247, 0.15);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================================
+   IMAGEN DEL PRODUCTO - 72x72px
+   ============================================================================ */
+.producto-imagen {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+/* Gradientes coloridos modernos con ondas sutiles */
+.producto-imagen.gradient-1 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+}
+
+.producto-imagen.gradient-2 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+}
+
+.producto-imagen.gradient-3 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+}
+
+.producto-imagen.gradient-4 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+}
+
+.producto-imagen.gradient-5 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}
+
+.producto-imagen.gradient-6 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.producto-imagen.gradient-7 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+}
+
+.producto-imagen.gradient-8 {
+    background:
+        radial-gradient(circle 40px at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(circle 35px at 75% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 45px 30px at 80% 80%, rgba(0, 0, 0, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+/* Imágenes reales del producto */
+.producto-imagen-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* Badge circular PRO - MÁXIMA PRIORIDAD */
+body.design-minimalist .producto-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    z-index: 10 !important;
+}
+
+body.design-minimalist .badge-pro {
+    background: #1a1a1a;
+    color: #fbbf24;
+    padding: 0;
+}
+
+body.design-minimalist .badge-pro svg {
+    width: 13px;
+    height: 13px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    display: block;
+    margin: auto;
+}
+
+/* Botón de Play para Audio - Negro Transparente y Minimalista */
+.audio-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    opacity: 1;
+    visibility: visible;
+}
+
+.producto-imagen:hover .audio-play-btn {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.audio-play-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.audio-play-btn svg {
+    width: 16px;
+    height: 16px;
+    color: #ffffff;
+    transition: all 0.2s ease;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+/* Estados del botón de audio */
+.audio-play-btn.playing {
+    background: rgba(var(--saico-primario-rgb, 59, 130, 246), 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.audio-play-btn.playing svg {
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(0.95);
+    }
+}
+
+.audio-play-btn.loading {
+    background: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.audio-play-btn.loading svg {
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.audio-play-btn.error {
+    background: rgba(239, 68, 68, 0.9);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.audio-play-btn.error svg {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    75% {
+        transform: translateX(3px);
+    }
+}
+
+/* Contenedor MIDI */
+.midi-grid-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* ============================================================================
+    CONTENIDO DEL PRODUCTO
+    ============================================================================ */
+ .producto-contenido {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Categoría */
+.categoria-badge {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.1);
+    color: #1d4ed8;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 5;
+    width: auto;
+    max-width: 100px; /* Límite específico para badge */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.categoria-badge:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+/* Título del producto */
+body.design-minimalist .producto-card .producto-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+    /* Sin padding por defecto - expandido */
+}
+
+body.design-minimalist .producto-card:hover .producto-titulo {
+    padding-right: 80px; /* Espacio para acciones en hover - truncado */
+}
+
+body.design-minimalist .producto-card .producto-titulo a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+body.design-minimalist .producto-card .producto-titulo a:hover {
+    color: var(--saico-primario, #10b981) !important;
+}
+
+/* Stats (autor y tiempo) */
+ .producto-stats {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: flex-start !important;
+    align-items: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.card-stat-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: transparent !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    line-height: 1;
+}
+
+.card-stat-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--saico-primario, #10b981);
+    flex-shrink: 0;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+}
+
+.card-stat-value {
+    font-weight: 600;
+    color: var(--text-primary);
+    background: transparent !important;
+    text-shadow: none !important;
+    font-size: 12px;
+    box-shadow: none !important;
+    filter: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* ============================================================================
+    ACCIONES DEL CARD - Botón de acción
+    ============================================================================ */
+ .card-acciones {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 10;
+}
+
+body.design-minimalist .card-acciones .btn-icono {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+body.design-minimalist .card-acciones .btn-icono:hover {
+    background: var(--bg-primary);
+    border-color: var(--text-primary);
+    transform: scale(1.05);
+}
+
+body.design-minimalist .card-acciones .btn-icono svg {
+    width: 18px;
+    height: 18px;
+    fill: none !important;
+    stroke: var(--text-primary) !important;
+    stroke-width: 2 !important;
+    color: var(--text-primary) !important;
+}
+
+body.design-minimalist .card-acciones .btn-icono:hover svg {
+    stroke: var(--saico-primario, #10b981) !important;
+    color: var(--saico-primario, #10b981) !important;
+}
+
+/* ============================================================================
+   TOOLTIP - Solo visible al hover, NO bloquea la card
+   ============================================================================ */
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: rgba(255, 255, 255, 0.98);
+    color: #1a1a1a;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: left !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transition-delay: 0.5s;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.1);
+    z-index: 100;
+    min-width: 250px;
+    max-width: 320px;
+    will-change: opacity, visibility, transform;
+}
+
+/* Tooltip visible al hover */
+body.design-minimalist .producto-card:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Flecha del tooltip */
+.tooltip::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: rgba(255, 255, 255, 0.98);
+}
+
+.tooltip-titulo {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    color: #1a1a1a;
+}
+
+.tooltip-descripcion {
+    font-size: 11px;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    white-space: normal;
+}
+
+.tooltip-link {
+    margin-top: 6px;
+    margin-bottom: 8px;
+    text-align: left !important;
+}
+
+.tooltip-link-btn {
+    color: #10b981 !important;
+    text-decoration: none !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    pointer-events: auto !important;
+    transition: all 0.2s ease !important;
+    display: inline-block !important;
+    padding: 2px 0 !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+}
+
+.tooltip-link-btn:hover {
+    color: #059669 !important;
+    text-decoration: underline !important;
+}
+
+.tooltip-badges {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 8px;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.destacado {
+    background: #f97316;
+    color: white;
+}
+
+.status-badge.nuevo {
+    background: #10b981;
+    color: white;
+}
+
+.status-badge.popular {
+    background: #8b5cf6;
+    color: white;
+}
+
+.tooltip-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 6px;
+    text-align: left !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+
+.tooltip-stat {
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
+    gap: 6px;
+    text-align: left !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tooltip-label {
+    color: rgba(0,0,0,0.6);
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.tooltip-label svg {
+    flex-shrink: 0;
+    fill: none !important;
+    stroke: rgba(0,0,0,0.6) !important;
+    stroke-width: 2 !important;
+    color: rgba(0,0,0,0.6) !important;
+}
+
+.tooltip-value {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 11px;
+    text-align: left !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+/* Ocultar "Hace:" en grids de 4 columnas (1200px-1599px) */
+@media (min-width: 1200px) and (max-width: 1599px) {
+    body.design-minimalist .producto-stats .card-stat-item:nth-child(2) {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1199px) {
+    body.design-minimalist ul.products,
+    body.design-minimalist .productos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+        gap: 18px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body.design-minimalist ul.products,
+    body.design-minimalist .productos-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+
+    body.design-minimalist .producto-card {
+        padding: 14px;
+    }
+
+    .producto-imagen {
+        width: 64px;
+        height: 64px;
+    }
+
+    .producto-titulo {
+        font-size: 15px;
+    }
+
+    body.design-minimalist .card-acciones .btn-icono {
+        width: 38px;
+        height: 38px;
+    }
+
+    body.design-minimalist .card-acciones .btn-icono svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Ocultar tooltips en móvil */
+    .tooltip {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    body.design-minimalist ul.products,
+    body.design-minimalist .productos-grid {
+        gap: 12px !important;
+    }
+
+    body.design-minimalist .producto-card {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .producto-imagen {
+        width: 56px;
+        height: 56px;
+    }
+
+    .producto-titulo {
+        font-size: 14px;
+    }
+
+    .categoria-badge {
+        font-size: 10px;
+    }
+
+    .stat-item {
+        font-size: 11px;
+    }
+
+    .card-acciones {
+        gap: 6px;
+    }
+
+    body.design-minimalist .card-acciones .btn-icono {
+        width: 36px;
+        height: 36px;
+    }
+
+    body.design-minimalist .card-acciones .btn-icono svg {
+        width: 15px;
+        height: 15px;
+    }
+}

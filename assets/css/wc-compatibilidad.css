@@ -1,0 +1,1468 @@
+/**
+ * WooCommerce Compatibilidad - Saico WC
+ * Fixes y ajustes de compatibilidad con WooCommerce
+ */
+
+/* ============================================================================
+   RESET DE ESTILOS DE WOOCOMMERCE
+   ============================================================================ */
+
+/* Remover estilos de listas de WC */
+.woocommerce ul.products,
+.woocommerce-page ul.products {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remover clearfix innecesarios */
+.woocommerce .woocommerce-result-count,
+.woocommerce .woocommerce-ordering,
+.woocommerce-page .woocommerce-result-count,
+.woocommerce-page .woocommerce-ordering {
+    margin: 0 0 var(--saico-spacing-lg);
+}
+
+/* ============================================================================
+   BOTONES DE WOOCOMMERCE
+   ============================================================================ */
+.woocommerce a.button,
+.woocommerce button.button,
+.woocommerce input.button,
+.woocommerce #respond input#submit {
+    background-color: var(--saico-primario);
+    color: white;
+    border: none;
+    padding: var(--saico-spacing-md) var(--saico-spacing-lg);
+    border-radius: var(--saico-radius-md);
+    font-weight: var(--saico-font-weight-semibold);
+    transition: all var(--saico-transition-fast);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.woocommerce a.button:hover,
+.woocommerce button.button:hover,
+.woocommerce input.button:hover,
+.woocommerce #respond input#submit:hover {
+    background-color: var(--saico-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--saico-shadow-md);
+}
+
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt,
+.woocommerce #respond input#submit.alt {
+    background-color: var(--saico-secundario);
+}
+
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt:hover,
+.woocommerce #respond input#submit.alt:hover {
+    background-color: var(--saico-secundario-hover);
+}
+
+/* Botón disabled */
+.woocommerce a.button:disabled,
+.woocommerce button.button:disabled,
+.woocommerce input.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ============================================================================
+   ADD TO CART
+   ============================================================================ */
+.woocommerce .single_add_to_cart_button {
+    width: 100%;
+    padding: var(--saico-spacing-lg);
+    font-size: var(--saico-font-lg);
+}
+
+.woocommerce .quantity {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+}
+
+.woocommerce .quantity input[type="number"] {
+    width: 80px;
+    text-align: center;
+    padding: var(--saico-spacing-sm);
+}
+
+/* Botón añadir al carrito en loop */
+.woocommerce ul.products li.product .button {
+    width: 100%;
+    margin-top: var(--saico-spacing-md);
+}
+
+/* ============================================================================
+   MENSAJES DE WOOCOMMERCE
+   ============================================================================ */
+.woocommerce-message,
+.woocommerce-error,
+.woocommerce-info {
+    padding: var(--saico-spacing-md) var(--saico-spacing-lg);
+    margin-bottom: var(--saico-spacing-lg);
+    border-radius: var(--saico-radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+}
+
+.woocommerce-message::before,
+.woocommerce-error::before,
+.woocommerce-info::before {
+    display: none;
+}
+
+.woocommerce-message {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--saico-exito);
+    border-left: 4px solid var(--saico-exito);
+}
+
+.woocommerce-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--saico-error);
+    border-left: 4px solid var(--saico-error);
+}
+
+.woocommerce-info {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--saico-info);
+    border-left: 4px solid var(--saico-info);
+}
+
+.woocommerce-message a.button,
+.woocommerce-error a.button,
+.woocommerce-info a.button {
+    margin-left: auto;
+}
+
+/* ============================================================================
+   CARRITO (CART)
+   ============================================================================ */
+.woocommerce table.cart {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.woocommerce table.cart thead {
+    background-color: var(--saico-bg-secundario);
+}
+
+.woocommerce table.cart th,
+.woocommerce table.cart td {
+    padding: var(--saico-spacing-md);
+    border: 1px solid var(--saico-borde-claro);
+}
+
+.woocommerce table.cart img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--saico-radius-md);
+}
+
+.woocommerce .cart-collaterals {
+    margin-top: var(--saico-spacing-2xl);
+}
+
+.woocommerce .cart_totals {
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    box-shadow: var(--saico-shadow-md);
+    padding: var(--saico-spacing-xl);
+}
+
+.woocommerce .cart_totals h2 {
+    margin-bottom: var(--saico-spacing-lg);
+    padding-bottom: var(--saico-spacing-md);
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+/* ============================================================================
+   RATING (ESTRELLAS)
+   ============================================================================ */
+.woocommerce .star-rating {
+    overflow: hidden;
+    position: relative;
+    height: 1em;
+    line-height: 1;
+    font-size: 1em;
+    width: 5.4em;
+    font-family: star;
+    color: var(--saico-advertencia);
+}
+
+.woocommerce .star-rating::before {
+    content: '\2606\2606\2606\2606\2606';
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+    color: var(--saico-borde-medio);
+}
+
+.woocommerce .star-rating span {
+    overflow: hidden;
+    float: left;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding-top: 1.5em;
+}
+
+.woocommerce .star-rating span::before {
+    content: '\2605\2605\2605\2605\2605';
+    top: 0;
+    position: absolute;
+    left: 0;
+    color: var(--saico-advertencia);
+}
+
+/* ============================================================================
+   COMENTARIOS / REVIEWS
+   ============================================================================ */
+.woocommerce #reviews #comments ol.commentlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.woocommerce #reviews #comments ol.commentlist li {
+    padding: var(--saico-spacing-lg);
+    margin-bottom: var(--saico-spacing-lg);
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-lg);
+}
+
+.woocommerce #reviews #comments ol.commentlist li img.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: var(--saico-spacing-md);
+}
+
+.woocommerce #reviews #comments ol.commentlist li .comment-text {
+    padding: 0;
+    border: none;
+    margin-left: 75px;
+}
+
+.woocommerce #review_form #respond {
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-xl);
+    margin-top: var(--saico-spacing-xl);
+}
+
+/* ============================================================================
+   TABS DE PRODUCTO
+   ============================================================================ */
+.woocommerce div.product .woocommerce-tabs {
+    margin-top: var(--saico-spacing-2xl);
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: var(--saico-spacing-md);
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li {
+    margin: 0 0 -2px 0;
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li a {
+    padding: var(--saico-spacing-md) var(--saico-spacing-lg);
+    display: block;
+    color: var(--saico-texto-secundario);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all var(--saico-transition-fast);
+}
+
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a {
+    color: var(--saico-primario);
+    border-bottom-color: var(--saico-primario);
+}
+
+.woocommerce div.product .woocommerce-tabs .panel {
+    padding: var(--saico-spacing-xl) 0;
+}
+
+/* ============================================================================
+   BREADCRUMBS
+   ============================================================================ */
+.woocommerce .woocommerce-breadcrumb {
+    padding: var(--saico-spacing-md) 0;
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-sm);
+}
+
+.woocommerce .woocommerce-breadcrumb a {
+    color: var(--saico-primario);
+    text-decoration: none;
+}
+
+.woocommerce .woocommerce-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   MI CUENTA
+   ============================================================================ */
+.esaico-myaccount-layout {
+    display: flex;
+    gap: var(--saico-spacing-3xl);
+    margin-top: var(--saico-spacing-3xl);
+}
+
+.esaico-myaccount-sidebar {
+    flex: 0 0 320px;
+}
+
+.esaico-myaccount-main {
+    flex: 1;
+}
+
+/* ============================================================================
+   MI CUENTA - NAVEGACIÓN
+   ============================================================================ */
+.esaico-myaccount-nav {
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    box-shadow: var(--saico-shadow-md);
+    border: 1px solid var(--saico-borde-claro);
+    overflow: hidden;
+    position: sticky;
+    top: var(--saico-spacing-2xl);
+}
+
+/* Header del usuario */
+.esaico-myaccount-nav-header {
+    background: var(--saico-bg-secundario);
+    padding: var(--saico-spacing-xl);
+    border-bottom: 1px solid var(--saico-borde-claro);
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+}
+
+.esaico-user-avatar {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.esaico-user-avatar img {
+    border-radius: 50%;
+    border: 2px solid var(--saico-primario);
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    box-shadow: var(--saico-shadow-sm);
+}
+
+.esaico-user-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background: var(--saico-exito);
+    border-radius: 50%;
+    border: 2px solid var(--saico-bg-primario);
+}
+
+.esaico-user-info {
+    flex: 1;
+    text-align: left;
+    min-width: 0;
+}
+
+.esaico-user-info h4 {
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    margin-bottom: var(--saico-spacing-xs);
+    color: var(--saico-texto-primario);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.esaico-user-info p {
+    font-size: var(--saico-font-xs);
+    color: var(--saico-texto-secundario);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Navegación principal */
+.esaico-myaccount-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: var(--saico-spacing-md) 0;
+}
+
+.esaico-myaccount-nav ul li {
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+.esaico-myaccount-nav ul li:last-child {
+    border-bottom: none;
+}
+
+.esaico-myaccount-nav ul li a {
+    display: flex !important;
+    align-items: center;
+    padding: var(--saico-spacing-lg) var(--saico-spacing-xl);
+    color: var(--saico-texto-primario);
+    text-decoration: none;
+    border-radius: 0;
+    transition: all var(--saico-transition-fast);
+    font-weight: var(--saico-font-weight-medium);
+    font-size: var(--saico-font-base);
+    position: relative;
+    background: transparent;
+}
+
+.esaico-myaccount-nav ul li a:hover {
+    background: var(--saico-primario-light);
+    color: var(--saico-primario);
+    padding-left: calc(var(--saico-spacing-xl) + 8px);
+}
+
+.esaico-myaccount-nav ul li.is-active a {
+    font-weight: var(--saico-font-weight-semibold);
+    background: var(--saico-primario);
+    color: white;
+    padding-left: calc(var(--saico-spacing-xl) + 8px);
+}
+
+.esaico-myaccount-nav ul li.is-active a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    background: var(--saico-secundario);
+    border-radius: 0 var(--saico-radius-sm) var(--saico-radius-sm) 0;
+}
+
+.esaico-nav-icon {
+    margin-right: var(--saico-spacing-md);
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.esaico-nav-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: all var(--saico-transition-fast);
+}
+
+/* Color del icono según el estado */
+.esaico-myaccount-nav ul li a .esaico-nav-icon svg {
+    stroke: var(--saico-texto-secundario);
+}
+
+.esaico-myaccount-nav ul li a:hover .esaico-nav-icon svg {
+    stroke: var(--saico-primario);
+}
+
+.esaico-myaccount-nav ul li.is-active a .esaico-nav-icon svg {
+    stroke: white;
+}
+
+.esaico-nav-text {
+    flex: 1;
+}
+
+.esaico-nav-badge {
+    background: var(--saico-secundario);
+    color: white;
+    font-size: var(--saico-font-xs);
+    padding: var(--saico-spacing-xs) var(--saico-spacing-sm);
+    border-radius: var(--saico-radius-full);
+    font-weight: var(--saico-font-weight-bold);
+    min-width: 24px;
+    text-align: center;
+    line-height: 1;
+}
+
+/* Footer con estadísticas */
+.esaico-myaccount-nav-footer {
+    background: var(--saico-bg-primario);
+    padding: var(--saico-spacing-lg);
+    border-top: 1px solid var(--saico-borde-claro);
+}
+
+.esaico-account-stats {
+    display: flex;
+    gap: var(--saico-spacing-md);
+    justify-content: space-around;
+}
+
+.esaico-stat-item {
+    text-align: center;
+    flex: 1;
+    padding: var(--saico-spacing-sm);
+    background: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-stat-item:hover {
+    background: var(--saico-primario-light);
+    transform: translateY(-2px);
+}
+
+.esaico-stat-number {
+    display: block;
+    font-size: var(--saico-font-lg);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-primario);
+    margin-bottom: var(--saico-spacing-xs);
+}
+
+.esaico-stat-label {
+    font-size: var(--saico-font-xs);
+    color: var(--saico-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    font-weight: var(--saico-font-weight-medium);
+}
+
+/* Contenido principal de My Account */
+.esaico-myaccount-main .woocommerce-MyAccount-content {
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-4xl);
+    box-shadow: var(--saico-shadow-md);
+    border: 1px solid var(--saico-borde-claro);
+    min-height: 500px;
+}
+
+/* Enlaces en contenido de My Account */
+.esaico-myaccount-main .woocommerce-MyAccount-content a {
+    color: var(--saico-primario);
+    text-decoration: none;
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content a:hover {
+    color: var(--saico-primario-hover);
+    text-decoration: underline;
+}
+
+/* Títulos en My Account */
+.esaico-myaccount-main h2,
+.esaico-myaccount-main h3 {
+    color: var(--saico-texto-primario);
+    font-weight: var(--saico-font-weight-semibold);
+    margin-bottom: var(--saico-spacing-3xl);
+    font-size: var(--saico-font-2xl);
+    line-height: var(--saico-line-height-tight);
+}
+
+.esaico-myaccount-main h3 {
+    font-size: var(--saico-font-xl);
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+/* Formularios en My Account */
+.esaico-myaccount-main form {
+    margin-bottom: var(--saico-spacing-3xl);
+    background: var(--saico-bg-secundario);
+    padding: var(--saico-spacing-3xl);
+    border-radius: var(--saico-radius-md);
+    border: 1px solid var(--saico-borde-claro);
+}
+
+/* Tabla de pedidos */
+.esaico-myaccount-main .woocommerce-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--saico-spacing-3xl);
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-md);
+    overflow: hidden;
+    box-shadow: var(--saico-shadow-sm);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table th,
+.esaico-myaccount-main .woocommerce-orders-table td {
+    padding: var(--saico-spacing-xl);
+    text-align: left;
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table th {
+    background: var(--saico-bg-secundario);
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+    font-size: var(--saico-font-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.esaico-myaccount-main .woocommerce-orders-table tbody tr {
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table tbody tr:hover {
+    background: var(--saico-bg-secundario);
+    transform: scale(1.01);
+    box-shadow: var(--saico-shadow-sm);
+}
+
+/* Badges de estado de pedidos */
+.esaico-myaccount-main .woocommerce-orders-table .woocommerce-orders-table__cell-order-status mark {
+    padding: var(--saico-spacing-sm) var(--saico-spacing-md);
+    border-radius: var(--saico-radius-md);
+    font-weight: var(--saico-font-weight-semibold);
+    font-size: var(--saico-font-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    display: inline-block;
+}
+
+.esaico-myaccount-main .woocommerce-orders-table mark.status-completed {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--saico-exito);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table mark.status-processing {
+    background-color: rgba(59, 130, 246, 0.15);
+    color: var(--saico-info);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table mark.status-on-hold {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: var(--saico-advertencia);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table mark.status-cancelled,
+.esaico-myaccount-main .woocommerce-orders-table mark.status-failed {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--saico-error);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table mark.status-pending {
+    background-color: rgba(107, 114, 128, 0.15);
+    color: var(--saico-texto-secundario);
+}
+
+/* Número de pedido destacado */
+.esaico-myaccount-main .woocommerce-orders-table__cell-order-number a {
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-primario);
+    text-decoration: none;
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-orders-table__cell-order-number a:hover {
+    color: var(--saico-primario-hover);
+    text-decoration: underline;
+}
+
+/* Botones en My Account - ESTANDARIZACIÓN COMPLETA con máxima especificidad */
+.esaico-myaccount-main .woocommerce-MyAccount-content button,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"],
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"],
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-button,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-Button,
+.esaico-myaccount-main .woocommerce-MyAccount-content .button,
+.esaico-myaccount-main .woocommerce-MyAccount-content .btn,
+.esaico-myaccount-main .woocommerce-MyAccount-content a.button,
+.esaico-myaccount-main .woocommerce-MyAccount-content a.woocommerce-button,
+.esaico-myaccount-main .woocommerce-MyAccount-content .wp-block-button__link,
+.esaico-myaccount-main .woocommerce-MyAccount-content .wp-element-button {
+    background: var(--saico-primario) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: var(--saico-radius-md) !important;
+    font-weight: var(--saico-font-weight-semibold) !important;
+    font-size: var(--saico-font-base) !important;
+    text-decoration: none !important;
+    transition: all var(--saico-transition-fast) !important;
+    cursor: pointer !important;
+    padding: var(--saico-spacing-lg) var(--saico-spacing-3xl) !important;
+    box-shadow: var(--saico-shadow-sm) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--saico-spacing-sm) !important;
+    justify-content: center !important;
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content button:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"]:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"]:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-button:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-Button:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .button:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .btn:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content a.button:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content a.woocommerce-button:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .wp-block-button__link:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .wp-element-button:hover {
+    background: var(--saico-primario-hover) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--saico-shadow-lg) !important;
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content button:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"]:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"]:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-button:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-Button:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content .button:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content .btn:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content a.button:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content a.woocommerce-button:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content .wp-block-button__link:active,
+.esaico-myaccount-main .woocommerce-MyAccount-content .wp-element-button:active {
+    background: var(--saico-primario-hover) !important;
+    color: white !important;
+    transform: translateY(0) !important;
+    box-shadow: var(--saico-shadow-sm) !important;
+}
+
+/* Botones secundarios o alternativos en My Account - ESTANDARIZACIÓN COMPLETA */
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-button.alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-Button.alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content .button.alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content .btn.alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content button.alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"].alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"].alt,
+.esaico-myaccount-main .woocommerce-MyAccount-content .secondary,
+.esaico-myaccount-main .woocommerce-MyAccount-content button.secondary,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"].secondary,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"].secondary {
+    background: var(--saico-secundario) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: var(--saico-radius-md) !important;
+    font-weight: var(--saico-font-weight-semibold) !important;
+    font-size: var(--saico-font-base) !important;
+    text-decoration: none !important;
+    transition: all var(--saico-transition-fast) !important;
+    cursor: pointer !important;
+    padding: var(--saico-spacing-lg) var(--saico-spacing-3xl) !important;
+    box-shadow: var(--saico-shadow-sm) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: var(--saico-spacing-sm) !important;
+    justify-content: center !important;
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-button.alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-Button.alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .button.alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .btn.alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content button.alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"].alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"].alt:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content .secondary:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content button.secondary:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="button"].secondary:hover,
+.esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"].secondary:hover {
+    background: var(--saico-secundario-hover) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--saico-shadow-lg) !important;
+}
+
+/* Campos de formulario mejorados */
+.esaico-myaccount-main .form-row {
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+.esaico-myaccount-main .form-row label {
+    display: block;
+    font-weight: var(--saico-font-weight-medium);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-sm);
+    font-size: var(--saico-font-sm);
+}
+
+.esaico-myaccount-main .form-row input[type="text"],
+.esaico-myaccount-main .form-row input[type="email"],
+.esaico-myaccount-main .form-row input[type="password"],
+.esaico-myaccount-main .form-row input[type="tel"],
+.esaico-myaccount-main .form-row input[type="url"],
+.esaico-myaccount-main .form-row textarea,
+.esaico-myaccount-main .form-row select {
+    width: 100%;
+    padding: var(--saico-spacing-lg);
+    border: 2px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-md);
+    font-size: var(--saico-font-base);
+    transition: all var(--saico-transition-fast);
+    background: var(--saico-bg-primario);
+    color: var(--saico-texto-primario);
+}
+
+.esaico-myaccount-main .form-row input:focus,
+.esaico-myaccount-main .form-row textarea:focus,
+.esaico-myaccount-main .form-row select:focus {
+    outline: none;
+    border-color: var(--saico-primario);
+    box-shadow: 0 0 0 3px rgba(0, 124, 186, 0.1);
+}
+
+/* Mensajes de WooCommerce */
+.esaico-myaccount-main .woocommerce-message,
+.esaico-myaccount-main .woocommerce-info,
+.esaico-myaccount-main .woocommerce-error {
+    padding: var(--saico-spacing-xl);
+    border-radius: var(--saico-radius-md);
+    margin-bottom: var(--saico-spacing-xl);
+    border-left: 4px solid;
+    font-weight: var(--saico-font-weight-medium);
+    background: var(--saico-bg-secundario);
+    border: 1px solid var(--saico-borde-claro);
+}
+
+.esaico-myaccount-main .woocommerce-message {
+    border-left-color: var(--saico-exito);
+    color: var(--saico-texto-primario);
+}
+
+.esaico-myaccount-main .woocommerce-info {
+    border-left-color: var(--saico-info);
+    color: var(--saico-texto-primario);
+}
+
+.esaico-myaccount-main .woocommerce-error {
+    border-left-color: var(--saico-error);
+    color: var(--saico-texto-primario);
+}
+
+/* ============================================================================
+   DIRECCIONES
+   ============================================================================ */
+.esaico-myaccount-main .woocommerce-Addresses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--saico-spacing-2xl);
+}
+
+.esaico-myaccount-main .woocommerce-Address {
+    background: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-2xl);
+    border: 2px solid var(--saico-borde-claro);
+    transition: all var(--saico-transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.esaico-myaccount-main .woocommerce-Address::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(135deg, var(--saico-primario) 0%, var(--saico-secundario) 100%);
+}
+
+.esaico-myaccount-main .woocommerce-Address:hover {
+    border-color: var(--saico-primario);
+    box-shadow: var(--saico-shadow-lg);
+    transform: translateY(-4px);
+}
+
+.esaico-myaccount-main .woocommerce-Address-title h3 {
+    font-size: var(--saico-font-lg);
+    margin-bottom: var(--saico-spacing-lg);
+    color: var(--saico-primario);
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+}
+
+.esaico-myaccount-main .woocommerce-Address-title h3::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%230B996E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.esaico-myaccount-main .woocommerce-Address address {
+    font-style: normal;
+    line-height: var(--saico-line-height-relaxed);
+    color: var(--saico-texto-secundario);
+    margin-bottom: var(--saico-spacing-lg);
+}
+
+/* ============================================================================
+   DASHBOARD - TARJETAS DE RESUMEN
+   ============================================================================ */
+.esaico-myaccount-main .woocommerce-MyAccount-content > p:first-of-type {
+    background: linear-gradient(135deg, var(--saico-primario-light) 0%, var(--saico-acento-light) 100%);
+    padding: var(--saico-spacing-2xl);
+    border-radius: var(--saico-radius-lg);
+    border-left: 4px solid var(--saico-primario);
+    margin-bottom: var(--saico-spacing-2xl);
+    font-size: var(--saico-font-lg);
+    line-height: var(--saico-line-height-relaxed);
+}
+
+/* Cards del dashboard */
+.esaico-dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--saico-spacing-xl);
+    margin-bottom: var(--saico-spacing-3xl);
+}
+
+.esaico-dashboard-card {
+    background: var(--saico-bg-primario);
+    border: 2px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-xl);
+    transition: all var(--saico-transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.esaico-dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: var(--saico-primario-light);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    transition: all var(--saico-transition-base);
+}
+
+.esaico-dashboard-card:hover {
+    border-color: var(--saico-primario);
+    box-shadow: var(--saico-shadow-lg);
+    transform: translateY(-4px);
+}
+
+.esaico-dashboard-card:hover::before {
+    transform: translate(20%, -20%) scale(1.2);
+}
+
+.esaico-dashboard-card-icon {
+    font-size: var(--saico-font-3xl);
+    color: var(--saico-primario);
+    margin-bottom: var(--saico-spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.esaico-dashboard-card-title {
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--saico-spacing-sm);
+    font-weight: var(--saico-font-weight-semibold);
+}
+
+.esaico-dashboard-card-value {
+    font-size: var(--saico-font-3xl);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================================
+   DESCARGAS
+   ============================================================================ */
+.esaico-myaccount-main .woocommerce-MyAccount-downloads {
+    display: grid;
+    gap: var(--saico-spacing-lg);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-downloads tr {
+    background: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    padding: var(--saico-spacing-lg);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: var(--saico-spacing-lg);
+    align-items: center;
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-downloads tr:hover {
+    background: var(--saico-primario-light);
+    box-shadow: var(--saico-shadow-sm);
+}
+
+/* ============================================================================
+   MÉTODOS DE PAGO
+   ============================================================================ */
+.esaico-myaccount-main .woocommerce-PaymentMethods {
+    display: grid;
+    gap: var(--saico-spacing-lg);
+}
+
+.esaico-myaccount-main .woocommerce-PaymentMethod {
+    background: var(--saico-bg-secundario);
+    border: 2px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-xl);
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-PaymentMethod:hover {
+    border-color: var(--saico-primario);
+    box-shadow: var(--saico-shadow-md);
+}
+
+/* ============================================================================
+   ANIMACIONES Y TRANSICIONES
+   ============================================================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.esaico-myaccount-nav {
+    animation: fadeInUp 0.5s ease-out 0.1s backwards;
+}
+
+/* ============================================================================
+   MEJORAS VISUALES ADICIONALES
+   ============================================================================ */
+
+/* Mejora de enlaces del dashboard */
+.esaico-myaccount-main .woocommerce-MyAccount-content > p a {
+    color: var(--saico-primario);
+    text-decoration: none;
+    font-weight: var(--saico-font-weight-semibold);
+    position: relative;
+    transition: all var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content > p a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--saico-primario);
+    transition: width var(--saico-transition-fast);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content > p a:hover {
+    color: var(--saico-primario-hover);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content > p a:hover::after {
+    width: 100%;
+}
+
+/* Sombras y elevaciones mejoradas */
+.esaico-myaccount-main .woocommerce-MyAccount-content {
+    position: relative;
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(135deg, var(--saico-primario-light) 0%, var(--saico-acento-light) 100%);
+    border-radius: var(--saico-radius-xl);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity var(--saico-transition-base);
+}
+
+/* Badges personalizados */
+.esaico-badge {
+    display: inline-block;
+    padding: var(--saico-spacing-xs) var(--saico-spacing-sm);
+    border-radius: var(--saico-radius-full);
+    font-size: var(--saico-font-xs);
+    font-weight: var(--saico-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.esaico-badge-success {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--saico-exito);
+}
+
+.esaico-badge-warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--saico-advertencia);
+}
+
+.esaico-badge-info {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--saico-info);
+}
+
+.esaico-badge-error {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--saico-error);
+}
+
+/* Tooltips para iconos */
+.esaico-nav-icon {
+    position: relative;
+}
+
+/* Separadores visuales */
+.esaico-myaccount-main hr,
+.esaico-myaccount-main .woocommerce-MyAccount-content hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--saico-borde-claro) 50%, transparent);
+    margin: var(--saico-spacing-3xl) 0;
+}
+
+/* Mejora de listas */
+.esaico-myaccount-main .woocommerce-MyAccount-content ul:not(.woocommerce-error):not(.woocommerce-message):not(.woocommerce-info) {
+    padding-left: var(--saico-spacing-lg);
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content ul li {
+    padding: var(--saico-spacing-xs) 0;
+    position: relative;
+}
+
+.esaico-myaccount-main .woocommerce-MyAccount-content ul li::marker {
+    color: var(--saico-primario);
+}
+
+/* Notas y avisos */
+.esaico-myaccount-main .woocommerce-MyAccount-content .woocommerce-notice {
+    background: var(--saico-bg-secundario);
+    border-left: 4px solid var(--saico-primario);
+    padding: var(--saico-spacing-lg);
+    border-radius: var(--saico-radius-md);
+    margin-bottom: var(--saico-spacing-lg);
+}
+
+/* Estado de carga (skeleton) */
+.esaico-skeleton {
+    background: linear-gradient(90deg, var(--saico-bg-secundario) 25%, var(--saico-bg-terciario) 50%, var(--saico-bg-secundario) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease-in-out infinite;
+    border-radius: var(--saico-radius-md);
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Mejoras de accesibilidad */
+.esaico-myaccount-nav ul li a:focus,
+.esaico-myaccount-main .woocommerce-MyAccount-content a:focus,
+.esaico-myaccount-main .woocommerce-MyAccount-content button:focus {
+    outline: 2px solid var(--saico-primario);
+    outline-offset: 2px;
+}
+
+/* Estados vacíos con estilo */
+.esaico-myaccount-main .woocommerce-message.woocommerce-message--info {
+    text-align: center;
+    padding: var(--saico-spacing-4xl) var(--saico-spacing-2xl);
+}
+
+/* ============================================================================
+   ONSALE BADGE
+   ============================================================================ */
+.woocommerce span.onsale {
+    background-color: var(--saico-secundario);
+    color: white;
+    padding: var(--saico-spacing-sm) var(--saico-spacing-md);
+    border-radius: var(--saico-radius-md);
+    font-size: var(--saico-font-xs);
+    font-weight: var(--saico-font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   PRECIO
+   ============================================================================ */
+.woocommerce .price {
+    color: var(--saico-primario);
+    font-weight: var(--saico-font-weight-bold);
+}
+
+.woocommerce .price del {
+    color: var(--saico-texto-terciario);
+    opacity: 0.7;
+}
+
+.woocommerce .price ins {
+    text-decoration: none;
+    color: var(--saico-primario);
+}
+
+/* ============================================================================
+   RESPONSIVE FIXES
+   ============================================================================ */
+@media (max-width: 768px) {
+    .woocommerce table.cart img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .woocommerce table.cart td.product-remove,
+    .woocommerce table.cart td.product-thumbnail {
+        padding: var(--saico-spacing-sm);
+    }
+
+    .woocommerce .cart_totals {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .woocommerce div.product .woocommerce-tabs ul.tabs {
+        flex-wrap: wrap;
+    }
+
+    /* My Account Mobile */
+    .esaico-myaccount-layout {
+        flex-direction: column;
+        gap: var(--saico-spacing-xl);
+        margin-top: var(--saico-spacing-xl);
+    }
+
+    .esaico-myaccount-sidebar {
+        flex: none;
+        width: 100%;
+    }
+
+    .esaico-myaccount-nav {
+        position: static;
+    }
+
+    .esaico-myaccount-nav-header {
+        padding: var(--saico-spacing-md);
+    }
+
+    .esaico-user-avatar img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .esaico-user-avatar::after {
+        width: 10px;
+        height: 10px;
+    }
+
+    .esaico-user-info h4 {
+        font-size: var(--saico-font-sm);
+    }
+
+    .esaico-myaccount-nav ul li a {
+        padding: var(--saico-spacing-md) var(--saico-spacing-lg);
+        font-size: var(--saico-font-sm);
+    }
+
+    .esaico-myaccount-nav ul li a:hover,
+    .esaico-myaccount-nav ul li.is-active a {
+        padding-left: var(--saico-spacing-lg);
+    }
+
+    .esaico-nav-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: var(--saico-spacing-sm);
+    }
+
+    .esaico-myaccount-nav-footer {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .esaico-account-stats {
+        flex-direction: row;
+        gap: var(--saico-spacing-md);
+    }
+
+    .esaico-stat-number {
+        font-size: var(--saico-font-lg);
+    }
+
+    .esaico-myaccount-main .woocommerce-MyAccount-content {
+        padding: var(--saico-spacing-xl);
+    }
+
+    .esaico-myaccount-main h2 {
+        font-size: var(--saico-font-xl);
+        margin-bottom: var(--saico-spacing-xl);
+    }
+
+    /* Tablas responsive */
+    .esaico-myaccount-main .woocommerce-orders-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .esaico-myaccount-main .woocommerce-orders-table th,
+    .esaico-myaccount-main .woocommerce-orders-table td {
+        padding: var(--saico-spacing-md);
+        font-size: var(--saico-font-sm);
+        white-space: nowrap;
+    }
+
+    .esaico-myaccount-main .woocommerce-orders-table tbody tr:hover {
+        transform: none;
+    }
+
+    /* Botones móviles */
+    .esaico-myaccount-main .woocommerce-MyAccount-content button,
+    .esaico-myaccount-main .woocommerce-MyAccount-content .button,
+    .esaico-myaccount-main .woocommerce-MyAccount-content input[type="submit"] {
+        padding: var(--saico-spacing-md) var(--saico-spacing-xl) !important;
+        font-size: var(--saico-font-sm) !important;
+        width: 100%;
+    }
+
+    /* Direcciones responsive */
+    .esaico-myaccount-main .woocommerce-Addresses {
+        grid-template-columns: 1fr;
+        gap: var(--saico-spacing-lg);
+    }
+
+    .esaico-myaccount-main .woocommerce-Address {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .esaico-myaccount-main .woocommerce-Address:hover {
+        transform: none;
+    }
+
+    /* Dashboard cards */
+    .esaico-dashboard-cards {
+        grid-template-columns: 1fr;
+        gap: var(--saico-spacing-md);
+    }
+
+    .esaico-dashboard-card {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .esaico-dashboard-card-icon {
+        font-size: var(--saico-font-2xl);
+    }
+
+    .esaico-dashboard-card-value {
+        font-size: var(--saico-font-2xl);
+    }
+
+    /* Formularios */
+    .esaico-myaccount-main form {
+        padding: var(--saico-spacing-xl);
+    }
+
+    .esaico-myaccount-main .form-row input,
+    .esaico-myaccount-main .form-row textarea,
+    .esaico-myaccount-main .form-row select {
+        padding: var(--saico-spacing-md);
+        font-size: var(--saico-font-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .esaico-myaccount-layout {
+        gap: var(--saico-spacing-xl);
+    }
+
+    .esaico-myaccount-nav {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .esaico-myaccount-main .woocommerce-MyAccount-content {
+        padding: var(--saico-spacing-xl);
+    }
+
+    .esaico-myaccount-main h2 {
+        font-size: var(--saico-font-xl);
+    }
+
+    .esaico-myaccount-main h3 {
+        font-size: var(--saico-font-lg);
+    }
+}
+
+/* ============================================================================
+   CLEARFIX
+   ============================================================================ */
+.woocommerce::after,
+.woocommerce::before,
+.woocommerce-page::after,
+.woocommerce-page::before {
+    content: '';
+    display: table;
+}
+
+.woocommerce::after,
+.woocommerce-page::after {
+    clear: both;
+}

@@ -1,0 +1,363 @@
+/**
+ * Productos Relacionados - Saico WC
+ * Estilos para la sección de productos relacionados
+ */
+
+/* ============================================================================
+   SECCIÓN DE RELACIONADOS
+   ============================================================================ */
+.saico-productos-relacionados {
+    padding: var(--saico-spacing-2xl) 0;
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-xl);
+    margin-top: var(--saico-spacing-3xl);
+}
+
+.saico-productos-relacionados h2 {
+    font-size: var(--saico-font-3xl);
+    font-weight: var(--saico-font-weight-bold);
+    text-align: center;
+    margin-bottom: var(--saico-spacing-xl);
+    color: var(--saico-texto-primario);
+    position: relative;
+    padding-bottom: var(--saico-spacing-md);
+}
+
+.saico-productos-relacionados h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--saico-primario), var(--saico-acento));
+    border-radius: var(--saico-radius-full);
+}
+
+/* ============================================================================
+   GRID DE PRODUCTOS
+   ============================================================================ */
+.saico-productos-relacionados .productos-grid {
+    padding: 0 var(--saico-spacing-lg);
+}
+
+/* ============================================================================
+   BOTÓN VER MÁS
+   ============================================================================ */
+.saico-relacionados-ver-mas {
+    text-align: center;
+    margin-top: var(--saico-spacing-xl);
+}
+
+.saico-relacionados-ver-mas .saico-btn {
+    min-width: 200px;
+}
+
+/* ============================================================================
+   MODAL DE RELACIONADOS
+   ============================================================================ */
+.saico-modal-relacionados {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--saico-z-modal);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--saico-spacing-lg);
+}
+
+.saico-modal-relacionados.activo {
+    display: flex;
+}
+
+/* Backdrop del modal */
+.modal-relacionados-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    animation: fade-in 0.3s ease-out;
+}
+
+/* Contenido del modal */
+.modal-relacionados-contenido {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-xl);
+    box-shadow: var(--saico-shadow-2xl);
+    overflow: hidden;
+    animation: slide-up 0.4s ease-out;
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header del modal */
+.modal-relacionados-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--saico-spacing-lg);
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+.modal-relacionados-header h3 {
+    font-size: var(--saico-font-2xl);
+    font-weight: var(--saico-font-weight-bold);
+    margin: 0;
+}
+
+.modal-relacionados-cerrar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    border-radius: var(--saico-radius-md);
+    cursor: pointer;
+    transition: all var(--saico-transition-fast);
+    color: var(--saico-texto-secundario);
+}
+
+.modal-relacionados-cerrar:hover {
+    background-color: var(--saico-bg-secundario);
+    color: var(--saico-texto-primario);
+}
+
+.modal-relacionados-cerrar svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2px;
+}
+
+/* Body del modal */
+.modal-relacionados-body {
+    padding: var(--saico-spacing-lg);
+    max-height: calc(90vh - 160px);
+    overflow-y: auto;
+}
+
+.modal-relacionados-body .productos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--saico-spacing-lg);
+}
+
+/* Footer del modal */
+.modal-relacionados-footer {
+    padding: var(--saico-spacing-lg);
+    border-top: 2px solid var(--saico-borde-claro);
+    text-align: center;
+}
+
+/* ============================================================================
+   LOADING STATE
+   ============================================================================ */
+.relacionados-cargando {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--saico-spacing-3xl);
+    gap: var(--saico-spacing-md);
+}
+
+.relacionados-cargando .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--saico-borde-claro);
+    border-top-color: var(--saico-primario);
+    border-radius: 50%;
+    animation: spinner-rotate 0.8s linear infinite;
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.relacionados-cargando p {
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-sm);
+    margin: 0;
+}
+
+/* ============================================================================
+   PAGINACIÓN DE RELACIONADOS
+   ============================================================================ */
+.relacionados-paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+    margin-top: var(--saico-spacing-xl);
+}
+
+.relacionados-paginacion button {
+    padding: var(--saico-spacing-sm) var(--saico-spacing-md);
+    background-color: var(--saico-bg-primario);
+    border: 2px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-md);
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-sm);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all var(--saico-transition-fast);
+}
+
+.relacionados-paginacion button:hover:not(:disabled) {
+    background-color: var(--saico-primario);
+    border-color: var(--saico-primario);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.relacionados-paginacion button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.relacionados-paginacion button.activo {
+    background-color: var(--saico-primario);
+    border-color: var(--saico-primario);
+    color: white;
+}
+
+.relacionados-paginacion .pagina-info {
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-secundario);
+    padding: 0 var(--saico-spacing-md);
+}
+
+/* ============================================================================
+   MENSAJE DE SIN PRODUCTOS
+   ============================================================================ */
+.relacionados-sin-productos {
+    text-align: center;
+    padding: var(--saico-spacing-3xl);
+    color: var(--saico-texto-secundario);
+}
+
+.relacionados-sin-productos svg {
+    width: 64px;
+    height: 64px;
+    stroke: var(--saico-texto-terciario);
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.relacionados-sin-productos p {
+    font-size: var(--saico-font-lg);
+    margin: 0;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 992px) {
+    .modal-relacionados-body .productos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .saico-productos-relacionados {
+        padding: var(--saico-spacing-xl) 0;
+        margin-top: var(--saico-spacing-2xl);
+    }
+
+    .saico-productos-relacionados h2 {
+        font-size: var(--saico-font-2xl);
+    }
+
+    .saico-productos-relacionados .productos-grid {
+        padding: 0;
+    }
+
+    .modal-relacionados-contenido {
+        max-height: 95vh;
+        border-radius: var(--saico-radius-lg);
+    }
+
+    .modal-relacionados-header {
+        padding: var(--saico-spacing-md);
+    }
+
+    .modal-relacionados-header h3 {
+        font-size: var(--saico-font-xl);
+    }
+
+    .modal-relacionados-body {
+        padding: var(--saico-spacing-md);
+        max-height: calc(95vh - 140px);
+    }
+
+    .modal-relacionados-body .productos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--saico-spacing-md);
+    }
+
+    .modal-relacionados-footer {
+        padding: var(--saico-spacing-md);
+    }
+
+    .relacionados-paginacion {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-modal-relacionados {
+        padding: var(--saico-spacing-sm);
+    }
+
+    .modal-relacionados-body .productos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .relacionados-paginacion button {
+        padding: var(--saico-spacing-xs) var(--saico-spacing-sm);
+        font-size: 12px;
+    }
+}
+
+/* ============================================================================
+   CUSTOMIZACIÓN DE SCROLL
+   ============================================================================ */
+.modal-relacionados-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-relacionados-body::-webkit-scrollbar-track {
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+}
+
+.modal-relacionados-body::-webkit-scrollbar-thumb {
+    background-color: var(--saico-borde-medio);
+    border-radius: var(--saico-radius-md);
+}
+
+.modal-relacionados-body::-webkit-scrollbar-thumb:hover {
+    background-color: var(--saico-primario);
+}

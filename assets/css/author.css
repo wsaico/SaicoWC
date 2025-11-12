@@ -1,0 +1,668 @@
+/**
+ * Página de Autor
+ * Estilos para la página de perfil del autor
+ *
+ * @package SaicoWC
+ * @version 1.0.0
+ */
+
+/* ============================================================================
+   HEADER DEL AUTOR
+   ============================================================================ */
+
+.saico-autor-page {
+    padding: var(--saico-spacing-xl) 0;
+    min-height: 60vh;
+}
+
+.autor-header {
+    position: relative;
+    margin-bottom: var(--saico-spacing-xl);
+    border-radius: var(--saico-radius-xl);
+    overflow: hidden;
+    background: var(--saico-bg-primario);
+    box-shadow: var(--saico-shadow-md);
+}
+
+.autor-header-bg {
+    height: 120px;
+    background: linear-gradient(135deg, var(--saico-primario) 0%, var(--saico-primario-dark) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.autor-header-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    animation: headerPulse 8s ease-in-out infinite;
+}
+
+@keyframes headerPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.autor-header-content {
+    padding: 0 var(--saico-spacing-lg) var(--saico-spacing-lg);
+    position: relative;
+    margin-top: -50px;
+}
+
+/* Avatar */
+.autor-avatar {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto var(--saico-spacing-md);
+}
+
+.autor-avatar .avatar-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 4px solid var(--saico-bg-primario);
+    box-shadow: var(--saico-shadow-lg);
+    display: block;
+    object-fit: cover;
+}
+
+.autor-badge-verificado {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 26px;
+    height: 26px;
+    background: var(--saico-primario);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: 2px solid var(--saico-bg-primario);
+    box-shadow: var(--saico-shadow-md);
+}
+
+.autor-badge-verificado svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Info del Autor */
+.autor-info {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.autor-nombre {
+    font-size: var(--saico-font-2xl);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-xs);
+    line-height: 1.2;
+}
+
+.autor-web {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--saico-spacing-xs);
+    color: var(--saico-primario);
+    text-decoration: none;
+    font-size: var(--saico-font-sm);
+    font-weight: var(--saico-font-weight-medium);
+    margin-bottom: var(--saico-spacing-sm);
+    transition: all 0.3s ease;
+}
+
+.autor-web:hover {
+    color: var(--saico-primario-dark);
+    gap: var(--saico-spacing-sm);
+}
+
+.autor-web svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2px;
+}
+
+.autor-bio {
+    color: var(--saico-texto-secundario);
+    line-height: var(--saico-line-height-relaxed);
+    margin-bottom: var(--saico-spacing-md);
+    font-size: var(--saico-font-sm);
+}
+
+/* Stats */
+.autor-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--saico-spacing-md);
+    flex-wrap: wrap;
+}
+
+.autor-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--saico-spacing-sm) var(--saico-spacing-md);
+    background: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    min-width: 90px;
+    transition: all 0.3s ease;
+}
+
+.autor-stat:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--saico-shadow-sm);
+}
+
+.autor-stat svg {
+    width: 18px;
+    height: 18px;
+    color: var(--saico-primario);
+    stroke-width: 2px;
+}
+
+.autor-stat .stat-valor {
+    font-size: var(--saico-font-lg);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    line-height: 1;
+}
+
+.autor-stat .stat-label {
+    font-size: 11px;
+    color: var(--saico-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-weight: var(--saico-font-weight-medium);
+}
+
+/* ============================================================================
+   TABS
+   ============================================================================ */
+
+.autor-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: var(--saico-spacing-xl);
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+.autor-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-xs);
+    padding: var(--saico-spacing-sm) var(--saico-spacing-lg);
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-sm);
+    font-weight: var(--saico-font-weight-semibold);
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: -2px;
+    flex: 1;
+    justify-content: center;
+}
+
+.autor-tab svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2px;
+    transition: transform 0.3s ease;
+}
+
+.autor-tab:hover {
+    color: var(--saico-primario);
+    background: var(--saico-primario-light);
+}
+
+.autor-tab.activo {
+    color: var(--saico-primario);
+    border-bottom-color: var(--saico-primario);
+}
+
+.autor-tab.activo svg {
+    transform: scale(1.05);
+}
+
+/* ============================================================================
+   CONTENIDO DE TABS
+   ============================================================================ */
+
+.autor-content {
+    min-height: 400px;
+}
+
+.autor-tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.autor-tab-content.activo {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sin contenido */
+.autor-sin-contenido {
+    text-align: center;
+    padding: var(--saico-spacing-3xl);
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-xl);
+    border: 2px dashed var(--saico-borde-claro);
+}
+
+.autor-sin-contenido svg {
+    color: var(--saico-texto-terciario);
+    margin-bottom: var(--saico-spacing-lg);
+    stroke-width: 1.5px;
+}
+
+.autor-sin-contenido h3 {
+    font-size: var(--saico-font-xl);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-sm);
+}
+
+.autor-sin-contenido p {
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-base);
+}
+
+/* Cargar Más */
+.autor-cargar-mas {
+    margin-top: var(--saico-spacing-2xl);
+    text-align: center;
+}
+
+.autor-cargar-mas .saico-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+}
+
+.autor-cargar-mas .saico-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.autor-cargar-mas .saico-btn:hover svg {
+    transform: translateY(3px);
+}
+
+.autor-cargar-mas .saico-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============================================================================
+   PRODUCTOS EN AUTOR
+   ============================================================================ */
+
+#autorProductos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--saico-spacing-xl);
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+/* ============================================================================
+   POSTS EN AUTOR
+   ============================================================================ */
+
+.saico-posts-lista {
+    display: grid;
+    gap: var(--saico-spacing-xl);
+}
+
+.saico-post-card {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--saico-spacing-lg);
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--saico-shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.saico-post-card:hover {
+    box-shadow: var(--saico-shadow-md);
+    transform: translateY(-2px);
+}
+
+.post-card-imagen {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: var(--saico-bg-secundario);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-card-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.saico-post-card:hover .post-card-imagen img {
+    transform: scale(1.05);
+}
+
+.post-card-sin-imagen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--saico-bg-secundario) 0%, var(--saico-bg-terciario) 100%);
+}
+
+.post-card-sin-imagen svg {
+    color: var(--saico-texto-terciario);
+    stroke-width: 1.5px;
+}
+
+.post-card-contenido {
+    padding: var(--saico-spacing-lg);
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+    margin-bottom: var(--saico-spacing-md);
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-secundario);
+    flex-wrap: wrap;
+}
+
+.post-card-meta-separador {
+    width: 4px;
+    height: 4px;
+    background: var(--saico-texto-terciario);
+    border-radius: 50%;
+}
+
+.post-categoria {
+    display: inline-block;
+    padding: 4px var(--saico-spacing-sm);
+    background: var(--saico-primario-light);
+    color: var(--saico-primario);
+    font-size: var(--saico-font-xs);
+    font-weight: var(--saico-font-weight-semibold);
+    border-radius: var(--saico-radius-sm);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.post-categoria:hover {
+    background: var(--saico-primario);
+    color: white;
+}
+
+.post-card-titulo {
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.post-card-titulo a {
+    font-size: var(--saico-font-xl);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    text-decoration: none;
+    line-height: 1.3;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.post-card-titulo a:hover {
+    color: var(--saico-primario);
+}
+
+.post-card-excerpt {
+    color: var(--saico-texto-secundario);
+    line-height: var(--saico-line-height-relaxed);
+    margin-bottom: var(--saico-spacing-lg);
+    flex-grow: 1;
+}
+
+.post-card-leer-mas {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--saico-spacing-xs);
+    color: var(--saico-primario);
+    font-weight: var(--saico-font-weight-semibold);
+    text-decoration: none;
+    font-size: var(--saico-font-sm);
+    transition: all 0.3s ease;
+    align-self: flex-start;
+}
+
+.post-card-leer-mas:hover {
+    gap: var(--saico-spacing-sm);
+    color: var(--saico-primario-dark);
+}
+
+.post-card-leer-mas svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+    #autorProductos {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: var(--saico-spacing-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    .saico-autor-page {
+        padding: var(--saico-spacing-md) 0;
+    }
+
+    .autor-header {
+        margin-bottom: var(--saico-spacing-lg);
+    }
+
+    .autor-header-bg {
+        height: 100px;
+    }
+
+    .autor-header-content {
+        padding: 0 var(--saico-spacing-md) var(--saico-spacing-md);
+        margin-top: -40px;
+    }
+
+    .autor-avatar {
+        width: 80px;
+        height: 80px;
+        margin-bottom: var(--saico-spacing-sm);
+    }
+
+    .autor-avatar .avatar-img {
+        width: 80px;
+        height: 80px;
+        border-width: 3px;
+    }
+
+    .autor-badge-verificado {
+        width: 24px;
+        height: 24px;
+        bottom: 2px;
+        right: 2px;
+    }
+
+    .autor-badge-verificado svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .autor-nombre {
+        font-size: var(--saico-font-xl);
+    }
+
+    .autor-bio {
+        font-size: var(--saico-font-xs);
+    }
+
+    .autor-stats {
+        gap: var(--saico-spacing-sm);
+    }
+
+    .autor-stat {
+        min-width: 85px;
+        padding: var(--saico-spacing-xs) var(--saico-spacing-sm);
+    }
+
+    .autor-stat svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .autor-stat .stat-valor {
+        font-size: var(--saico-font-base);
+    }
+
+    .autor-stat .stat-label {
+        font-size: 10px;
+    }
+
+    .autor-tabs {
+        margin-bottom: var(--saico-spacing-md);
+    }
+
+    .autor-tab {
+        padding: var(--saico-spacing-xs) var(--saico-spacing-sm);
+        font-size: var(--saico-font-xs);
+        gap: 4px;
+    }
+
+    .autor-tab svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    #autorProductos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--saico-spacing-sm);
+    }
+
+    .saico-posts-lista {
+        gap: var(--saico-spacing-md);
+    }
+
+    .saico-post-card {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .post-card-contenido {
+        padding: var(--saico-spacing-md);
+    }
+
+    .post-card-titulo a {
+        font-size: var(--saico-font-base);
+    }
+
+    .autor-cargar-mas .saico-btn {
+        font-size: var(--saico-font-sm);
+        padding: var(--saico-spacing-sm) var(--saico-spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-autor-page {
+        padding: var(--saico-spacing-sm) 0;
+    }
+
+    .autor-header {
+        border-radius: var(--saico-radius-md);
+    }
+
+    .autor-header-bg {
+        height: 80px;
+    }
+
+    .autor-avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .autor-avatar .avatar-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .autor-nombre {
+        font-size: var(--saico-font-lg);
+    }
+
+    .autor-stats {
+        flex-direction: row;
+        gap: var(--saico-spacing-xs);
+    }
+
+    .autor-stat {
+        flex: 1;
+        min-width: 0;
+        padding: var(--saico-spacing-xs);
+    }
+
+    .autor-stat .stat-label {
+        font-size: 9px;
+    }
+
+    .autor-tab {
+        font-size: 11px;
+        padding: var(--saico-spacing-xs);
+    }
+
+    #autorProductos {
+        grid-template-columns: 1fr;
+    }
+
+    .autor-sin-contenido {
+        padding: var(--saico-spacing-xl) var(--saico-spacing-md);
+    }
+
+    .autor-sin-contenido svg {
+        width: 60px;
+        height: 60px;
+    }
+}

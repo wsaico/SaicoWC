@@ -1,0 +1,444 @@
+/**
+ * Single Product Optimized Styles - Saico WC
+ * Replica el diseño del tema eSaicoWC
+ *
+ * Layout:
+ * - Móvil: 1 columna (Descripción → Social → Sidebar → Relacionados)
+ * - Desktop: 3 columnas (Social Left | Descripción + Relacionados | Sidebar Right)
+ */
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+.saico-single-product-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--saico-spacing-xl) 0 40px;
+    background: var(--saico-bg-secundario);
+}
+
+/* Título del Producto */
+.saico-product-title-header {
+    margin-bottom: var(--saico-spacing-2xl);
+}
+
+.saico-product-title {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 700;
+    color: var(--saico-texto-primario);
+    line-height: 1.2;
+    margin: 0;
+    text-align: left;
+}
+
+/* ============================================
+   LAYOUT PRINCIPAL - MOBILE FIRST
+   ============================================ */
+.saico-product-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--saico-spacing-xl);
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+/* Orden de elementos en móvil */
+.saico-main-column {
+    order: 1;
+    width: 100%;
+}
+
+.saico-sidebar-column {
+    order: 2;
+    width: 100%;
+}
+
+.saico-related-products-wrapper {
+    order: 3;
+    width: 100%;
+}
+
+/* ============================================
+   LAYOUT DESKTOP - GRID DE 2 COLUMNAS
+   ============================================ */
+@media (min-width: 1025px) {
+    .saico-product-content {
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        grid-template-rows: auto auto;
+        gap: var(--saico-spacing-2xl);
+        align-items: start;
+    }
+
+    /* Columna Principal - Reproductor + Tabs + Estadísticas */
+    .saico-main-column {
+        grid-column: 1;
+        grid-row: 1;
+        order: unset;
+    }
+
+    /* Sidebar Derecha - Info del Producto - Sticky */
+    .saico-sidebar-column {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        position: sticky;
+        top: 100px;
+        width: 350px;
+        max-width: 350px;
+        align-self: start;
+        height: fit-content;
+    }
+
+    /* Productos Relacionados - Debajo de Tabs */
+    .saico-related-products-wrapper {
+        grid-column: 1;
+        grid-row: 2;
+        order: unset;
+    }
+}
+
+/* ============================================
+   SIDEBAR MODERNA - INFO DEL PRODUCTO
+   ============================================ */
+.saico-sidebar-modern {
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-xl);
+    box-shadow: var(--saico-shadow-md);
+    overflow: hidden;
+}
+
+/* 1. CTA PRINCIPAL */
+.saico-cta-container {
+    padding: var(--saico-spacing-xl);
+    background: var(--saico-bg-secundario);
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+/* Espacio para AdSense */
+.saico-adsense-slot {
+    margin-bottom: var(--saico-spacing-lg);
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-md);
+    border: 1px dashed var(--saico-borde-claro);
+}
+
+.saico-adsense-slot:empty {
+    display: none;
+}
+
+.saico-cta-btn-primary {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+    width: 100%;
+    padding: var(--saico-spacing-lg);
+    background: linear-gradient(135deg, var(--saico-primario), var(--saico-primario-hover));
+    color: white;
+    text-decoration: none;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-bold);
+    text-align: left;
+    transition: all var(--saico-transition-base);
+    box-shadow: var(--saico-shadow-lg);
+    border: none;
+    cursor: pointer;
+}
+
+.saico-cta-btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--saico-shadow-xl);
+    color: white; /* Mantener texto blanco en hover */
+    background: linear-gradient(135deg, var(--saico-primario-hover), var(--saico-primario));
+}
+
+.saico-cta-btn-primary svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    stroke-width: 2.5px;
+}
+
+.cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.cta-text strong {
+    font-size: var(--saico-font-lg);
+    display: block;
+}
+
+.cta-text small {
+    font-size: var(--saico-font-xs);
+    opacity: 0.9;
+    font-weight: normal;
+}
+
+.saico-cta-pro {
+    background: linear-gradient(135deg, var(--saico-secundario), var(--saico-secundario-hover));
+}
+
+/* 2. ACCIONES RÁPIDAS */
+.saico-quick-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--saico-spacing-sm);
+    padding: var(--saico-spacing-xl);
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+.saico-quick-actions-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--saico-spacing-xs);
+    padding: var(--saico-spacing-md);
+    background: var(--saico-bg-secundario);
+    border: 2px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-md);
+    cursor: pointer;
+    transition: all var(--saico-transition-fast);
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-secundario);
+}
+
+.action-btn:hover {
+    background: var(--saico-primario-light);
+    border-color: var(--saico-primario);
+    color: var(--saico-primario);
+    transform: translateY(-2px);
+}
+
+.action-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2px;
+}
+
+.action-btn-donate {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.action-btn-donate:hover {
+    background: linear-gradient(135deg, #ee5a6f, #e04856);
+    border-color: #e04856;
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.action-btn-donate svg {
+    fill: white;
+    stroke: white;
+}
+
+/* 3. INFORMACIÓN DEL PRODUCTO */
+.saico-product-info {
+    padding: var(--saico-spacing-xl);
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+.info-title {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    margin-bottom: var(--saico-spacing-md);
+    color: var(--saico-texto-primario);
+}
+
+.info-title svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2px;
+    color: var(--saico-primario);
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--saico-spacing-sm);
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--saico-spacing-sm);
+    background: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-sm);
+}
+
+.info-label {
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-terciario);
+    font-weight: var(--saico-font-weight-medium);
+}
+
+.info-value {
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-primario);
+    font-weight: var(--saico-font-weight-semibold);
+}
+
+/* 4. ETIQUETAS */
+.saico-tags {
+    padding: var(--saico-spacing-xl);
+}
+
+.tags-title {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    margin-bottom: var(--saico-spacing-md);
+    color: var(--saico-texto-primario);
+}
+
+.tags-title svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2px;
+    color: var(--saico-primario);
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--saico-spacing-sm);
+}
+
+.tag-pill {
+    display: inline-block;
+    padding: 4px var(--saico-spacing-md);
+    background: var(--saico-bg-terciario);
+    color: var(--saico-texto-secundario);
+    text-decoration: none;
+    border-radius: var(--saico-radius-full);
+    font-size: var(--saico-font-xs);
+    font-weight: var(--saico-font-weight-semibold);
+    transition: all var(--saico-transition-fast);
+}
+
+.tag-pill:hover {
+    background: var(--saico-primario);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+    .saico-sidebar-column {
+        max-height: none;
+        overflow-y: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    .saico-single-product-container {
+        padding: var(--saico-spacing-lg) 0;
+    }
+
+    .saico-quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .saico-sidebar-modern {
+        border-radius: var(--saico-radius-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-cta-container,
+    .saico-quick-actions,
+    .saico-product-info,
+    .saico-tags {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .cta-text strong {
+        font-size: var(--saico-font-base);
+    }
+}
+
+/* ============================================
+   SCROLLBAR PERSONALIZADO (Sidebar)
+   ============================================ */
+.saico-sidebar-column::-webkit-scrollbar {
+    width: 6px;
+}
+
+.saico-sidebar-column::-webkit-scrollbar-track {
+    background: var(--saico-bg-secundario);
+}
+
+.saico-sidebar-column::-webkit-scrollbar-thumb {
+    background: var(--saico-borde-medio);
+    border-radius: var(--saico-radius-full);
+}
+
+.saico-sidebar-column::-webkit-scrollbar-thumb:hover {
+    background: var(--saico-primario);
+}
+
+/* ============================================
+   BOTÓN ANIMADO DE DESCARGA
+   ============================================ */
+.saico-animated-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-number {
+    position: absolute;
+    top: 50%;
+    right: var(--saico-spacing-lg);
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    display: none;
+    z-index: 3;
+}
+
+.button-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    width: 0%;
+    z-index: 2;
+    border-radius: 0 0 var(--saico-radius-lg) var(--saico-radius-lg);
+}
+
+.saico-animated-button.loading {
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* Contenedor de descarga real (shortcode) */
+.saico-real-download-container {
+    margin-top: var(--saico-spacing-md);
+    padding: var(--saico-spacing-lg);
+    background: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-lg);
+    border: 2px dashed var(--saico-borde-medio);
+    display: none; /* Oculto por defecto, se muestra solo en botón animado */
+}

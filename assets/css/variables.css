@@ -1,0 +1,173 @@
+/**
+ * Variables CSS Globales - Saico WC
+ * Todas las variables de colores, tipografía, espaciado, sombras, etc.
+ */
+
+:root {
+    /* ========================================================================
+       COLORES PRINCIPALES
+       ======================================================================== */
+    --saico-primario: #0B996E;
+    --saico-primario-hover: #0a8660;
+    --saico-primario-light: #e6f7f2;
+
+    --saico-secundario: #FF6B6B;
+    --saico-secundario-hover: #ff5555;
+    --saico-secundario-light: #ffe6e6;
+
+    --saico-acento: #4ECDC4;
+    --saico-acento-hover: #3dbdb4;
+    --saico-acento-light: #e8f9f8;
+
+    /* ========================================================================
+       COLORES DE FONDO
+       ======================================================================== */
+    --saico-bg-primario: #ffffff;
+    --saico-bg-secundario: #f8f9fa;
+    --saico-bg-terciario: #f1f3f5;
+    --saico-bg-oscuro: #1a1a1a;
+
+    /* ========================================================================
+       COLORES DE TEXTO
+       ======================================================================== */
+    --saico-texto-primario: #1a1a1a;
+    --saico-texto-secundario: #6b7280;
+    --saico-texto-terciario: #9ca3af;
+    --saico-texto-claro: #d1d5db;
+    --saico-texto-blanco: #ffffff;
+
+    /* ========================================================================
+       COLORES DE ESTADO
+       ======================================================================== */
+    --saico-exito: #10b981;
+    --saico-error: #ef4444;
+    --saico-advertencia: #f59e0b;
+    --saico-info: #3b82f6;
+
+    /* ========================================================================
+       COLORES DE BORDES
+       ======================================================================== */
+    --saico-borde-claro: #e5e7eb;
+    --saico-borde-medio: #d1d5db;
+    --saico-borde-oscuro: #9ca3af;
+
+    /* ========================================================================
+       TIPOGRAFÍA
+       ======================================================================== */
+    --saico-font-principal: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --saico-font-mono: 'Monaco', 'Courier New', monospace;
+
+    --saico-font-xs: 0.75rem;    /* 12px */
+    --saico-font-sm: 0.875rem;   /* 14px */
+    --saico-font-base: 1rem;     /* 16px */
+    --saico-font-lg: 1.125rem;   /* 18px */
+    --saico-font-xl: 1.25rem;    /* 20px */
+    --saico-font-2xl: 1.5rem;    /* 24px */
+    --saico-font-3xl: 1.875rem;  /* 30px */
+    --saico-font-4xl: 2.25rem;   /* 36px */
+    --saico-font-5xl: 3rem;      /* 48px */
+    --saico-font-6xl: 3.75rem;   /* 60px */
+
+    --saico-font-weight-light: 300;
+    --saico-font-weight-normal: 400;
+    --saico-font-weight-medium: 500;
+    --saico-font-weight-semibold: 600;
+    --saico-font-weight-bold: 700;
+
+    --saico-line-height-tight: 1.25;
+    --saico-line-height-normal: 1.5;
+    --saico-line-height-relaxed: 1.75;
+
+    /* ========================================================================
+       ESPACIADO
+       ======================================================================== */
+    --saico-spacing-xs: 0.25rem;   /* 4px */
+    --saico-spacing-sm: 0.5rem;    /* 8px */
+    --saico-spacing-md: 1rem;      /* 16px */
+    --saico-spacing-lg: 1.5rem;    /* 24px */
+    --saico-spacing-xl: 2rem;      /* 32px */
+    --saico-spacing-2xl: 3rem;     /* 48px */
+    --saico-spacing-3xl: 4rem;     /* 64px */
+    --saico-spacing-4xl: 6rem;     /* 96px */
+
+    /* ========================================================================
+       BORDER RADIUS
+       ======================================================================== */
+    --saico-radius-sm: 0.25rem;   /* 4px */
+    --saico-radius-md: 0.5rem;    /* 8px */
+    --saico-radius-lg: 0.75rem;   /* 12px */
+    --saico-radius-xl: 1rem;      /* 16px */
+    --saico-radius-2xl: 1.5rem;   /* 24px */
+    --saico-radius-full: 9999px;  /* Circular */
+
+    /* ========================================================================
+       SOMBRAS
+       ======================================================================== */
+    --saico-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --saico-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --saico-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --saico-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --saico-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --saico-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    /* ========================================================================
+       TRANSICIONES
+       ======================================================================== */
+    --saico-transition-fast: 150ms ease-in-out;
+    --saico-transition-base: 250ms ease-in-out;
+    --saico-transition-slow: 350ms ease-in-out;
+
+    /* ========================================================================
+       Z-INDEX
+       ======================================================================== */
+    --saico-z-dropdown: 1000;
+    --saico-z-sticky: 1020;
+    --saico-z-fixed: 1030;
+    --saico-z-modal-backdrop: 1040;
+    --saico-z-modal: 1050;
+    --saico-z-popover: 1060;
+    --saico-z-tooltip: 1070;
+
+    /* ========================================================================
+       BREAKPOINTS (para uso en JS)
+       ======================================================================== */
+    --saico-breakpoint-sm: 576px;
+    --saico-breakpoint-md: 768px;
+    --saico-breakpoint-lg: 992px;
+    --saico-breakpoint-xl: 1200px;
+    --saico-breakpoint-2xl: 1400px;
+
+    /* ========================================================================
+       COLORES DE GRADIENTES
+       ======================================================================== */
+    --saico-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --saico-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --saico-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --saico-gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    --saico-gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --saico-gradient-6: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    --saico-gradient-7: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --saico-gradient-8: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    --saico-gradient-9: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+
+    /* ========================================================================
+       CONTENEDORES
+       ======================================================================== */
+    --saico-container-sm: 640px;
+    --saico-container-md: 768px;
+    --saico-container-lg: 1024px;
+    --saico-container-xl: 1280px;
+    --saico-container-2xl: 1536px;
+}
+
+/* Modo oscuro (opcional - para implementar en futuro) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --saico-bg-primario: #1a1a1a;
+        --saico-bg-secundario: #2d2d2d;
+        --saico-bg-terciario: #3a3a3a;
+        --saico-texto-primario: #ffffff;
+        --saico-texto-secundario: #d1d5db;
+        --saico-texto-terciario: #9ca3af;
+    }
+}

@@ -1,0 +1,368 @@
+/**
+ * Widgets - Saico WC
+ * Estilos globales para widgets de WordPress y WooCommerce
+ */
+
+/* ============================================================================
+   WIDGETS GENERALES
+   ============================================================================ */
+.widget {
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+.widget-title,
+.widgettitle {
+    font-size: var(--saico-font-lg);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.widget ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.widget ul li {
+    margin-bottom: var(--saico-spacing-sm);
+}
+
+.widget a {
+    color: var(--saico-texto-secundario);
+    text-decoration: none;
+    transition: color var(--saico-transition-fast);
+}
+
+.widget a:hover {
+    color: var(--saico-primario);
+}
+
+/* ============================================================================
+   WIDGET: TEXT
+   ============================================================================ */
+.widget_text {
+    font-size: var(--saico-font-sm);
+    line-height: var(--saico-line-height-relaxed);
+    color: var(--saico-texto-secundario);
+}
+
+/* ============================================================================
+   WIDGET: RSS
+   ============================================================================ */
+.widget_rss ul li {
+    padding: var(--saico-spacing-md);
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.widget_rss .rsswidget {
+    display: block;
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-xs);
+}
+
+.widget_rss .rss-date {
+    display: block;
+    font-size: var(--saico-font-xs);
+    color: var(--saico-texto-terciario);
+    margin-bottom: var(--saico-spacing-sm);
+}
+
+.widget_rss .rssSummary {
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-secundario);
+}
+
+/* ============================================================================
+   WIDGET: MEDIA (Audio/Video)
+   ============================================================================ */
+.widget_media_audio,
+.widget_media_video {
+    padding: var(--saico-spacing-md);
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+}
+
+/* ============================================================================
+   WIDGET: ARCHIVOS
+   ============================================================================ */
+.widget_archive select {
+    width: 100%;
+    padding: var(--saico-spacing-md);
+    border: 1px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-md);
+    background-color: var(--saico-bg-primario);
+    color: var(--saico-texto-primario);
+    font-size: var(--saico-font-base);
+    cursor: pointer;
+}
+
+/* ============================================================================
+   WIDGET: META
+   ============================================================================ */
+.widget_meta ul li {
+    padding: var(--saico-spacing-sm) 0;
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+.widget_meta ul li:last-child {
+    border-bottom: none;
+}
+
+/* ============================================================================
+   WIDGET: PÁGINAS
+   ============================================================================ */
+.widget_pages ul,
+.widget_nav_menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.widget_pages ul li,
+.widget_nav_menu ul li {
+    padding: var(--saico-spacing-sm);
+}
+
+.widget_pages ul ul,
+.widget_nav_menu ul ul {
+    margin-top: var(--saico-spacing-sm);
+    padding-left: var(--saico-spacing-lg);
+}
+
+/* ============================================================================
+   WIDGET: COMENTARIOS RECIENTES
+   ============================================================================ */
+.widget_recent_comments ul li {
+    padding: var(--saico-spacing-md);
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.widget_recent_comments .comment-author-link {
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-primario);
+}
+
+/* ============================================================================
+   WIDGET: REDES SOCIALES (custom)
+   ============================================================================ */
+.widget_social_media {
+    display: flex;
+    gap: var(--saico-spacing-sm);
+    flex-wrap: wrap;
+}
+
+.widget_social_media a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    transition: all var(--saico-transition-fast);
+}
+
+.widget_social_media a:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--saico-shadow-md);
+}
+
+.widget_social_media a.facebook:hover {
+    background-color: #1877f2;
+    color: white;
+}
+
+.widget_social_media a.twitter:hover {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.widget_social_media a.instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.widget_social_media a.youtube:hover {
+    background-color: #ff0000;
+    color: white;
+}
+
+.widget_social_media a.linkedin:hover {
+    background-color: #0077b5;
+    color: white;
+}
+
+.widget_social_media a svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================================================
+   WIDGET: NEWSLETTER (custom)
+   ============================================================================ */
+.widget_newsletter {
+    padding: var(--saico-spacing-lg);
+    background: linear-gradient(135deg, var(--saico-primario-light), var(--saico-acento-light));
+    border-radius: var(--saico-radius-lg);
+}
+
+.widget_newsletter .widget-title {
+    color: var(--saico-primario);
+}
+
+.widget_newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--saico-spacing-md);
+    margin-top: var(--saico-spacing-md);
+}
+
+.widget_newsletter input[type="email"] {
+    padding: var(--saico-spacing-md);
+    border: 2px solid transparent;
+    border-radius: var(--saico-radius-md);
+}
+
+.widget_newsletter input[type="email"]:focus {
+    border-color: var(--saico-primario);
+}
+
+.widget_newsletter button {
+    width: 100%;
+}
+
+/* ============================================================================
+   WIDGET: CTA (Call to Action - custom)
+   ============================================================================ */
+.widget_cta {
+    padding: var(--saico-spacing-xl);
+    background: linear-gradient(135deg, var(--saico-primario), var(--saico-primario-hover));
+    color: white;
+    border-radius: var(--saico-radius-lg);
+    text-align: center;
+}
+
+.widget_cta .widget-title {
+    color: white;
+    font-size: var(--saico-font-2xl);
+}
+
+.widget_cta p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--saico-spacing-lg);
+}
+
+.widget_cta .saico-btn {
+    background-color: white;
+    color: var(--saico-primario);
+}
+
+.widget_cta .saico-btn:hover {
+    background-color: var(--saico-bg-secundario);
+}
+
+/* ============================================================================
+   WIDGET: BANNER (custom)
+   ============================================================================ */
+.widget_banner {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--saico-radius-lg);
+    aspect-ratio: 16 / 9;
+}
+
+.widget_banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.widget_banner a {
+    display: block;
+    transition: transform var(--saico-transition-base);
+}
+
+.widget_banner a:hover {
+    transform: scale(1.05);
+}
+
+/* ============================================================================
+   WIDGET: RATING FILTER (WooCommerce)
+   ============================================================================ */
+.widget_rating_filter .star-rating {
+    display: inline-block;
+    font-size: 1em;
+    font-family: star;
+    color: var(--saico-advertencia);
+}
+
+.widget_rating_filter .star-rating::before {
+    content: '\2606\2606\2606\2606\2606';
+    color: var(--saico-borde-claro);
+}
+
+.widget_rating_filter .star-rating span::before {
+    content: '\2605\2605\2605\2605\2605';
+    color: var(--saico-advertencia);
+}
+
+/* ============================================================================
+   WIDGET: PRODUCT CATEGORIES (WooCommerce)
+   ============================================================================ */
+.widget_product_categories ul li {
+    position: relative;
+}
+
+.widget_product_categories ul li.cat-parent > a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--saico-texto-terciario);
+}
+
+/* ============================================================================
+   FOOTER WIDGETS
+   ============================================================================ */
+.saico-footer .widget {
+    margin-bottom: 0;
+}
+
+.saico-footer .widget-title {
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.saico-footer .widget ul li a {
+    color: var(--saico-texto-secundario);
+    padding: var(--saico-spacing-xs) 0;
+}
+
+.saico-footer .widget ul li a:hover {
+    color: var(--saico-primario);
+    padding-left: var(--saico-spacing-sm);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+    .widget {
+        margin-bottom: var(--saico-spacing-lg);
+    }
+
+    .widget-title,
+    .widgettitle {
+        font-size: var(--saico-font-base);
+    }
+}

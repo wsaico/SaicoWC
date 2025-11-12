@@ -1,0 +1,464 @@
+/**
+ * Reproductor Moderno y Minimalista - Producto
+ * Diseño limpio y profesional con animaciones suaves
+ *
+ * @package SaicoWC
+ * @version 2.0.0
+ */
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+.saico-player-modern {
+    width: 100%;
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+/* ============================================
+   REPRODUCTOR DE AUDIO
+   ============================================ */
+.player-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-xl);
+    padding: var(--saico-spacing-2xl);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: var(--saico-radius-xl);
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.player-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+}
+
+/* Botón Play Principal */
+.player-play-main {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+}
+
+.player-play-main:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.player-play-main:active {
+    transform: scale(0.95);
+}
+
+.play-icon {
+    width: 28px;
+    height: 28px;
+    position: relative;
+}
+
+.play-icon svg {
+    width: 100%;
+    height: 100%;
+    color: #667eea;
+    transition: opacity 0.2s ease;
+}
+
+.play-icon .icon-play {
+    position: absolute;
+    top: 0;
+    left: 2px;
+}
+
+.play-icon .icon-pause {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.player-play-main.playing .icon-play {
+    opacity: 0;
+}
+
+.player-play-main.playing .icon-pause {
+    opacity: 1;
+}
+
+/* Contenido del Player */
+.player-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--saico-spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+/* Header del Player */
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+}
+
+.player-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.player-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+}
+
+.player-title {
+    font-size: var(--saico-font-lg);
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    font-variant-numeric: tabular-nums;
+}
+
+.time-divider {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Barra de Progreso */
+.player-progress-wrapper {
+    position: relative;
+}
+
+.progress-track {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+}
+
+.progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.progress-thumb {
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 0%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.progress-track:hover .progress-thumb {
+    opacity: 1;
+}
+
+/* Controles Secundarios */
+.player-controls-secondary {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+}
+
+.control-btn {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.control-btn svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+}
+
+.control-btn .icon-volume-mute {
+    display: none;
+}
+
+.control-btn.muted .icon-volume-high {
+    display: none;
+}
+
+.control-btn.muted .icon-volume-mute {
+    display: block;
+}
+
+/* Slider de Volumen */
+.volume-slider-wrapper {
+    width: 80px;
+}
+
+.volume-slider {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* ============================================
+   REPRODUCTOR MIDI - SOLO CONTENEDOR
+   ============================================ */
+.saico-midi-container {
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+/* Fallback cuando no hay plugin */
+.midi-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+    padding: var(--saico-spacing-2xl);
+    background: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    text-align: center;
+}
+
+.midi-fallback p {
+    margin: 0;
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-sm);
+}
+
+.btn-download-midi {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--saico-spacing-sm);
+    padding: var(--saico-spacing-md) var(--saico-spacing-xl);
+    background: var(--saico-primario);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--saico-radius-md);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-download-midi:hover {
+    background: var(--saico-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--saico-shadow-lg);
+}
+
+.btn-download-midi svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .player-wrapper {
+        flex-direction: column;
+        gap: var(--saico-spacing-lg);
+        padding: var(--saico-spacing-xl);
+    }
+
+    .player-play-main {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+    }
+
+    .play-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .player-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--saico-spacing-sm);
+    }
+
+    .player-title {
+        font-size: var(--saico-font-base);
+        white-space: normal;
+    }
+
+    .player-time {
+        align-self: flex-end;
+        font-size: 13px;
+    }
+
+    .player-controls-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .volume-slider-wrapper {
+        flex: 1;
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-wrapper {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .player-play-main {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+    }
+
+    .play-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .player-label {
+        font-size: 10px;
+    }
+
+    .player-title {
+        font-size: var(--saico-font-sm);
+    }
+
+    .volume-slider-wrapper {
+        display: none;
+    }
+
+    .midi-header {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .midi-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+
+    .midi-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.player-play-main.playing {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.saico-player-modern {
+    animation: slideInUp 0.5s ease-out;
+}

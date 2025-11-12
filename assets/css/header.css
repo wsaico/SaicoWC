@@ -1,0 +1,862 @@
+/**
+ * Header CSS - Creado desde cero para SaicoWC
+ * Diseño responsive con mobile-first approach
+ */
+
+/* ============================================
+   HEADER PRINCIPAL
+   ============================================ */
+
+.saico-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.saico-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 16px;
+    height: 64px;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+/* Ajuste padding para contenido */
+body {
+    padding-top: 64px;
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.saico-logo-contenedor {
+    grid-column: 2;
+    justify-self: center;
+    z-index: 10;
+    position: relative;
+}
+
+.saico-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #1a1a1a;
+}
+
+.saico-logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.saico-logo-texto {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* ============================================
+   MENÚ HAMBURGUESA
+   ============================================ */
+
+.saico-menu-hamburguesa {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.saico-menu-hamburguesa:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.saico-menu-hamburguesa:active {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.saico-hamburguesa-linea {
+    width: 24px;
+    height: 2px;
+    background: #1a1a1a;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.saico-menu-hamburguesa.activo .saico-hamburguesa-linea:nth-child(1) {
+    transform: rotate(45deg) translateY(6px);
+}
+
+.saico-menu-hamburguesa.activo .saico-hamburguesa-linea:nth-child(2) {
+    opacity: 0;
+}
+
+.saico-menu-hamburguesa.activo .saico-hamburguesa-linea:nth-child(3) {
+    transform: rotate(-45deg) translateY(-6px);
+}
+
+/* ============================================
+   BÚSQUEDA + MENÚ (Desktop)
+   ============================================ */
+
+.saico-search-menu-grupo {
+    display: none;
+}
+
+.saico-search-contenedor {
+    position: relative;
+    width: 320px;
+}
+
+.saico-search-input {
+    width: 100%;
+    height: 42px;
+    padding: 0 40px 0 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s;
+    background: #f9fafb;
+}
+
+.saico-search-input:focus {
+    outline: none;
+    border-color: #10b981;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.saico-search-input::placeholder {
+    color: #9ca3af;
+}
+
+.saico-search-btn {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.saico-search-btn:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.saico-search-btn svg {
+    color: #6b7280;
+}
+
+/* Resultados de búsqueda */
+.saico-search-resultados {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    display: none;
+    z-index: 100;
+}
+
+.saico-search-resultados.activo {
+    display: block;
+}
+
+/* ============================================
+   ACCIONES DEL HEADER
+   ============================================ */
+
+.saico-header-acciones {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.saico-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+
+.saico-cta-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+}
+
+.saico-icono-btn {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.saico-icono-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.saico-icono-btn svg {
+    color: #1a1a1a;
+}
+
+.saico-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #ef4444;
+    color: white;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ============================================
+   MENÚ LATERAL
+   ============================================ */
+
+.saico-menu-lateral {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    max-width: 360px;
+    height: 100%;
+    background: white;
+    z-index: 1100;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.saico-menu-lateral.activo {
+    left: 0;
+}
+
+.saico-menu-lateral-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.saico-menu-lateral-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.saico-menu-cerrar {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.saico-menu-cerrar:hover {
+    background: #e5e7eb;
+    transform: rotate(90deg);
+}
+
+.saico-menu-busqueda {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.saico-menu-busqueda .saico-search-input {
+    width: 100%;
+}
+
+.saico-menu-contenido {
+    padding: 16px 0;
+}
+
+.saico-menu-lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.saico-menu-lista li {
+    margin: 0;
+}
+
+.saico-menu-lista a {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: #374151;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.saico-menu-lista a:hover {
+    background: #f3f4f6;
+    color: #10b981;
+}
+
+/* ============================================
+   OVERLAY
+   ============================================ */
+
+.saico-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    backdrop-filter: blur(2px);
+}
+
+.saico-overlay.activo {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ============================================
+   BOTTOM NAVIGATION (Móvil)
+   ============================================ */
+
+.saico-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+}
+
+.saico-bottom-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 4px;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.saico-bottom-item:hover,
+.saico-bottom-item.activo {
+    color: #10b981;
+}
+
+.saico-bottom-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+}
+
+.saico-bottom-item span {
+    text-align: center;
+}
+
+/* ============================================
+   RESPONSIVE: TABLET Y DESKTOP
+   ============================================ */
+
+@media (min-width: 769px) {
+    /* Header desktop */
+    .saico-header-container {
+        height: 72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        padding: 0 24px;
+    }
+
+    body {
+        padding-top: 72px;
+        padding-bottom: 0;
+    }
+
+    /* Logo a la izquierda */
+    .saico-logo-contenedor {
+        flex-shrink: 0;
+    }
+
+    .saico-logo-img {
+        height: 44px;
+    }
+
+    .saico-logo-texto {
+        font-size: 24px;
+    }
+
+    /* Búsqueda + Menú centrados */
+    .saico-search-menu-grupo {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Buscador más grande y prominente en desktop */
+    .saico-search-contenedor {
+        width: 520px;
+    }
+
+    .saico-search-input {
+        height: 52px;
+        padding: 0 56px 0 20px;
+        font-size: 16px;
+        border-radius: 12px;
+        border: 2px solid #e5e7eb;
+        background: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .saico-search-input:focus {
+        border-color: #10b981;
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15);
+    }
+
+    .saico-search-btn {
+        width: 44px;
+        height: 44px;
+        right: 4px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-radius: 10px;
+    }
+
+    .saico-search-btn:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+        transform: translateY(-50%) scale(1.05);
+    }
+
+    .saico-search-btn svg {
+        color: #ffffff;
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Resultados más grandes */
+    .saico-search-resultados {
+        width: 520px;
+        max-height: 500px;
+        border-radius: 16px;
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        margin-top: 12px;
+    }
+
+    /* Acciones a la derecha */
+    .saico-header-acciones {
+        flex-shrink: 0;
+        gap: 12px;
+    }
+
+    .saico-cta-btn {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+
+    .saico-icono-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* ============================================
+   UTILIDADES RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .saico-solo-escritorio {
+        display: none !important;
+    }
+
+    .saico-solo-movil {
+        display: flex !important;
+    }
+
+    .saico-bottom-nav {
+        display: grid !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .saico-solo-movil {
+        display: none !important;
+    }
+
+    .saico-solo-escritorio {
+        display: flex !important;
+    }
+
+    .saico-bottom-nav {
+        display: none !important;
+    }
+
+    .saico-menu-hamburguesa.saico-solo-movil {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   RESULTADOS DE BÚSQUEDA - ITEMS
+   ============================================ */
+
+.saico-search-items {
+    padding: 8px 0;
+}
+
+.saico-search-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: background 0.2s;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.saico-search-item:last-child {
+    border-bottom: none;
+}
+
+.saico-search-item:hover {
+    background: #f9fafb;
+}
+
+.saico-search-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.saico-search-no-thumb {
+    width: 50px;
+    height: 50px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.saico-search-no-thumb svg {
+    color: #9ca3af;
+}
+
+.saico-search-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.saico-search-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+    color: #1a1a1a;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saico-search-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: #10b981;
+}
+
+.saico-search-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.saico-search-footer a {
+    display: inline-block;
+    color: #10b981;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.saico-search-footer a:hover {
+    color: #059669;
+}
+
+.saico-search-empty,
+.saico-search-loading,
+.saico-search-error {
+    padding: 20px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.saico-search-loading {
+    color: #10b981;
+}
+
+/* ============================================================================
+   MENÚ DROPDOWN DE USUARIO
+   ============================================================================ */
+.saico-usuario-menu-wrapper {
+    position: relative;
+}
+
+.saico-usuario-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.saico-usuario-btn:hover .saico-usuario-avatar {
+    border-color: var(--saico-primario);
+}
+
+.saico-usuario-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 280px;
+    background: white;
+    border-radius: var(--saico-radius-xl);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.saico-usuario-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 16px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    transform: rotate(45deg);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.saico-usuario-menu-wrapper:hover .saico-usuario-dropdown,
+.saico-usuario-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.saico-usuario-dropdown-header {
+    padding: var(--saico-spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+    border-bottom: 1px solid var(--saico-borde-claro);
+    background: linear-gradient(135deg,
+        rgba(var(--saico-primario-rgb), 0.03) 0%,
+        rgba(var(--saico-acento-rgb), 0.03) 100%);
+}
+
+.dropdown-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-user-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dropdown-user-name {
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-user-email {
+    font-size: var(--saico-font-xs);
+    color: var(--saico-texto-secundario);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.saico-usuario-dropdown-menu {
+    padding: var(--saico-spacing-sm);
+}
+
+.dropdown-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+    padding: var(--saico-spacing-md);
+    border-radius: var(--saico-radius-md);
+    text-decoration: none;
+    color: var(--saico-texto-primario);
+    font-size: var(--saico-font-sm);
+    font-weight: var(--saico-font-weight-medium);
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu-item svg {
+    color: var(--saico-texto-secundario);
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+.dropdown-menu-item:hover {
+    background: var(--saico-bg-secundario);
+    color: var(--saico-primario);
+}
+
+.dropdown-menu-item:hover svg {
+    color: var(--saico-primario);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: var(--saico-borde-claro);
+    margin: var(--saico-spacing-sm) 0;
+}
+
+.dropdown-logout {
+    color: #dc2626;
+}
+
+.dropdown-logout svg {
+    color: #dc2626;
+}
+
+.dropdown-logout:hover {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+}
+
+.dropdown-logout:hover svg {
+    color: #dc2626;
+}

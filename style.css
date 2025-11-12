@@ -1,0 +1,80 @@
+/**
+Theme Name: Saico WC
+Author: Wilber Saico
+Author URI: https://wsaico.com/
+Description: Theme profesional optimizado para WooCommerce con funcionalidades avanzadas de audio y tienda digital
+Version: 1.1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: saico-wc
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+Tags: woocommerce, tienda, audio, responsive, personalizable
+*/
+
+/* Breadcrumb ancho completo */
+.saico-breadcrumb {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: var(--saico-bg-secundario);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.saico-breadcrumb a {
+    color: var(--saico-texto-secundario);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.saico-breadcrumb a:hover {
+    color: var(--saico-primario);
+}
+
+.saico-breadcrumb i.fas.fa-home {
+    color: #0B996E;
+    margin-right: 5px;
+}
+
+.saico-breadcrumb i.fas.fa-chevron-right {
+    color: var(--saico-texto-claro);
+    font-size: 12px;
+    margin: 0 8px;
+}
+
+.saico-breadcrumb span {
+    color: var(--saico-texto-primario);
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .saico-breadcrumb {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* Ocultar sidebar en páginas de WooCommerce */
+.woocommerce-account .saico-pagina-sidebar,
+.woocommerce-cart .saico-pagina-sidebar,
+.woocommerce-checkout .saico-pagina-sidebar {
+    display: none !important;
+}
+
+/* Ajustar layout para ocupar todo el ancho */
+.woocommerce-account .saico-pagina-layout,
+.woocommerce-cart .saico-pagina-layout,
+.woocommerce-checkout .saico-pagina-layout {
+    grid-template-columns: 1fr !important;
+}
+
+.woocommerce-account .saico-pagina-main,
+.woocommerce-cart .saico-pagina-main,
+.woocommerce-checkout .saico-pagina-main {
+    max-width: 100%;
+}

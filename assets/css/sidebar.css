@@ -1,0 +1,449 @@
+/**
+ * Sidebar - Saico WC
+ * Estilos del sidebar principal y de tienda
+ */
+
+/* ============================================================================
+   SIDEBAR PRINCIPAL
+   ============================================================================ */
+.saico-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+/* ============================================================================
+   WIDGETS
+   ============================================================================ */
+.saico-widget {
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    box-shadow: var(--saico-shadow-md);
+    padding: var(--saico-spacing-lg);
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+.saico-widget:last-child {
+    margin-bottom: 0;
+}
+
+/* Título del widget */
+.saico-widget-titulo {
+    font-size: var(--saico-font-lg);
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-md);
+    padding-bottom: var(--saico-spacing-sm);
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+/* ============================================================================
+   WIDGET: BÚSQUEDA
+   ============================================================================ */
+.widget_search form {
+    position: relative;
+    display: flex;
+    gap: var(--saico-spacing-sm);
+}
+
+.widget_search input[type="search"] {
+    flex: 1;
+    padding-right: var(--saico-spacing-3xl);
+}
+
+.widget_search button {
+    position: absolute;
+    right: var(--saico-spacing-sm);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--saico-primario);
+    border: none;
+    border-radius: var(--saico-radius-md);
+    color: white;
+    cursor: pointer;
+    transition: all var(--saico-transition-fast);
+}
+
+.widget_search button:hover {
+    background-color: var(--saico-primario-hover);
+}
+
+.widget_search button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================================================
+   WIDGET: CATEGORÍAS Y LISTAS
+   ============================================================================ */
+.saico-widget ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.saico-widget ul li {
+    margin-bottom: var(--saico-spacing-sm);
+}
+
+.saico-widget ul li:last-child {
+    margin-bottom: 0;
+}
+
+.saico-widget ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--saico-spacing-sm);
+    color: var(--saico-texto-secundario);
+    text-decoration: none;
+    border-radius: var(--saico-radius-md);
+    transition: all var(--saico-transition-fast);
+}
+
+.saico-widget ul li a:hover {
+    background-color: var(--saico-bg-secundario);
+    color: var(--saico-primario);
+    padding-left: var(--saico-spacing-md);
+}
+
+.saico-widget ul li .count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 var(--saico-spacing-xs);
+    background-color: var(--saico-bg-terciario);
+    color: var(--saico-texto-terciario);
+    font-size: var(--saico-font-xs);
+    font-weight: var(--saico-font-weight-semibold);
+    border-radius: var(--saico-radius-full);
+    transition: all var(--saico-transition-fast);
+}
+
+.saico-widget ul li a:hover .count {
+    background-color: var(--saico-primario);
+    color: white;
+}
+
+/* Categorías anidadas */
+.saico-widget ul ul {
+    margin-top: var(--saico-spacing-sm);
+    padding-left: var(--saico-spacing-lg);
+}
+
+/* ============================================================================
+   WIDGET: POSTS RECIENTES
+   ============================================================================ */
+.widget_recent_entries ul li {
+    display: flex;
+    gap: var(--saico-spacing-md);
+    padding: var(--saico-spacing-md);
+    border-radius: var(--saico-radius-md);
+    transition: background-color var(--saico-transition-fast);
+}
+
+.widget_recent_entries ul li:hover {
+    background-color: var(--saico-bg-secundario);
+}
+
+.widget_recent_entries .post-date {
+    display: block;
+    font-size: var(--saico-font-xs);
+    color: var(--saico-texto-terciario);
+    margin-top: var(--saico-spacing-xs);
+}
+
+/* ============================================================================
+   WIDGET: TAG CLOUD
+   ============================================================================ */
+.tagcloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--saico-spacing-sm);
+}
+
+.tagcloud a {
+    display: inline-block;
+    padding: var(--saico-spacing-xs) var(--saico-spacing-md);
+    background-color: var(--saico-bg-secundario);
+    color: var(--saico-texto-secundario);
+    font-size: var(--saico-font-sm) !important;
+    border-radius: var(--saico-radius-full);
+    text-decoration: none;
+    transition: all var(--saico-transition-fast);
+}
+
+.tagcloud a:hover {
+    background-color: var(--saico-primario);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ============================================================================
+   WIDGET: CALENDARIO
+   ============================================================================ */
+.widget_calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.widget_calendar caption {
+    padding: var(--saico-spacing-sm);
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+}
+
+.widget_calendar th,
+.widget_calendar td {
+    padding: var(--saico-spacing-sm);
+    text-align: center;
+    border: 1px solid var(--saico-borde-claro);
+}
+
+.widget_calendar th {
+    background-color: var(--saico-bg-secundario);
+    font-size: var(--saico-font-xs);
+    font-weight: var(--saico-font-weight-semibold);
+}
+
+.widget_calendar td a {
+    display: block;
+    color: var(--saico-primario);
+    font-weight: var(--saico-font-weight-semibold);
+    text-decoration: none;
+}
+
+.widget_calendar td a:hover {
+    background-color: var(--saico-primario);
+    color: white;
+    border-radius: var(--saico-radius-sm);
+}
+
+/* ============================================================================
+   WIDGET: FILTROS DE PRODUCTOS (WooCommerce)
+   ============================================================================ */
+.widget_layered_nav ul li {
+    position: relative;
+    padding-left: var(--saico-spacing-lg);
+}
+
+.widget_layered_nav ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--saico-borde-medio);
+    border-radius: var(--saico-radius-sm);
+}
+
+.widget_layered_nav ul li.chosen::before {
+    background-color: var(--saico-primario);
+    border-color: var(--saico-primario);
+}
+
+/* ============================================================================
+   WIDGET: FILTRO DE PRECIOS
+   ============================================================================ */
+.widget_price_filter .price_slider_wrapper {
+    padding: var(--saico-spacing-md) 0;
+}
+
+.widget_price_filter .price_slider {
+    height: 6px;
+    background-color: var(--saico-borde-claro);
+    border-radius: var(--saico-radius-full);
+}
+
+.widget_price_filter .ui-slider-range {
+    background-color: var(--saico-primario);
+    border-radius: var(--saico-radius-full);
+}
+
+.widget_price_filter .ui-slider-handle {
+    width: 20px;
+    height: 20px;
+    background-color: var(--saico-primario);
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: var(--saico-shadow-md);
+    cursor: pointer;
+    top: -7px;
+}
+
+.widget_price_filter .price_label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--saico-spacing-md);
+    font-size: var(--saico-font-sm);
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+}
+
+.widget_price_filter button {
+    width: 100%;
+    margin-top: var(--saico-spacing-md);
+}
+
+/* ============================================================================
+   WIDGET: PRODUCTOS DESTACADOS
+   ============================================================================ */
+.widget_products ul li {
+    display: flex;
+    gap: var(--saico-spacing-md);
+    padding: var(--saico-spacing-md);
+    border-radius: var(--saico-radius-md);
+    transition: background-color var(--saico-transition-fast);
+}
+
+.widget_products ul li:hover {
+    background-color: var(--saico-bg-secundario);
+}
+
+.widget_products ul li img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--saico-radius-md);
+}
+
+.widget_products ul li .product-title {
+    display: block;
+    color: var(--saico-texto-primario);
+    font-weight: var(--saico-font-weight-semibold);
+    text-decoration: none;
+    margin-bottom: var(--saico-spacing-xs);
+}
+
+.widget_products ul li .product-title:hover {
+    color: var(--saico-primario);
+}
+
+.widget_products ul li .amount {
+    color: var(--saico-primario);
+    font-weight: var(--saico-font-weight-bold);
+}
+
+/* ============================================================================
+   TOGGLE SIDEBAR (móvil)
+   ============================================================================ */
+.saico-sidebar-toggle {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: var(--saico-spacing-lg);
+    width: 56px;
+    height: 56px;
+    background-color: var(--saico-primario);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: var(--saico-shadow-xl);
+    cursor: pointer;
+    z-index: var(--saico-z-fixed);
+    transition: all var(--saico-transition-fast);
+}
+
+.saico-sidebar-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--saico-shadow-2xl);
+}
+
+.saico-sidebar-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 992px) {
+    .saico-sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 320px;
+        height: 100vh;
+        background-color: var(--saico-bg-primario);
+        box-shadow: var(--saico-shadow-2xl);
+        padding: var(--saico-spacing-xl);
+        overflow-y: auto;
+        z-index: var(--saico-z-modal);
+        transition: right var(--saico-transition-base);
+    }
+
+    .saico-sidebar.activo {
+        right: 0;
+    }
+
+    .saico-sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Overlay para sidebar móvil */
+    .saico-sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: calc(var(--saico-z-modal) - 1);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--saico-transition-base);
+    }
+
+    .saico-sidebar-overlay.activo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Botón cerrar sidebar */
+    .saico-sidebar-cerrar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-bottom: var(--saico-spacing-lg);
+    }
+
+    .saico-sidebar-cerrar button {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        border-radius: var(--saico-radius-md);
+        cursor: pointer;
+        transition: background-color var(--saico-transition-fast);
+    }
+
+    .saico-sidebar-cerrar button:hover {
+        background-color: var(--saico-bg-secundario);
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+
+    .saico-sidebar-toggle {
+        bottom: 80px;
+        right: var(--saico-spacing-md);
+    }
+}

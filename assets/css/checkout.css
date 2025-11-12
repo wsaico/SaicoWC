@@ -1,0 +1,437 @@
+/**
+ * Checkout - Saico WC
+ * Estilos para el proceso de compra de WooCommerce
+ */
+
+/* ============================================================================
+   CONTENEDOR DE CHECKOUT
+   ============================================================================ */
+.woocommerce-checkout {
+    padding: var(--saico-spacing-2xl) 0;
+}
+
+/* ============================================================================
+   LAYOUT DEL CHECKOUT
+   ============================================================================ */
+.woocommerce-checkout-review-order {
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    box-shadow: var(--saico-shadow-lg);
+    padding: var(--saico-spacing-xl);
+    position: sticky;
+    top: 100px;
+}
+
+/* ============================================================================
+   FORMULARIO DE CHECKOUT
+   ============================================================================ */
+.woocommerce-billing-fields h3,
+.woocommerce-shipping-fields h3,
+.woocommerce-additional-fields h3 {
+    font-size: var(--saico-font-xl);
+    font-weight: var(--saico-font-weight-bold);
+    margin-bottom: var(--saico-spacing-lg);
+    padding-bottom: var(--saico-spacing-md);
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+.woocommerce-billing-fields__field-wrapper,
+.woocommerce-shipping-fields__field-wrapper,
+.woocommerce-additional-fields__field-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--saico-spacing-lg);
+}
+
+/* Campos de ancho completo */
+.form-row-wide {
+    grid-column: 1 / -1;
+}
+
+.form-row {
+    margin-bottom: 0;
+}
+
+.form-row label {
+    display: block;
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+    margin-bottom: var(--saico-spacing-sm);
+}
+
+.form-row label .required {
+    color: var(--saico-error);
+    margin-left: 2px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    width: 100%;
+}
+
+.form-row textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Checkbox */
+.form-row input[type="checkbox"] {
+    width: auto;
+    margin-right: var(--saico-spacing-sm);
+}
+
+/* Mensajes de validación */
+.woocommerce-invalid input {
+    border-color: var(--saico-error) !important;
+}
+
+.woocommerce-validated input {
+    border-color: var(--saico-exito) !important;
+}
+
+/* ============================================================================
+   RESUMEN DEL PEDIDO
+   ============================================================================ */
+.woocommerce-checkout-review-order-table {
+    width: 100%;
+    margin-bottom: var(--saico-spacing-lg);
+}
+
+.woocommerce-checkout-review-order-table thead {
+    background-color: var(--saico-bg-secundario);
+}
+
+.woocommerce-checkout-review-order-table th {
+    padding: var(--saico-spacing-md);
+    font-weight: var(--saico-font-weight-semibold);
+    text-align: left;
+    border-bottom: 2px solid var(--saico-borde-claro);
+}
+
+.woocommerce-checkout-review-order-table td {
+    padding: var(--saico-spacing-md);
+    border-bottom: 1px solid var(--saico-borde-claro);
+}
+
+.woocommerce-checkout-review-order-table .cart_item:hover {
+    background-color: var(--saico-bg-secundario);
+}
+
+.product-name {
+    font-weight: var(--saico-font-weight-semibold);
+    color: var(--saico-texto-primario);
+}
+
+.product-total {
+    text-align: right;
+    font-weight: var(--saico-font-weight-bold);
+    color: var(--saico-primario);
+}
+
+/* Subtotal, envío y total */
+.cart-subtotal th,
+.cart-subtotal td,
+.shipping th,
+.shipping td {
+    padding: var(--saico-spacing-md);
+}
+
+.order-total th,
+.order-total td {
+    padding: var(--saico-spacing-lg) var(--saico-spacing-md);
+    font-size: var(--saico-font-lg);
+    font-weight: var(--saico-font-weight-bold);
+    background-color: var(--saico-bg-secundario);
+}
+
+.order-total .woocommerce-Price-amount {
+    color: var(--saico-primario);
+    font-size: var(--saico-font-2xl);
+}
+
+/* ============================================================================
+   MÉTODOS DE PAGO
+   ============================================================================ */
+#payment {
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-lg);
+    margin-top: var(--saico-spacing-lg);
+}
+
+#payment ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#payment .payment_method_container {
+    margin-top: var(--saico-spacing-md);
+}
+
+.wc_payment_method {
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.wc_payment_method input[type="radio"] {
+    margin-right: var(--saico-spacing-sm);
+}
+
+.wc_payment_method label {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+    padding: var(--saico-spacing-md);
+    background-color: var(--saico-bg-primario);
+    border: 2px solid var(--saico-borde-claro);
+    border-radius: var(--saico-radius-md);
+    cursor: pointer;
+    transition: all var(--saico-transition-fast);
+}
+
+.wc_payment_method label:hover {
+    border-color: var(--saico-primario-light);
+    background-color: var(--saico-primario-light);
+}
+
+.wc_payment_method input[type="radio"]:checked + label {
+    border-color: var(--saico-primario);
+    background-color: var(--saico-primario-light);
+}
+
+.wc_payment_method img {
+    max-width: 50px;
+    height: auto;
+}
+
+.payment_box {
+    padding: var(--saico-spacing-md);
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-md);
+    margin-top: var(--saico-spacing-md);
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-secundario);
+}
+
+/* ============================================================================
+   TÉRMINOS Y CONDICIONES
+   ============================================================================ */
+.woocommerce-terms-and-conditions-wrapper {
+    margin: var(--saico-spacing-lg) 0;
+}
+
+.woocommerce-terms-and-conditions {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: var(--saico-spacing-md);
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-md);
+    font-size: var(--saico-font-sm);
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.woocommerce-terms-and-conditions::-webkit-scrollbar {
+    width: 8px;
+}
+
+.woocommerce-terms-and-conditions::-webkit-scrollbar-track {
+    background-color: var(--saico-bg-terciario);
+    border-radius: var(--saico-radius-md);
+}
+
+.woocommerce-terms-and-conditions::-webkit-scrollbar-thumb {
+    background-color: var(--saico-borde-medio);
+    border-radius: var(--saico-radius-md);
+}
+
+.woocommerce-terms-and-conditions::-webkit-scrollbar-thumb:hover {
+    background-color: var(--saico-primario);
+}
+
+.validate-required .woocommerce-terms-and-conditions-checkbox-text {
+    font-weight: var(--saico-font-weight-semibold);
+}
+
+/* ============================================================================
+   BOTÓN DE REALIZAR PEDIDO
+   ============================================================================ */
+#place_order {
+    width: 100%;
+    padding: var(--saico-spacing-lg);
+    font-size: var(--saico-font-lg);
+    font-weight: var(--saico-font-weight-bold);
+    background-color: var(--saico-primario);
+    color: white;
+    border: none;
+    border-radius: var(--saico-radius-lg);
+    cursor: pointer;
+    transition: all var(--saico-transition-base);
+    box-shadow: var(--saico-shadow-lg);
+}
+
+#place_order:hover {
+    background-color: var(--saico-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--saico-shadow-xl);
+}
+
+#place_order:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================================================
+   CUPONES
+   ============================================================================ */
+.woocommerce-form-coupon {
+    background-color: var(--saico-bg-secundario);
+    border-radius: var(--saico-radius-lg);
+    padding: var(--saico-spacing-lg);
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+.woocommerce-form-coupon p {
+    margin-bottom: var(--saico-spacing-md);
+}
+
+.woocommerce-form-coupon .form-row {
+    display: flex;
+    gap: var(--saico-spacing-md);
+}
+
+.woocommerce-form-coupon input {
+    flex: 1;
+}
+
+.woocommerce-form-coupon button {
+    min-width: 150px;
+}
+
+/* ============================================================================
+   NOTIFICACIONES
+   ============================================================================ */
+.woocommerce-NoticeGroup,
+.woocommerce-error,
+.woocommerce-message,
+.woocommerce-info {
+    padding: var(--saico-spacing-md) var(--saico-spacing-lg);
+    margin-bottom: var(--saico-spacing-lg);
+    border-radius: var(--saico-radius-md);
+    border-left: 4px solid;
+}
+
+.woocommerce-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: var(--saico-error);
+    color: var(--saico-error);
+}
+
+.woocommerce-message {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: var(--saico-exito);
+    color: var(--saico-exito);
+}
+
+.woocommerce-info {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-color: var(--saico-info);
+    color: var(--saico-info);
+}
+
+/* ============================================================================
+   PÁGINA DE CONFIRMACIÓN (Thank You)
+   ============================================================================ */
+.woocommerce-order-received {
+    padding: var(--saico-spacing-2xl) 0;
+}
+
+.woocommerce-notice--success {
+    background-color: var(--saico-exito);
+    color: white;
+    padding: var(--saico-spacing-xl);
+    border-radius: var(--saico-radius-lg);
+    text-align: center;
+    font-size: var(--saico-font-lg);
+    margin-bottom: var(--saico-spacing-2xl);
+}
+
+.woocommerce-order-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--saico-spacing-lg);
+    list-style: none;
+    margin: var(--saico-spacing-xl) 0;
+    padding: 0;
+}
+
+.woocommerce-order-overview__order,
+.woocommerce-order-overview__date,
+.woocommerce-order-overview__total,
+.woocommerce-order-overview__payment-method {
+    background-color: var(--saico-bg-secundario);
+    padding: var(--saico-spacing-lg);
+    border-radius: var(--saico-radius-lg);
+    text-align: center;
+}
+
+.woocommerce-order-overview strong {
+    display: block;
+    font-size: var(--saico-font-sm);
+    color: var(--saico-texto-terciario);
+    margin-bottom: var(--saico-spacing-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.woocommerce-order-details {
+    margin-top: var(--saico-spacing-2xl);
+    background-color: var(--saico-bg-primario);
+    border-radius: var(--saico-radius-lg);
+    box-shadow: var(--saico-shadow-md);
+    padding: var(--saico-spacing-xl);
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 992px) {
+    .woocommerce-checkout-review-order {
+        position: static;
+        margin-top: var(--saico-spacing-2xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .woocommerce-billing-fields__field-wrapper,
+    .woocommerce-shipping-fields__field-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .woocommerce-order-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .woocommerce-checkout-review-order {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .order-total .woocommerce-Price-amount {
+        font-size: var(--saico-font-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    .woocommerce-checkout {
+        padding: var(--saico-spacing-lg) 0;
+    }
+
+    .woocommerce-form-coupon .form-row {
+        flex-direction: column;
+    }
+
+    .woocommerce-form-coupon button {
+        width: 100%;
+    }
+}
