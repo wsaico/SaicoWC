@@ -19,12 +19,12 @@
  * @version 1.0.0
  */
 
+namespace SaicoWC\AuthorSystem {
+
 // Prevenir acceso directo
 if (!defined('ABSPATH')) {
     exit;
 }
-
-namespace SaicoWC\AuthorSystem {
 
 // Definir constantes del plugin
 define('SAICOWC_AUTHOR_VERSION', '1.0.0');
