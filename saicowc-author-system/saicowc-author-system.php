@@ -19,12 +19,12 @@
  * @version 1.0.0
  */
 
-namespace SaicoWC\AuthorSystem;
-
 // Prevenir acceso directo
 if (!defined('ABSPATH')) {
     exit;
 }
+
+namespace SaicoWC\AuthorSystem {
 
 // Definir constantes del plugin
 define('SAICOWC_AUTHOR_VERSION', '1.0.0');
@@ -314,15 +314,22 @@ final class Plugin {
     }
 }
 
+} // Fin del namespace SaicoWC\AuthorSystem
+
+namespace { // Namespace global
+
 /**
  * Función helper para obtener la instancia del plugin
+ * Esta función está en el namespace global para ser accesible desde cualquier parte
  *
  * @since 1.0.0
- * @return Plugin
+ * @return \SaicoWC\AuthorSystem\Plugin
  */
 function saicowc_author_system() {
-    return Plugin::instance();
+    return \SaicoWC\AuthorSystem\Plugin::instance();
 }
+
+} // Fin del namespace global
 
 // Inicializar el plugin
 saicowc_author_system();
