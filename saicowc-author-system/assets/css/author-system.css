@@ -1,0 +1,543 @@
+/**
+ * SaicoWC Author Follow & Badges - Estilos Frontend
+ * Version: 1.0.0
+ * Author: Wilber Saico
+ */
+
+/* ============================================================================
+   VARIABLES CSS
+   ============================================================================ */
+:root {
+    --saicowc-primary: #667eea;
+    --saicowc-primary-dark: #5568d3;
+    --saicowc-secondary: #764ba2;
+    --saicowc-success: #10b981;
+    --saicowc-danger: #ef4444;
+    --saicowc-text: #1f2937;
+    --saicowc-text-light: #6b7280;
+    --saicowc-border: #e5e7eb;
+    --saicowc-bg: #f9fafb;
+    --saicowc-white: #ffffff;
+    --saicowc-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --saicowc-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --saicowc-radius: 8px;
+    --saicowc-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================
+   BOTÓN DE SEGUIR
+   ============================================================================ */
+.saicowc-follow-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--saicowc-white);
+    background: linear-gradient(135deg, var(--saicowc-primary) 0%, var(--saicowc-secondary) 100%);
+    border: none;
+    border-radius: var(--saicowc-radius);
+    cursor: pointer;
+    transition: var(--saicowc-transition);
+    box-shadow: var(--saicowc-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.saicowc-follow-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.saicowc-follow-button:hover::before {
+    left: 100%;
+}
+
+.saicowc-follow-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--saicowc-shadow-lg);
+}
+
+.saicowc-follow-button:active {
+    transform: translateY(0);
+}
+
+/* Estado: Siguiendo */
+.saicowc-follow-button.is-following {
+    background: var(--saicowc-success);
+}
+
+.saicowc-follow-button.is-following:hover {
+    background: var(--saicowc-danger);
+}
+
+/* Iconos del botón */
+.saicowc-follow-button .follow-icon {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+}
+
+.saicowc-follow-button .icon-follow,
+.saicowc-follow-button .icon-following {
+    transition: var(--saicowc-transition);
+}
+
+.saicowc-follow-button .icon-following {
+    display: none;
+}
+
+.saicowc-follow-button.is-following .icon-follow {
+    display: none;
+}
+
+.saicowc-follow-button.is-following .icon-following {
+    display: block;
+}
+
+/* Contador de seguidores */
+.saicowc-follow-button .followers-count {
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+/* Estado: Loading */
+.saicowc-follow-button.is-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ============================================================================
+   BADGE DEL AUTOR
+   ============================================================================ */
+.saicowc-author-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: help;
+}
+
+.saicowc-author-badge svg {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: var(--saicowc-transition);
+}
+
+.saicowc-author-badge:hover svg {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Animación de brillo */
+@keyframes badge-shine {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.saicowc-author-badge[data-level="diamond"] svg {
+    animation: badge-shine 2s ease-in-out infinite;
+}
+
+/* ============================================================================
+   INTEGRACIÓN EN PÁGINA DE AUTOR
+   ============================================================================ */
+.saicowc-author-page-integration {
+    margin: 20px 0;
+    padding: 24px;
+    background: var(--saicowc-white);
+    border-radius: var(--saicowc-radius);
+    box-shadow: var(--saicowc-shadow);
+}
+
+.author-header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--saicowc-border);
+}
+
+.author-badge-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-badge-display .badge-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-badge-display .badge-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--saicowc-text);
+}
+
+.author-badge-display .badge-points {
+    font-size: 14px;
+    color: var(--saicowc-text-light);
+}
+
+/* Estadísticas del autor */
+.author-stats-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.author-stats-panel .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--saicowc-bg);
+    border-radius: var(--saicowc-radius);
+}
+
+.author-stats-panel .stat-item svg {
+    width: 24px;
+    height: 24px;
+    color: var(--saicowc-primary);
+}
+
+.author-stats-panel .stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-stats-panel .stat-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--saicowc-text);
+}
+
+.author-stats-panel .stat-label {
+    font-size: 12px;
+    color: var(--saicowc-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Barra de progreso */
+.author-progress {
+    padding: 16px;
+    background: var(--saicowc-bg);
+    border-radius: var(--saicowc-radius);
+}
+
+.author-progress .progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.author-progress .progress-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--saicowc-text);
+}
+
+.author-progress .progress-percent {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--saicowc-primary);
+}
+
+.author-progress .progress-bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.author-progress .progress-fill {
+    height: 100%;
+    background: var(--saicowc-primary);
+    border-radius: 4px;
+    transition: width 0.6s ease;
+}
+
+.author-progress .progress-text {
+    font-size: 12px;
+    color: var(--saicowc-text-light);
+}
+
+/* ============================================================================
+   SHORTCODES
+   ============================================================================ */
+
+/* Author Stats Shortcode */
+.saicowc-author-stats-shortcode {
+    padding: 20px;
+    background: var(--saicowc-white);
+    border-radius: var(--saicowc-radius);
+    box-shadow: var(--saicowc-shadow);
+}
+
+.saicowc-author-stats-shortcode .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.saicowc-author-stats-shortcode .stat-item {
+    text-align: center;
+    padding: 16px;
+    background: var(--saicowc-bg);
+    border-radius: var(--saicowc-radius);
+}
+
+.saicowc-author-stats-shortcode .stat-label {
+    display: block;
+    font-size: 12px;
+    color: var(--saicowc-text-light);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.saicowc-author-stats-shortcode .stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--saicowc-primary);
+}
+
+/* Following List */
+.saicowc-following-list,
+.saicowc-top-authors {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.following-item,
+.top-author-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--saicowc-white);
+    border: 1px solid var(--saicowc-border);
+    border-radius: var(--saicowc-radius);
+    transition: var(--saicowc-transition);
+}
+
+.following-item:hover,
+.top-author-item:hover {
+    box-shadow: var(--saicowc-shadow);
+    transform: translateY(-2px);
+}
+
+.following-item .author-avatar img,
+.top-author-item .author-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.following-item .author-info,
+.top-author-item .author-info {
+    flex: 1;
+}
+
+.following-item .author-name-badge,
+.top-author-item .author-name-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.following-item .author-name-badge a,
+.top-author-item .author-name-badge a {
+    font-weight: 600;
+    color: var(--saicowc-text);
+    text-decoration: none;
+}
+
+.following-item .author-name-badge a:hover,
+.top-author-item .author-name-badge a:hover {
+    color: var(--saicowc-primary);
+}
+
+.following-item .author-meta,
+.top-author-item .author-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--saicowc-text-light);
+}
+
+.top-author-item .author-rank {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--saicowc-primary);
+    min-width: 40px;
+    text-align: center;
+}
+
+/* ============================================================================
+   WIDGETS
+   ============================================================================ */
+.saicowc-widget-top-authors-list,
+.saicowc-widget-following-list,
+.saicowc-widget-products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.widget-author-item,
+.widget-product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: var(--saicowc-bg);
+    border-radius: var(--saicowc-radius);
+    transition: var(--saicowc-transition);
+}
+
+.widget-author-item:hover,
+.widget-product-item:hover {
+    background: #f3f4f6;
+}
+
+.widget-author-item .author-rank {
+    font-weight: 700;
+    color: var(--saicowc-primary);
+    min-width: 24px;
+}
+
+.widget-author-item .author-avatar,
+.widget-product-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.widget-author-item .author-link,
+.widget-product-item .product-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+}
+
+.widget-author-item .author-details,
+.widget-product-item .product-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.widget-author-item .author-name,
+.widget-product-item .product-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--saicowc-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.widget-author-item .author-followers,
+.widget-product-item .product-author {
+    display: block;
+    font-size: 12px;
+    color: var(--saicowc-text-light);
+}
+
+.widget-product-item .product-price {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--saicowc-primary);
+    margin-top: 4px;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 768px) {
+    .author-header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .author-stats-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .saicowc-follow-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .saicowc-author-stats-shortcode .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================================
+   DARK MODE SUPPORT
+   ============================================================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --saicowc-text: #f3f4f6;
+        --saicowc-text-light: #9ca3af;
+        --saicowc-border: #374151;
+        --saicowc-bg: #1f2937;
+        --saicowc-white: #111827;
+    }
+}
+
+/* ============================================================================
+   ANIMACIONES
+   ============================================================================ */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.saicowc-follow-button.just-followed {
+    animation: pulse 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.saicowc-author-page-integration {
+    animation: fadeIn 0.5s ease;
+}
