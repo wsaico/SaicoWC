@@ -1,0 +1,298 @@
+/**
+ * Responsive Utilities - Breakpoints Centralizados
+ * @package SaicoWC
+ * @version 1.0.0
+ *
+ * BREAKPOINTS ESTÁNDAR:
+ * - Mobile: 0-768px
+ * - Tablet: 769px-1023px
+ * - Desktop: 1024px+
+ * - Large Desktop: 1280px+
+ */
+
+/* ============================================================================
+   VARIABLES DE BREAKPOINT (Documentación)
+   ============================================================================ */
+/**
+ * Los breakpoints están definidos en variables.css como:
+ * --saico-breakpoint-sm: 576px;
+ * --saico-breakpoint-md: 768px;
+ * --saico-breakpoint-lg: 992px;
+ * --saico-breakpoint-xl: 1200px;
+ * --saico-breakpoint-2xl: 1400px;
+ */
+
+/* ============================================================================
+   UTILIDADES DE VISIBILIDAD RESPONSIVE
+   ============================================================================ */
+
+/* Ocultar en todos los dispositivos por defecto */
+.hide-mobile,
+.hide-tablet,
+.hide-desktop {
+    display: none !important;
+}
+
+/* Mostrar solo en móvil (0-768px) */
+@media (max-width: 768px) {
+    .show-mobile-only {
+        display: block !important;
+    }
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Mostrar solo en tablet (769px-1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .show-tablet-only {
+        display: block !important;
+    }
+    .hide-tablet {
+        display: none !important;
+    }
+}
+
+/* Mostrar solo en desktop (1024px+) */
+@media (min-width: 1024px) {
+    .show-desktop-only {
+        display: block !important;
+    }
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE TEXT ALIGNMENT
+   ============================================================================ */
+@media (max-width: 768px) {
+    .mobile-text-center {
+        text-align: center !important;
+    }
+    .mobile-text-left {
+        text-align: left !important;
+    }
+    .mobile-text-right {
+        text-align: right !important;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE SPACING
+   ============================================================================ */
+@media (max-width: 768px) {
+    /* Reducir padding en móviles */
+    .mobile-p-sm { padding: var(--saico-spacing-sm) !important; }
+    .mobile-p-md { padding: var(--saico-spacing-md) !important; }
+    .mobile-p-lg { padding: var(--saico-spacing-lg) !important; }
+
+    /* Reducir margin en móviles */
+    .mobile-m-0 { margin: 0 !important; }
+    .mobile-mt-sm { margin-top: var(--saico-spacing-sm) !important; }
+    .mobile-mb-sm { margin-bottom: var(--saico-spacing-sm) !important; }
+}
+
+/* ============================================================================
+   RESPONSIVE FLEX UTILITIES
+   ============================================================================ */
+@media (max-width: 768px) {
+    .mobile-flex-column {
+        flex-direction: column !important;
+    }
+    .mobile-flex-row {
+        flex-direction: row !important;
+    }
+    .mobile-justify-center {
+        justify-content: center !important;
+    }
+    .mobile-items-center {
+        align-items: center !important;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE WIDTH
+   ============================================================================ */
+@media (max-width: 768px) {
+    .mobile-w-full {
+        width: 100% !important;
+    }
+    .mobile-w-auto {
+        width: auto !important;
+    }
+}
+
+/* ============================================================================
+   OPTIMIZACIONES MOBILE PARA MEJOR PERFORMANCE
+   ============================================================================ */
+@media (max-width: 768px) {
+    /* Reducir animaciones en dispositivos de baja potencia */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* Optimizar imágenes en móvil */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+
+    /* Mejorar scrolling en iOS */
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Prevenir zoom en inputs en iOS */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+
+    /* Prevenir desbordamiento horizontal en toda la página */
+    html,
+    body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+    }
+
+    /* Prevenir desbordamiento en elementos contenedores principales */
+    body > *,
+    #page,
+    .site,
+    main,
+    .main-content {
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    .saico-tienda-contenedor,
+    .saico-tienda-layout,
+    .saico-tienda-main {
+        height: auto !important;
+        overflow: visible !important;
+    }
+    .productos-grid {
+        overflow: visible !important;
+    }
+
+    /* Asegurar que todos los elementos respeten el ancho del viewport */
+    * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Excepciones para elementos que necesitan ancho completo */
+    .woocommerce-products-header,
+    .products,
+    .productos-grid {
+        max-width: 100% !important;
+    }
+}
+
+/* ============================================================================
+   SAFE AREA INSETS (Para dispositivos con notch)
+   ============================================================================ */
+@supports (padding: env(safe-area-inset-bottom)) {
+    body {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .saico-bottom-nav {
+        padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    }
+}
+
+/* ============================================================================
+   LANDSCAPE MODE OPTIMIZATIONS
+   ============================================================================ */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* Reducir padding vertical en landscape */
+    .saico-header {
+        height: 56px;
+    }
+
+    body {
+        padding-top: 56px;
+    }
+
+    /* Ocultar bottom nav en landscape si es necesario */
+    .saico-bottom-nav {
+        display: none;
+    }
+}
+
+/* ============================================================================
+   PRINT STYLES
+   ============================================================================ */
+@media print {
+    /* Ocultar elementos de navegación al imprimir */
+    .saico-header,
+    .saico-footer,
+    .saico-bottom-nav,
+    .saico-back-to-top,
+    .saico-overlay {
+        display: none !important;
+    }
+
+    /* Optimizar para impresión */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Evitar saltos de página en elementos */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================================================
+   TABLET SPECIFIC (769px - 1023px)
+   ============================================================================ */
+@media (min-width: 769px) and (max-width: 1023px) {
+    /* Ajustes específicos para tablet */
+    .saico-contenedor {
+        padding: 0 var(--saico-spacing-xl);
+    }
+
+    /* Grids responsive en tablet */
+    .saico-grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .saico-grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================================================
+   LARGE DESKTOP (1280px+)
+   ============================================================================ */
+@media (min-width: 1280px) {
+    /* Aumentar containers en pantallas grandes */
+    .saico-contenedor {
+        max-width: var(--saico-container-xl);
+    }
+
+    /* Ajustar tipografía en pantallas grandes */
+    h1 {
+        font-size: var(--saico-font-5xl);
+    }
+}

@@ -40,11 +40,19 @@ function saico_enqueue_assets() {
         SAICO_VERSION
     );
 
+    // Sistema de botones global (después de variables)
+    wp_enqueue_style(
+        'saico-buttons',
+        SAICO_URI . '/assets/css/buttons.css',
+        array('saico-variables'),
+        SAICO_VERSION
+    );
+
     // Style.css principal
     wp_enqueue_style(
         'saico-main',
         get_stylesheet_uri(),
-        array('saico-variables', 'saico-base'),
+        array('saico-variables', 'saico-base', 'saico-buttons'),
         SAICO_VERSION
     );
 
@@ -61,6 +69,22 @@ function saico_enqueue_assets() {
         'saico-footer',
         SAICO_URI . '/assets/css/footer.css',
         array('saico-variables'),
+        SAICO_VERSION
+    );
+
+    // Modales compartidos
+    wp_enqueue_style(
+        'saico-modals',
+        SAICO_URI . '/assets/css/modals.css',
+        array('saico-variables', 'saico-base'),
+        SAICO_VERSION
+    );
+
+    // Responsive utilities (última para sobrescribir cuando sea necesario)
+    wp_enqueue_style(
+        'saico-responsive',
+        SAICO_URI . '/assets/css/responsive.css',
+        array('saico-variables', 'saico-base'),
         SAICO_VERSION
     );
 
@@ -104,9 +128,14 @@ function saico_enqueue_assets() {
         wp_enqueue_style('saico-frontpage', SAICO_URI . '/assets/css/frontpage.css', array('saico-variables'), SAICO_VERSION);
     }
 
-    // Blog
+    // Blog y Posts
     if (is_singular('post') || (is_home() && !is_front_page()) || (is_archive() && (is_author() || is_date() || is_category() || is_tag()))) {
         wp_enqueue_style('saico-blog', SAICO_URI . '/assets/css/blog.css', array('saico-variables'), SAICO_VERSION);
+    }
+
+    // Páginas individuales
+    if (is_page() && !is_front_page()) {
+        wp_enqueue_style('saico-pages', SAICO_URI . '/assets/css/pages.css', array('saico-variables'), SAICO_VERSION);
     }
 
     // Single Product
@@ -128,8 +157,13 @@ function saico_enqueue_assets() {
         wp_enqueue_style('saico-sidebar', SAICO_URI . '/assets/css/sidebar.css', array('saico-variables'), SAICO_VERSION);
     }
 
+    // Sidebar principal (blog y páginas)
+    if (is_active_sidebar('sidebar-principal') && (is_singular('post') || is_page() || is_home() || is_archive())) {
+        wp_enqueue_style('saico-sidebar', SAICO_URI . '/assets/css/sidebar.css', array('saico-variables'), SAICO_VERSION);
+    }
+
     // Widgets
-    if (is_active_sidebar('sidebar-tienda') || is_active_sidebar('footer-1') || is_active_sidebar('footer-2')) {
+    if (is_active_sidebar('sidebar-tienda') || is_active_sidebar('sidebar-principal') || is_active_sidebar('footer-1') || is_active_sidebar('footer-2')) {
         wp_enqueue_style('saico-widgets', SAICO_URI . '/assets/css/widgets.css', array('saico-variables'), SAICO_VERSION);
     }
 
@@ -274,6 +308,28 @@ function saico_enqueue_assets() {
         wp_enqueue_script('saico-sidebar-toggle', SAICO_URI . '/assets/js/sidebar-toggle.js', array('jquery'), SAICO_VERSION, true);
     }
 
+    // Login Page & Modal Login (enqueue globally para modal)
+    // CSS del login (siempre, para modal-login.php)
+    wp_enqueue_style('saico-login-page', SAICO_URI . '/assets/css/login-page.css', array('saico-variables'), SAICO_VERSION);
+
+    // JavaScript del login (siempre, para modal-login.php)
+    wp_enqueue_script('saico-login-page', SAICO_URI . '/assets/js/login-page.js', array('jquery'), SAICO_VERSION, true);
+
+    // Localizar datos para login (global para página y modal)
+    wp_localize_script('saico-login-page', 'saicoLogin', array(
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'homeUrl' => home_url()
+    ));
+
+    // Google reCAPTCHA v3 si está configurado
+    $recaptcha_site_key = get_theme_mod('recaptcha_site_key');
+    if (!empty($recaptcha_site_key)) {
+        wp_enqueue_script('google-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . $recaptcha_site_key, array(), null, true);
+
+        // Pasar site key al JavaScript
+        wp_localize_script('saico-login-page', 'saicoRecaptchaSiteKey', $recaptcha_site_key);
+    }
+
     // ========================================================================
     // LIBRERÍAS EXTERNAS
     // ========================================================================
@@ -348,7 +404,10 @@ function saico_preload_critical_assets() {
     // Preload CSS crítico
     echo '<link rel="preload" href="' . SAICO_URI . '/assets/css/variables.css" as="style">' . "\n";
     echo '<link rel="preload" href="' . SAICO_URI . '/assets/css/base.css" as="style">' . "\n";
+    echo '<link rel="preload" href="' . SAICO_URI . '/assets/css/buttons.css" as="style">' . "\n";
     echo '<link rel="preload" href="' . SAICO_URI . '/assets/css/header.css" as="style">' . "\n";
+    echo '<link rel="preload" href="' . SAICO_URI . '/assets/css/modals.css" as="style">' . "\n";
+    echo '<link rel="preload" href="' . SAICO_URI . '/assets/css/responsive.css" as="style">' . "\n";
 
     // Preload del logo
     $custom_logo_id = get_theme_mod('custom_logo');

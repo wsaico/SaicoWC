@@ -10,6 +10,7 @@ if (!$product) return;
 
 $product_id = $product->get_id();
 $countdown_time = get_theme_mod('animated_button_time', 10);
+$is_logged_in = is_user_logged_in();
 ?>
 
 <div id="saico-download-modal" class="saico-modal">
@@ -27,44 +28,36 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
         <!-- PASO 1: Cuenta regresiva -->
         <div class="saico-modal-paso saico-modal-paso1">
             <h3>Preparando tu descarga...</h3>
-            <div class="countdown-circle">
-                <svg class="countdown-ring" width="140" height="140">
-                    <circle class="countdown-ring-bg" cx="70" cy="70" r="60"></circle>
-                    <circle class="countdown-ring-progress" cx="70" cy="70" r="60"></circle>
-                </svg>
-                <span id="saico-countdown-number"><?php echo esc_html($countdown_time); ?></span>
+            <p class="modal-product-title"><?php echo esc_html($product->get_name()); ?></p>
+
+            <!-- Temporizador lineal elegante -->
+            <div class="countdown-linear">
+                <div class="countdown-number-wrapper">
+                    <span id="saico-countdown-number"><?php echo esc_html($countdown_time); ?></span>
+                    <span class="countdown-label">segundos</span>
+                </div>
+                <div class="countdown-bar-container">
+                    <div class="countdown-bar-progress"></div>
+                </div>
             </div>
-            <p>Tu descarga comenzará en unos segundos</p>
 
             <!-- AdSense - Durante espera (usuario cautivo) -->
-            <div class="modal-adsense-container modal-adsense-waiting">
-                <?php
-                $ad_waiting = get_theme_mod('adsense_modal_waiting', '');
-                if (!empty($ad_waiting)) {
-                    // Mostrar código AdSense directamente sin filtros
-                    echo $ad_waiting;
-                } else {
-                    echo '<div class="ad-placeholder"><p>AdSense - Durante Espera</p><small>Configure en Personalizar → AdSense</small></div>';
-                }
-                ?>
-            </div>
+            <?php
+            // Usar función sanitizada de AdSense
+            saico_get_adsense('adsense_modal_waiting', 'modal-waiting');
+            ?>
         </div>
 
         <!-- PASO 2: Links de descarga -->
         <div class="saico-modal-paso saico-modal-paso2" style="display: none;">
             <h3>¡Tu descarga está lista!</h3>
-            <p class="modal-subtitle">Elige tu servidor de descarga preferido</p>
+            <p class="modal-product-title"><?php echo esc_html($product->get_name()); ?></p>
 
             <!-- AdSense - Antes de links (posición premium) -->
-            <div class="modal-adsense-container modal-adsense-before">
-                <?php
-                $ad_before = get_theme_mod('adsense_modal_before_links', '');
-                if (!empty($ad_before)) {
-                    // Mostrar código AdSense directamente sin filtros
-                    echo $ad_before;
-                }
-                ?>
-            </div>
+            <?php
+            // Usar función sanitizada de AdSense
+            saico_get_adsense('adsense_modal_before_links', 'modal-before');
+            ?>
 
             <div class="modal-download-links">
                 <?php
@@ -75,108 +68,18 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
                 }
                 ?>
             </div>
-
-            <!-- AdSense - Después de links -->
-            <div class="modal-adsense-container modal-adsense-after">
-                <?php
-                $ad_after = get_theme_mod('adsense_modal_after_links', '');
-                if (!empty($ad_after)) {
-                    // Mostrar código AdSense directamente sin filtros
-                    echo $ad_after;
-                }
-                ?>
-            </div>
-
-            <!-- Botón para cerrar modal -->
-            <button class="modal-close-btn" onclick="saicoCerrarModal('saico-download-modal')">
-                Cerrar
-            </button>
         </div>
     </div>
 </div>
 
 <style>
-.saico-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.saico-modal.activo {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.saico-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-}
-
-.saico-modal-contenido {
-    position: relative;
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-    z-index: 1;
-    animation: slideUp 0.4s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.saico-modal-cerrar {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #f3f4f6;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    z-index: 10;
-}
-
-.saico-modal-cerrar:hover {
-    background: #e5e7eb;
-    transform: rotate(90deg);
-}
-
+/* Estilos específicos del modal de descarga */
 .saico-modal-paso {
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .saico-modal-paso h3 {
@@ -184,189 +87,227 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
     margin-bottom: 12px;
     color: #1f2937;
     font-weight: 700;
+    word-wrap: break-word;
 }
 
-.modal-subtitle {
-    font-size: 14px;
-    color: #6b7280;
-    margin-bottom: 20px;
-}
-
-/* Countdown Circle con SVG animado */
-.countdown-circle {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    margin: 24px auto;
-}
-
-.countdown-ring {
-    transform: rotate(-90deg);
-}
-
-.countdown-ring-bg {
-    fill: none;
-    stroke: #e5e7eb;
-    stroke-width: 8;
-}
-
-.countdown-ring-progress {
-    fill: none;
-    stroke: url(#gradient);
-    stroke-width: 8;
-    stroke-linecap: round;
-    stroke-dasharray: 377;
-    stroke-dashoffset: 377;
-    transition: stroke-dashoffset 1s linear;
-}
-
-#saico-countdown-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 48px;
-    font-weight: 700;
+.modal-product-title {
+    font-size: 15px;
     color: #10b981;
+    font-weight: 600;
+    margin: 8px 0 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
-/* AdSense containers */
-.modal-adsense-container {
-    margin: 24px 0;
-    padding: 16px;
-    background: #f9fafb;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    min-height: 90px;
+/* Temporizador lineal elegante */
+.countdown-linear {
+    margin: 30px auto;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.countdown-number-wrapper {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
-}
-
-.modal-adsense-before {
-    background: #fef3c7;
-    border: 2px dashed #f59e0b;
+    gap: 8px;
     margin-bottom: 16px;
 }
 
-.modal-adsense-waiting {
-    margin-top: 20px;
+#saico-countdown-number {
+    font-size: 64px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    letter-spacing: -2px;
 }
 
-.ad-placeholder {
-    text-align: center;
-    color: #9ca3af;
-}
-
-.ad-placeholder p {
-    margin: 0;
-    font-weight: 600;
+.countdown-label {
     font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
 }
 
-.ad-placeholder small {
-    font-size: 12px;
+.countdown-bar-container {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
+
+.countdown-bar-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+    border-radius: 100px;
+    transition: width 1s linear;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* Estilos de AdSense gestionados desde inc/adsense.php */
 
 .modal-download-links {
     margin: 20px 0;
-}
-
-/* Botón cerrar */
-.modal-close-btn {
-    margin-top: 24px;
-    padding: 12px 32px;
-    background: #f3f4f6;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.modal-close-btn:hover {
-    background: #e5e7eb;
-    color: #1f2937;
-}
-
-body.modal-abierto {
+    width: 100%;
+    max-width: 100%;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
-/* Responsive */
-@media (max-width: 640px) {
-    .saico-modal-contenido {
-        padding: 24px;
-        max-width: 95%;
+.modal-download-links a,
+.modal-download-links button {
+    max-width: 100%;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+/* Responsive - Estilos específicos del modal de descarga */
+@media (max-width: 768px) {
+    .saico-modal-paso {
+        padding: 0;
     }
 
     .saico-modal-paso h3 {
-        font-size: 22px;
+        font-size: 20px;
+        margin-bottom: 8px;
     }
 
-    .countdown-circle {
-        width: 120px;
-        height: 120px;
+    .modal-product-title {
+        font-size: 13px;
+        margin: 6px 0 16px;
+    }
+
+    .countdown-linear {
+        margin: 20px auto;
     }
 
     #saico-countdown-number {
         font-size: 40px;
+        letter-spacing: -1px;
+    }
+
+    .countdown-label {
+        font-size: 11px;
+    }
+
+    .countdown-bar-container {
+        height: 6px;
+    }
+
+    .modal-download-links {
+        margin: 16px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-modal-paso h3 {
+        font-size: 18px;
+    }
+
+    .modal-product-title {
+        font-size: 12px;
+    }
+
+    #saico-countdown-number {
+        font-size: 36px;
+    }
+
+    .countdown-label {
+        font-size: 10px;
     }
 }
 </style>
 
-<!-- Gradiente SVG para el anillo de progreso -->
-<svg width="0" height="0" style="position: absolute;">
-    <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-        </linearGradient>
-    </defs>
-</svg>
-
 <script>
 jQuery(document).ready(function($) {
+    let isLoggedIn = <?php echo $is_logged_in ? 'true' : 'false'; ?>;
+    let userWantsDownload = false; // Flag para saber si el usuario quiere descargar
+
     // Abrir modal al hacer clic en botón de descarga
     $('#saico-download-button').on('click', function(e) {
         e.preventDefault();
+
+        // Si el usuario NO está logueado, mostrar popup de invitación primero
+        if (!isLoggedIn) {
+            userWantsDownload = true; // Marcar que quiere descargar
+
+            if (typeof saicoShowLoginInvite === 'function') {
+                saicoShowLoginInvite();
+            }
+            return;
+        }
+
+        // Si está logueado, abrir modal y saltar directamente a los links
+        saicoAbrirModal('saico-download-modal');
+        mostrarLinksDirectamente();
+    });
+
+    // Función para usuarios no logueados que eligen continuar con espera
+    window.saicoModalContinuarConEspera = function() {
+        userWantsDownload = false; // Reset flag
         saicoAbrirModal('saico-download-modal');
         iniciarCuentaRegresiva();
-    });
+    };
+
+    // Función llamada DESPUÉS de login exitoso
+    window.saicoAfterLoginSuccess = function() {
+        isLoggedIn = true;
+
+        // Solo proceder si el usuario había intentado descargar antes de loguearse
+        if (userWantsDownload) {
+            userWantsDownload = false; // Reset flag
+
+            // Esperar un momento para que el modal de login se cierre
+            setTimeout(function() {
+                saicoAbrirModal('saico-download-modal');
+                mostrarLinksDirectamente();
+            }, 400);
+        }
+    };
+
+    function mostrarLinksDirectamente() {
+        const $paso1 = $('.saico-modal-paso1');
+        const $paso2 = $('.saico-modal-paso2');
+
+        $paso1.hide();
+        $paso2.show();
+    }
 
     function iniciarCuentaRegresiva() {
         const $numero = $('#saico-countdown-number');
         const $paso1 = $('.saico-modal-paso1');
         const $paso2 = $('.saico-modal-paso2');
-        const $progressRing = $('.countdown-ring-progress');
+        const $progressBar = $('.countdown-bar-progress');
 
         let count = parseInt($numero.text(), 10);
         const initialCount = count;
-        const circumference = 2 * Math.PI * 60; // 2 * PI * radio (60)
 
         $paso1.show();
         $paso2.hide();
 
-        // Inicializar progreso
-        $progressRing.css('stroke-dasharray', circumference);
-        $progressRing.css('stroke-dashoffset', circumference);
+        // Inicializar barra de progreso
+        $progressBar.css('width', '0%');
 
         const interval = setInterval(function() {
             count--;
             $numero.text(count);
 
-            // Actualizar círculo de progreso
-            const progress = ((initialCount - count) / initialCount);
-            const offset = circumference - (progress * circumference);
-            $progressRing.css('stroke-dashoffset', offset);
+            // Actualizar barra de progreso lineal
+            const progress = ((initialCount - count) / initialCount) * 100;
+            $progressBar.css('width', progress + '%');
 
             if (count <= 0) {
                 clearInterval(interval);
 
-                // Animación de éxito
-                $progressRing.css('stroke-dashoffset', 0);
+                // Completar animación de barra
+                $progressBar.css('width', '100%');
 
                 setTimeout(function() {
                     $paso1.fadeOut(300, function() {

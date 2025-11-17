@@ -16,22 +16,33 @@
 }
 
 /* ============================================================================
-   GRID DE PRODUCTOS
+   GRID DE PRODUCTOS - APLICADO GLOBALMENTE
    ============================================================================ */
-body.design-minimalist ul.products,
-body.design-minimalist .productos-grid {
+ul.products,
+.productos-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
     gap: 20px !important;
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+/* Sobreescribir para body.design-minimalist (mantener compatibilidad) */
+body.design-minimalist ul.products,
+body.design-minimalist .productos-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
 }
 
 /* ============================================================================
-    CARD DE PRODUCTO - DISEÑO HORIZONTAL
+    CARD DE PRODUCTO - DISEÑO HORIZONTAL (GLOBAL)
     ============================================================================ */
-body.design-minimalist .producto-card {
+.producto-card {
     background: var(--bg-card);
     border-radius: 16px;
     padding: 16px;
@@ -47,34 +58,43 @@ body.design-minimalist .producto-card {
     border: 1px solid transparent;
     min-height: 88px;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
+    overflow: visible;
 }
 
-body.design-minimalist .producto-card:hover {
+.producto-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-xl);
     border-color: transparent;
+    z-index: 100;
+    position: relative;
 }
 
-body.design-minimalist .producto-card:hover .card-acciones {
+.producto-card:hover .card-acciones {
     opacity: 1;
     visibility: visible;
 }
 
 /* Cards especiales: Destacado, Nuevo, Popular - Bordes mínimos */
-body.design-minimalist .producto-card.destacado {
+.producto-card.destacado {
     border: 0.5px solid rgba(249, 115, 22, 0.15);
     box-shadow: var(--shadow-sm);
 }
 
-body.design-minimalist .producto-card.nuevo {
+.producto-card.nuevo {
     border: 0.5px solid rgba(40, 167, 69, 0.15);
     box-shadow: var(--shadow-sm);
 }
 
-body.design-minimalist .producto-card.popular {
+.producto-card.popular {
     border: 0.5px solid rgba(168, 85, 247, 0.15);
     box-shadow: var(--shadow-sm);
+}
+
+/* Compatibilidad con body.design-minimalist */
+body.design-minimalist .producto-card {
+    background: var(--bg-card);
 }
 
 /* ============================================================================
@@ -169,7 +189,8 @@ body.design-minimalist .producto-card.popular {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
-/* Badge circular PRO - MÁXIMA PRIORIDAD */
+/* Badge circular PRO - APLICADO GLOBALMENTE */
+.producto-badge,
 body.design-minimalist .producto-badge {
     position: absolute;
     top: -6px;
@@ -187,12 +208,14 @@ body.design-minimalist .producto-badge {
     z-index: 10 !important;
 }
 
+.badge-pro,
 body.design-minimalist .badge-pro {
     background: #1a1a1a;
     color: #fbbf24;
     padding: 0;
 }
 
+.badge-pro svg,
 body.design-minimalist .badge-pro svg {
     width: 13px;
     height: 13px;
@@ -321,23 +344,23 @@ body.design-minimalist .badge-pro svg {
 /* ============================================================================
     CONTENIDO DEL PRODUCTO
     ============================================================================ */
- .producto-contenido {
+.producto-contenido {
     flex: 1;
     min-width: 0;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
     position: relative;
-    width: 100%;
+    overflow: visible;
     box-sizing: border-box;
 }
 
 /* Categoría */
 .categoria-badge {
     display: inline-block;
-    background: rgba(59, 130, 246, 0.1);
-    color: #1d4ed8;
+    /* Los colores son dinámicos - se aplican via inline styles */
     padding: 2px 8px;
     border-radius: 6px;
     font-size: 10px;
@@ -349,18 +372,19 @@ body.design-minimalist .badge-pro svg {
     flex-shrink: 0;
     position: relative;
     z-index: 5;
-    width: auto;
-    max-width: 100px; /* Límite específico para badge */
+    width: fit-content;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: all var(--saico-transition-fast);
 }
 
 .categoria-badge:hover {
-    background: rgba(59, 130, 246, 0.2);
+    opacity: 0.8;
+    transform: translateY(-1px);
+    filter: brightness(1.1);
 }
 
-/* Título del producto */
+/* Título del producto - APLICADO GLOBALMENTE */
+.producto-card .producto-titulo,
 body.design-minimalist .producto-card .producto-titulo {
     font-size: 16px;
     font-weight: 600;
@@ -375,15 +399,18 @@ body.design-minimalist .producto-card .producto-titulo {
     /* Sin padding por defecto - expandido */
 }
 
+.producto-card:hover .producto-titulo,
 body.design-minimalist .producto-card:hover .producto-titulo {
     padding-right: 80px; /* Espacio para acciones en hover - truncado */
 }
 
+.producto-card .producto-titulo a,
 body.design-minimalist .producto-card .producto-titulo a {
     color: inherit !important;
     text-decoration: none !important;
 }
 
+.producto-card .producto-titulo a:hover,
 body.design-minimalist .producto-card .producto-titulo a:hover {
     color: var(--saico-primario, #10b981) !important;
 }
@@ -448,9 +475,9 @@ body.design-minimalist .producto-card .producto-titulo a:hover {
 }
 
 /* ============================================================================
-    ACCIONES DEL CARD - Botón de acción
+    ACCIONES DEL CARD - Botón de acción - APLICADO GLOBALMENTE
     ============================================================================ */
- .card-acciones {
+.card-acciones {
     display: flex;
     gap: 8px;
     align-items: center;
@@ -464,6 +491,7 @@ body.design-minimalist .producto-card .producto-titulo a:hover {
     z-index: 10;
 }
 
+.card-acciones .btn-icono,
 body.design-minimalist .card-acciones .btn-icono {
     width: 40px;
     height: 40px;
@@ -479,12 +507,14 @@ body.design-minimalist .card-acciones .btn-icono {
     text-decoration: none;
 }
 
+.card-acciones .btn-icono:hover,
 body.design-minimalist .card-acciones .btn-icono:hover {
     background: var(--bg-primary);
     border-color: var(--text-primary);
     transform: scale(1.05);
 }
 
+.card-acciones .btn-icono svg,
 body.design-minimalist .card-acciones .btn-icono svg {
     width: 18px;
     height: 18px;
@@ -494,6 +524,7 @@ body.design-minimalist .card-acciones .btn-icono svg {
     color: var(--text-primary) !important;
 }
 
+.card-acciones .btn-icono:hover svg,
 body.design-minimalist .card-acciones .btn-icono:hover svg {
     stroke: var(--saico-primario, #10b981) !important;
     color: var(--saico-primario, #10b981) !important;
@@ -520,15 +551,16 @@ body.design-minimalist .card-acciones .btn-icono:hover svg {
     transition-delay: 0.5s;
     pointer-events: none;
     backdrop-filter: blur(12px);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     border: 1px solid rgba(0,0,0,0.1);
-    z-index: 100;
+    z-index: 9999;
     min-width: 250px;
     max-width: 320px;
     will-change: opacity, visibility, transform;
 }
 
-/* Tooltip visible al hover */
+/* Tooltip visible al hover - APLICADO GLOBALMENTE */
+.producto-card:hover .tooltip,
 body.design-minimalist .producto-card:hover .tooltip {
     opacity: 1;
     visibility: visible;
@@ -682,12 +714,15 @@ body.design-minimalist .producto-card:hover .tooltip {
 
 /* Ocultar "Hace:" en grids de 4 columnas (1200px-1599px) */
 @media (min-width: 1200px) and (max-width: 1599px) {
+    .producto-stats .card-stat-item:nth-child(2),
     body.design-minimalist .producto-stats .card-stat-item:nth-child(2) {
         display: none !important;
     }
 }
 
 @media (max-width: 1199px) {
+    ul.products,
+    .productos-grid,
     body.design-minimalist ul.products,
     body.design-minimalist .productos-grid {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
@@ -696,47 +731,103 @@ body.design-minimalist .producto-card:hover .tooltip {
 }
 
 @media (max-width: 768px) {
+    ul.products,
+    .productos-grid,
     body.design-minimalist ul.products,
     body.design-minimalist .productos-grid {
         grid-template-columns: 1fr !important;
         gap: 16px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
     }
 
+    .producto-card,
     body.design-minimalist .producto-card {
-        padding: 14px;
+        padding: 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+    }
+
+    .producto-contenido {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        flex: 1 !important;
     }
 
     .producto-imagen {
-        width: 64px;
-        height: 64px;
+        width: 64px !important;
+        height: 64px !important;
+        flex-shrink: 0 !important;
     }
 
     .producto-titulo {
-        font-size: 15px;
+        font-size: 15px !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        padding-right: 0 !important;
     }
 
+    .producto-card:hover .producto-titulo,
+    body.design-minimalist .producto-card:hover .producto-titulo {
+        padding-right: 0 !important;
+    }
+
+    .categoria-badge {
+        max-width: fit-content !important;
+    }
+
+    .producto-stats {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+        flex-wrap: wrap !important;
+    }
+
+    .card-acciones,
+    body.design-minimalist .card-acciones {
+        opacity: 1 !important;
+        visibility: visible !important;
+        position: static !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+    }
+
+    .card-acciones .btn-icono,
     body.design-minimalist .card-acciones .btn-icono {
-        width: 38px;
-        height: 38px;
+        width: 38px !important;
+        height: 38px !important;
     }
 
+    .card-acciones .btn-icono svg,
     body.design-minimalist .card-acciones .btn-icono svg {
-        width: 16px;
-        height: 16px;
+        width: 16px !important;
+        height: 16px !important;
     }
 
     /* Ocultar tooltips en móvil */
     .tooltip {
-        display: none;
+        display: none !important;
     }
 }
 
 @media (max-width: 480px) {
+    ul.products,
+    .productos-grid,
     body.design-minimalist ul.products,
     body.design-minimalist .productos-grid {
         gap: 12px !important;
     }
 
+    .producto-card,
     body.design-minimalist .producto-card {
         padding: 12px;
         gap: 12px;
@@ -763,11 +854,13 @@ body.design-minimalist .producto-card:hover .tooltip {
         gap: 6px;
     }
 
+    .card-acciones .btn-icono,
     body.design-minimalist .card-acciones .btn-icono {
         width: 36px;
         height: 36px;
     }
 
+    .card-acciones .btn-icono svg,
     body.design-minimalist .card-acciones .btn-icono svg {
         width: 15px;
         height: 15px;

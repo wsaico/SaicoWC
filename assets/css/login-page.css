@@ -1,0 +1,803 @@
+/**
+ * Login Page - Saico WC
+ * Página de login moderna estilo Material Design
+ */
+
+/* ============================================================================
+   CONTENEDOR PRINCIPAL
+   ============================================================================ */
+.saico-login-page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--saico-spacing-xl);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    overflow: hidden;
+}
+
+.saico-login-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 2;
+    min-height: 650px;
+}
+
+/* ============================================================================
+   PANEL IZQUIERDO - INFORMACIÓN
+   ============================================================================ */
+.saico-login-info {
+    position: relative;
+    padding: var(--saico-spacing-3xl);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.login-info-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+/* Logo */
+.login-logo {
+    text-align: center;
+    margin-bottom: var(--saico-spacing-2xl);
+}
+
+.login-logo img {
+    max-width: 160px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+.login-logo h1 {
+    font-size: var(--saico-font-3xl);
+    font-weight: var(--saico-font-weight-bold);
+    color: white;
+    margin: 0;
+}
+
+/* Texto informativo */
+.login-info-text {
+    text-align: center;
+    margin-bottom: var(--saico-spacing-2xl);
+}
+
+.login-info-text h2 {
+    font-size: var(--saico-font-2xl);
+    font-weight: var(--saico-font-weight-bold);
+    margin-bottom: var(--saico-spacing-md);
+    color: white;
+}
+
+.login-info-text p {
+    font-size: var(--saico-font-base);
+    opacity: 0.95;
+    line-height: var(--saico-line-height-relaxed);
+}
+
+/* Características */
+.login-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--saico-spacing-md);
+    margin-top: var(--saico-spacing-xl);
+}
+
+.login-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--saico-spacing-md);
+    padding: var(--saico-spacing-md);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.login-feature:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(8px);
+}
+
+.feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.feature-icon svg {
+    stroke-width: 2px;
+}
+
+.feature-text h4 {
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    margin: 0 0 2px 0;
+}
+
+.feature-text p {
+    font-size: var(--saico-font-sm);
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Fondo decorativo */
+.login-info-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    animation: float 20s infinite ease-in-out;
+}
+
+.bg-circle-1 {
+    width: 250px;
+    height: 250px;
+    top: -125px;
+    right: -125px;
+    animation-delay: 0s;
+}
+
+.bg-circle-2 {
+    width: 180px;
+    height: 180px;
+    bottom: -90px;
+    left: -90px;
+    animation-delay: 5s;
+}
+
+.bg-circle-3 {
+    width: 120px;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-30px) scale(1.05);
+    }
+}
+
+/* ============================================================================
+   PANEL DERECHO - FORMULARIO
+   ============================================================================ */
+.saico-login-form-panel {
+    padding: var(--saico-spacing-3xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* ============================================================================
+   SISTEMA DE TABS (Login / Registro / Recuperar)
+   ============================================================================ */
+.login-tabs {
+    display: flex;
+    gap: var(--saico-spacing-md);
+    margin-bottom: var(--saico-spacing-2xl);
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.login-tab {
+    flex: 1;
+    padding: var(--saico-spacing-md) var(--saico-spacing-lg);
+    background: none;
+    border: none;
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    color: #9ca3af;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.login-tab:hover {
+    color: #667eea;
+}
+
+.login-tab.active {
+    color: #667eea;
+}
+
+.login-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #667eea;
+}
+
+/* Contenido de tabs */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensajes */
+.login-messages {
+    padding: var(--saico-spacing-md);
+    border-radius: 10px;
+    margin-bottom: var(--saico-spacing-lg);
+    font-size: var(--saico-font-sm);
+    animation: slideDown 0.3s ease;
+}
+
+.login-messages.success {
+    background-color: #d1fae5;
+    border: 1px solid #6ee7b7;
+    color: #065f46;
+}
+
+.login-messages.error {
+    background-color: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================================
+   FORMULARIOS CON LABELS FLOTANTES (Material Design)
+   ============================================================================ */
+.saico-login-form,
+.saico-register-form,
+.saico-recover-form {
+    margin-bottom: var(--saico-spacing-lg);
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: var(--saico-spacing-xl);
+}
+
+/* Input con icono y label flotante */
+.form-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Icono separado del input */
+.form-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    transition: color 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.form-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    font-size: var(--saico-font-base);
+    color: #1f2937;
+    background-color: #f9fafb;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    background-color: white;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-input:focus ~ .form-icon {
+    color: #667eea;
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+    top: -10px;
+    left: 12px;
+    font-size: 12px;
+    color: #667eea;
+    background: white;
+    padding: 0 8px;
+}
+
+/* Label flotante */
+.form-label {
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--saico-font-base);
+    color: #9ca3af;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    z-index: 1;
+}
+
+/* Campo de contraseña con botón toggle */
+.password-field {
+    position: relative;
+}
+
+.password-field .form-input {
+    padding-right: 48px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.toggle-password:hover {
+    color: #667eea;
+    background-color: #f3f4f6;
+}
+
+/* Opciones del formulario */
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--saico-spacing-xl);
+    flex-wrap: wrap;
+    gap: var(--saico-spacing-sm);
+}
+
+/* Checkbox personalizado */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox-custom {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkbox-custom::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-text {
+    font-size: var(--saico-font-sm);
+    color: #6b7280;
+}
+
+.forgot-password {
+    font-size: var(--saico-font-sm);
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: var(--saico-font-weight-semibold);
+    transition: color 0.2s ease;
+}
+
+.forgot-password:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   BOTONES
+   ============================================================================ */
+.btn-login,
+.btn-register,
+.btn-recover {
+    width: 100%;
+    padding: 16px;
+    font-size: var(--saico-font-base);
+    font-weight: var(--saico-font-weight-semibold);
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-login::before,
+.btn-register::before,
+.btn-recover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-login:hover,
+.btn-register:hover,
+.btn-recover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-login:hover::before,
+.btn-register:hover::before,
+.btn-recover:hover::before {
+    left: 100%;
+}
+
+.btn-login:active,
+.btn-register:active,
+.btn-recover:active {
+    transform: translateY(0);
+}
+
+.btn-login:disabled,
+.btn-register:disabled,
+.btn-recover:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-loader {
+    display: inline-flex;
+}
+
+.btn-loader svg {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================================================
+   LOGIN SOCIAL
+   ============================================================================ */
+.login-separator {
+    position: relative;
+    text-align: center;
+    margin: var(--saico-spacing-xl) 0;
+}
+
+.login-separator::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: #e5e7eb;
+}
+
+.login-separator span {
+    position: relative;
+    display: inline-block;
+    padding: 0 var(--saico-spacing-md);
+    background-color: white;
+    font-size: var(--saico-font-sm);
+    color: #9ca3af;
+}
+
+.social-login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--saico-spacing-md);
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--saico-spacing-sm);
+    padding: 12px;
+    font-size: var(--saico-font-sm);
+    font-weight: var(--saico-font-weight-semibold);
+    background-color: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.social-btn:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-google {
+    color: #1f2937;
+}
+
+.social-facebook {
+    color: #1877f2;
+}
+
+/* Footer del login */
+.login-footer {
+    text-align: center;
+    margin-top: var(--saico-spacing-lg);
+    padding-top: var(--saico-spacing-lg);
+}
+
+.login-footer p {
+    font-size: var(--saico-font-sm);
+    color: #6b7280;
+}
+
+.login-footer a {
+    color: #4f46e5;
+    font-weight: var(--saico-font-weight-semibold);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-footer a:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+/* Badge de reCAPTCHA */
+.recaptcha-badge {
+    text-align: center;
+    margin-top: var(--saico-spacing-md);
+}
+
+.recaptcha-badge small {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.recaptcha-badge a {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: var(--saico-font-weight-medium);
+}
+
+.recaptcha-badge a:hover {
+    color: #4338ca;
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   PARTÍCULAS DE FONDO
+   ============================================================================ */
+.login-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 50%;
+    animation: particleFloat 15s infinite ease-in-out;
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    top: 20%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    left: 80%;
+    top: 40%;
+    animation-delay: 3s;
+}
+
+.particle:nth-child(3) {
+    left: 30%;
+    top: 70%;
+    animation-delay: 6s;
+}
+
+.particle:nth-child(4) {
+    left: 60%;
+    top: 10%;
+    animation-delay: 9s;
+}
+
+.particle:nth-child(5) {
+    left: 90%;
+    top: 80%;
+    animation-delay: 12s;
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0.6;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+@media (max-width: 992px) {
+    .saico-login-container {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .saico-login-info {
+        display: none;
+    }
+
+    .saico-login-form-panel {
+        padding: var(--saico-spacing-2xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .saico-login-page {
+        padding: var(--saico-spacing-md);
+    }
+
+    .saico-login-form-panel {
+        padding: var(--saico-spacing-xl);
+    }
+
+    .social-login {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-login-container {
+        border-radius: 12px;
+    }
+
+    .saico-login-form-panel {
+        padding: var(--saico-spacing-lg);
+    }
+
+    .login-tabs {
+        gap: var(--saico-spacing-xs);
+    }
+
+    .login-tab {
+        padding: var(--saico-spacing-sm);
+        font-size: var(--saico-font-sm);
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

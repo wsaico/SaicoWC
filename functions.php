@@ -43,6 +43,27 @@ require_once SAICO_DIR . '/inc/ajax.php';
 // Compatibilidad WooCommerce
 require_once SAICO_DIR . '/inc/woocommerce.php';
 
+// Sistema de AdSense sanitizado
+require_once SAICO_DIR . '/inc/adsense.php';
+
+// Metaboxes para control de sidebar
+require_once SAICO_DIR . '/inc/metaboxes.php';
+
+// Sistema de login seguro personalizado
+require_once SAICO_DIR . '/inc/login-security.php';
+
+// Sistema de SEO Fallback Description
+require_once SAICO_DIR . '/inc/seo-fallback-description.php';
+
+// Campos ACF personalizados para productos
+require_once SAICO_DIR . '/inc/acf-fields.php';
+
+// Sistema de login/registro AJAX
+require_once SAICO_DIR . '/inc/ajax-login.php';
+
+// Social Login (OAuth Google & Facebook)
+require_once SAICO_DIR . '/inc/social-login.php';
+
 /**
  * ============================================================================
  * CONFIGURACIÓN DEL THEME
@@ -163,11 +184,13 @@ function saico_producto_schema($product) {
     }
 
     $product_id = $product->get_id();
+    // Aplicar filtro SEO fallback para descripción
+    $product_description = apply_filters('woocommerce_product_description', $product->get_description(), $product);
     $schema = array(
         '@context' => 'https://schema.org/',
         '@type' => 'Product',
         'name' => $product->get_name(),
-        'description' => wp_strip_all_tags($product->get_description() ?: $product->get_short_description()),
+        'description' => wp_strip_all_tags($product_description ?: $product->get_short_description()),
         'sku' => $product->get_sku(),
         'url' => get_permalink($product_id),
         'image' => wp_get_attachment_url($product->get_image_id()),
@@ -226,48 +249,77 @@ function saico_breadcrumbs() {
         return;
     }
 
-    $separador = '<i class="fas fa-chevron-right"></i>';
-    $home_titulo = '<i class="fas fa-home"></i>';
+    // Iconos SVG modernos
+    $separador = '<span class="breadcrumb-separador"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>';
+    $home_icon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>';
 
-    echo '<div class="saico-breadcrumb">';
-    echo '<a href="' . home_url() . '">' . $home_titulo . ' Inicio</a>' . $separador;
+    echo '<nav class="saico-breadcrumb" aria-label="breadcrumb"><ol class="breadcrumb-lista">';
+    echo '<li class="breadcrumb-item breadcrumb-home"><a href="' . esc_url(home_url()) . '">' . $home_icon . ' Inicio</a></li>' . $separador;
 
     if (is_singular('product')) {
         global $post;
         $terms = get_the_terms($post->ID, 'product_cat');
         if ($terms && !is_wp_error($terms)) {
             $term = array_shift($terms);
-            echo '<a href="' . get_term_link($term) . '">' . $term->name . '</a>' . $separador;
+            echo '<li class="breadcrumb-item"><a href="' . esc_url(get_term_link($term)) . '">' . esc_html($term->name) . '</a></li>' . $separador;
         }
-        echo '<span>' . get_the_title() . '</span>';
+        echo '<li class="breadcrumb-item">' . esc_html(get_the_title()) . '</li>';
     } elseif (is_tax('product_cat')) {
         $term = get_queried_object();
         if ($term->parent) {
             $parent = get_term($term->parent, 'product_cat');
-            echo '<a href="' . get_term_link($parent) . '">' . $parent->name . '</a>' . $separador;
+            echo '<li class="breadcrumb-item"><a href="' . esc_url(get_term_link($parent)) . '">' . esc_html($parent->name) . '</a></li>' . $separador;
         }
-        echo '<span>' . $term->name . '</span>';
+        echo '<li class="breadcrumb-item">' . esc_html($term->name) . '</li>';
     } elseif (is_post_type_archive('product') || is_shop()) {
-        echo '<span>Tienda</span>';
+        echo '<li class="breadcrumb-item">Tienda</li>';
     } elseif (is_category()) {
-        echo '<span>' . single_cat_title('', false) . '</span>';
+        echo '<li class="breadcrumb-item">' . esc_html(single_cat_title('', false)) . '</li>';
     } elseif (is_single()) {
         $category = get_the_category();
         if ($category) {
-            echo '<a href="' . get_category_link($category[0]->term_id) . '">' . $category[0]->name . '</a>' . $separador;
+            echo '<li class="breadcrumb-item"><a href="' . esc_url(get_category_link($category[0]->term_id)) . '">' . esc_html($category[0]->name) . '</a></li>' . $separador;
         }
-        echo '<span>' . get_the_title() . '</span>';
+        echo '<li class="breadcrumb-item">' . esc_html(get_the_title()) . '</li>';
     } elseif (is_page()) {
-        echo '<span>' . get_the_title() . '</span>';
+        echo '<li class="breadcrumb-item">' . esc_html(get_the_title()) . '</li>';
     } elseif (is_search()) {
-        echo '<span>Búsqueda: ' . get_search_query() . '</span>';
+        echo '<li class="breadcrumb-item">Búsqueda: ' . esc_html(get_search_query()) . '</li>';
     } elseif (is_404()) {
-        echo '<span>404 - Página no encontrada</span>';
+        echo '<li class="breadcrumb-item">404 - Página no encontrada</li>';
     } elseif (is_author()) {
-        echo '<span>Autor: ' . get_the_author() . '</span>';
+        echo '<li class="breadcrumb-item">Autor: ' . esc_html(get_the_author()) . '</li>';
     }
 
-    echo '</div>';
+    echo '</ol></nav>';
+}
+
+/**
+ * ============================================================================
+ * COLORES DINÁMICOS PARA CATEGORÍAS
+ * ============================================================================
+ * Genera colores únicos para cada categoría basados en su ID
+ */
+function saico_get_categoria_color($categoria_id) {
+    // Paleta de colores moderna con buen contraste
+    $colores = array(
+        array('bg' => 'rgba(59, 130, 246, 0.1)', 'text' => '#1d4ed8'),   // Azul
+        array('bg' => 'rgba(16, 185, 129, 0.1)', 'text' => '#059669'),   // Verde
+        array('bg' => 'rgba(239, 68, 68, 0.1)', 'text' => '#dc2626'),    // Rojo
+        array('bg' => 'rgba(245, 158, 11, 0.1)', 'text' => '#d97706'),   // Naranja
+        array('bg' => 'rgba(168, 85, 247, 0.1)', 'text' => '#7c3aed'),   // Púrpura
+        array('bg' => 'rgba(236, 72, 153, 0.1)', 'text' => '#db2777'),   // Rosa
+        array('bg' => 'rgba(14, 165, 233, 0.1)', 'text' => '#0284c7'),   // Cyan
+        array('bg' => 'rgba(132, 204, 22, 0.1)', 'text' => '#65a30d'),   // Lima
+        array('bg' => 'rgba(251, 146, 60, 0.1)', 'text' => '#ea580c'),   // Naranja oscuro
+        array('bg' => 'rgba(99, 102, 241, 0.1)', 'text' => '#4f46e5'),   // Índigo
+        array('bg' => 'rgba(20, 184, 166, 0.1)', 'text' => '#0d9488'),   // Teal
+        array('bg' => 'rgba(244, 63, 94, 0.1)', 'text' => '#e11d48'),    // Rosa oscuro
+    );
+
+    // Usar módulo del ID para seleccionar color de forma consistente
+    $index = $categoria_id % count($colores);
+    return $colores[$index];
 }
 
 /**
@@ -389,7 +441,9 @@ function saico_add_meta_tags() {
         if (!$product) return;
 
         $title = $product->get_name();
-        $description = wp_strip_all_tags($product->get_description() ?: $product->get_short_description());
+        // Aplicar filtro SEO fallback para descripción
+        $product_description = apply_filters('woocommerce_product_description', $product->get_description(), $product);
+        $description = wp_strip_all_tags($product_description ?: $product->get_short_description());
         $image = wp_get_attachment_url($product->get_image_id());
         $url = get_permalink($product->get_id());
 
@@ -490,7 +544,9 @@ function saico_add_meta_description() {
     if (is_singular('product')) {
         global $product;
         if ($product) {
-            $description = wp_strip_all_tags($product->get_description() ?: $product->get_short_description());
+            // Aplicar filtro SEO fallback para descripción
+            $product_description = apply_filters('woocommerce_product_description', $product->get_description(), $product);
+            $description = wp_strip_all_tags($product_description ?: $product->get_short_description());
             $description = substr($description, 0, 160);
         }
     } elseif (is_front_page()) {

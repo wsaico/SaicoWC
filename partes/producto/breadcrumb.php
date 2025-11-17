@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Part: Breadcrumb de Producto
+ * Template Part: Breadcrumb de Producto - Diseño Moderno
  *
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 defined('ABSPATH') || exit;
@@ -13,8 +13,8 @@ if (function_exists('woocommerce_breadcrumb')) :
 <nav class="saico-breadcrumb" aria-label="breadcrumb">
     <?php
     woocommerce_breadcrumb(array(
-        'delimiter'   => '<span class="breadcrumb-separador">/</span>',
-        'wrap_before' => '<ol class="breadcrumb-lista">',
+        'delimiter'   => '<span class="breadcrumb-separador"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>',
+        'wrap_before' => '<ol class="breadcrumb-lista"><li class="breadcrumb-item breadcrumb-home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
         'wrap_after'  => '</ol>',
         'before'      => '<li class="breadcrumb-item">',
         'after'       => '</li>',
@@ -25,52 +25,176 @@ if (function_exists('woocommerce_breadcrumb')) :
 
 <style>
 .saico-breadcrumb {
-    padding: var(--saico-spacing-md) 0;
-    margin-bottom: var(--saico-spacing-lg);
+    background: linear-gradient(135deg, var(--saico-bg-secundario) 0%, var(--saico-bg-primario) 100%);
+    border-radius: var(--saico-radius-lg);
+    padding: 14px 20px;
+    margin-bottom: var(--saico-spacing-xl);
+    border: 1px solid var(--saico-borde-claro);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(10px);
 }
 
 .breadcrumb-lista {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--saico-spacing-sm);
+    gap: 6px;
     list-style: none;
     margin: 0;
     padding: 0;
-    font-size: var(--saico-font-sm);
-    color: var(--saico-texto-secundario);
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .breadcrumb-item {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: var(--saico-spacing-sm);
+    gap: 6px;
+    color: var(--saico-texto-secundario);
+    transition: all var(--saico-transition-fast);
+    position: relative;
+}
+
+.breadcrumb-home {
+    color: var(--saico-primario);
+}
+
+.breadcrumb-home svg {
+    stroke: var(--saico-primario);
+    filter: drop-shadow(0 2px 4px rgba(11, 153, 110, 0.2));
+    transition: all var(--saico-transition-fast);
 }
 
 .breadcrumb-item a {
     color: var(--saico-texto-secundario);
     text-decoration: none;
-    transition: color var(--saico-transition-fast);
+    transition: all var(--saico-transition-fast);
+    padding: 4px 8px;
+    border-radius: var(--saico-radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.breadcrumb-item a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--saico-primario), var(--saico-acento));
+    transition: width var(--saico-transition-fast);
 }
 
 .breadcrumb-item a:hover {
     color: var(--saico-primario);
-    text-decoration: underline;
+    background: rgba(11, 153, 110, 0.08);
+    transform: translateY(-1px);
+}
+
+.breadcrumb-item a:hover::before {
+    width: 100%;
+}
+
+.breadcrumb-home a:hover svg {
+    transform: scale(1.15) translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(11, 153, 110, 0.3));
 }
 
 .breadcrumb-separador {
-    color: var(--saico-texto-terciario);
-    font-size: var(--saico-font-xs);
+    display: inline-flex;
+    align-items: center;
+    color: var(--saico-borde-medio);
+    opacity: 0.5;
+    margin: 0 2px;
+    transition: all var(--saico-transition-fast);
+}
+
+.breadcrumb-separador svg {
+    stroke: currentColor;
+    transition: transform var(--saico-transition-fast);
+}
+
+.breadcrumb-item:hover + .breadcrumb-separador svg {
+    transform: translateX(2px);
+    opacity: 1;
+}
+
+.breadcrumb-item:last-child {
+    color: var(--saico-texto-primario);
+    font-weight: 600;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, rgba(11, 153, 110, 0.1), rgba(11, 153, 110, 0.05));
+    border-radius: var(--saico-radius-md);
+    border: 1px solid rgba(11, 153, 110, 0.15);
 }
 
 @media (max-width: 768px) {
     .saico-breadcrumb {
-        padding: var(--saico-spacing-sm) 0;
+        padding: 12px 16px;
+        margin-bottom: var(--saico-spacing-lg);
+        border-radius: var(--saico-radius-md);
+    }
+
+    .breadcrumb-lista {
+        font-size: 13px;
+        gap: 4px;
+    }
+
+    .breadcrumb-home svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .breadcrumb-separador svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .breadcrumb-item a {
+        padding: 3px 6px;
+    }
+
+    .breadcrumb-item:last-child {
+        padding: 3px 10px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-breadcrumb {
+        padding: 10px 12px;
         margin-bottom: var(--saico-spacing-md);
     }
 
     .breadcrumb-lista {
         font-size: 12px;
+        gap: 3px;
+    }
+
+    .breadcrumb-home svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    .breadcrumb-separador svg {
+        width: 11px;
+        height: 11px;
+    }
+
+    /* Ocultar texto "Inicio" en móvil, solo mostrar icono */
+    .breadcrumb-home a {
+        font-size: 0;
+    }
+
+    .breadcrumb-item:last-child {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 </style>

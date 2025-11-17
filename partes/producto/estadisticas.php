@@ -23,7 +23,7 @@ $author_url = get_author_posts_url($author_id);
 $author_products_count = count_user_posts($author_id, 'product');
 
 // Estadísticas
-$descargas = (int) get_post_meta($producto_id, '_download_count', true);
+$descargas = (int) get_post_meta($producto_id, 'somdn_dlcount', true);
 $vistas = (int) get_post_meta($producto_id, '_view_count', true);
 $fecha_publicacion = get_the_date('d/m/Y', $producto_id);
 

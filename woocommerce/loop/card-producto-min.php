@@ -33,6 +33,10 @@ if (!$tiene_imagen) {
 $categorias = get_the_terms($producto_id, 'product_cat');
 $categoria_nombre = $categorias && !is_wp_error($categorias) ? $categorias[0]->name : '';
 $categoria_link = $categorias && !is_wp_error($categorias) ? get_term_link($categorias[0]) : '';
+$categoria_id = $categorias && !is_wp_error($categorias) ? $categorias[0]->term_id : 0;
+
+// Obtener colores dinámicos para la categoría
+$categoria_color = function_exists('saico_get_categoria_color') ? saico_get_categoria_color($categoria_id) : array('bg' => 'rgba(59, 130, 246, 0.1)', 'text' => '#1d4ed8');
 
 // Información del autor
 $autor_id = get_post_field('post_author', $producto_id);
@@ -67,8 +71,8 @@ $es_nuevo = (strtotime($product->get_date_created()) > strtotime('-30 days'));
 $ventas = (int) get_post_meta($producto_id, 'total_sales', true);
 $es_popular = $ventas > 10;
 
-// Descripción
-$descripcion = $product->get_description();
+// Descripción con filtro SEO fallback
+$descripcion = apply_filters('woocommerce_product_description', $product->get_description(), $product);
 if (empty($descripcion)) {
     $descripcion = get_the_content($producto_id);
 }
@@ -209,7 +213,7 @@ $gradiente_class = 'gradient-' . $gradiente_num;
     <!-- Contenido del producto -->
     <div class="producto-contenido">
         <?php if (!empty($categoria_nombre)): ?>
-        <a href="<?php echo esc_url($categoria_link); ?>" class="categoria-badge" title="Ver productos de la categoría <?php echo esc_attr($categoria_nombre); ?>" aria-label="Explorar categoría <?php echo esc_attr($categoria_nombre); ?>"><?php echo esc_html($categoria_nombre); ?></a>
+        <a href="<?php echo esc_url($categoria_link); ?>" class="categoria-badge" style="background: <?php echo esc_attr($categoria_color['bg']); ?>; color: <?php echo esc_attr($categoria_color['text']); ?>;" title="Ver productos de la categoría <?php echo esc_attr($categoria_nombre); ?>" aria-label="Explorar categoría <?php echo esc_attr($categoria_nombre); ?>"><?php echo esc_html($categoria_nombre); ?></a>
         <?php endif; ?>
         <h3 class="producto-titulo"><a href="<?php echo esc_url($url); ?>" title="Ver producto: <?php echo esc_attr($titulo); ?>" aria-label="Ir a la página del producto <?php echo esc_attr($titulo); ?>"><?php echo esc_html($titulo); ?></a></h3>
         <div class="producto-stats">

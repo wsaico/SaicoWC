@@ -81,85 +81,9 @@ $product_title = get_the_title();
 </div>
 
 <style>
-/* Estilos base del modal */
+/* Estilos específicos del modal de compartir */
 #saico-share-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    display: none;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
-}
-
-#saico-share-modal.activo {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-#saico-share-modal .saico-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-}
-
-#saico-share-modal .saico-modal-contenido {
-    position: relative;
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-    z-index: 1;
-    animation: slideUp 0.4s ease;
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-#saico-share-modal .saico-modal-cerrar {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #f3f4f6;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    z-index: 10;
-}
-
-#saico-share-modal .saico-modal-cerrar:hover {
-    background: #e5e7eb;
-    transform: rotate(90deg);
 }
 
 .saico-share-modal .share-modal-content {

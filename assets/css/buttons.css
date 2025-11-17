@@ -1,0 +1,416 @@
+/**
+ * Botones Globales - Saico WC
+ * Sistema de botones con colores accesibles y buen contraste
+ *
+ * @package SaicoWC
+ * @version 1.0.0
+ */
+
+/* ============================================================================
+   BOTONES PRIMARIOS (Verde Oscuro - Requiere texto blanco)
+   ============================================================================ */
+
+/* SOLO aplicar a botones con clases específicas de botón primario */
+.btn-primary,
+.button-primary,
+.saico-btn-primary {
+    background: var(--saico-primario);
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary:hover,
+.button-primary:hover,
+.saico-btn-primary:hover {
+    background: var(--saico-primario-hover);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 153, 110, 0.3);
+}
+
+.btn-primary:active,
+.button-primary:active,
+.saico-btn-primary:active {
+    transform: translateY(0);
+}
+
+/* WooCommerce - SOLO botones alt (agregar al carrito, checkout, etc) */
+.woocommerce button.button.alt,
+.woocommerce input.button.alt,
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt {
+    background: var(--saico-primario);
+    color: white !important;
+}
+
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt:hover,
+.woocommerce #respond input#submit.alt:hover,
+.woocommerce a.button.alt:hover {
+    background: var(--saico-primario-hover);
+    color: white !important;
+}
+
+/* ============================================================================
+   BOTÓN CON GRADIENTE PRIMARIO
+   ============================================================================ */
+
+.btn-gradient-primary,
+.saico-cta-btn {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-gradient-primary:hover,
+.saico-cta-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857) !important;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+}
+
+.btn-gradient-primary:active,
+.saico-cta-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================================================
+   BOTONES SECUNDARIOS (Rojo - Requiere texto blanco)
+   ============================================================================ */
+
+.btn-secondary,
+.button-secondary,
+.saico-btn-secondary {
+    background: var(--saico-secundario);
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-secondary:hover,
+.button-secondary:hover,
+.saico-btn-secondary:hover {
+    background: var(--saico-secundario-hover);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+/* ============================================================================
+   BOTONES DE ESTADO (Éxito, Error, Advertencia, Info)
+   ============================================================================ */
+
+.btn-success,
+.button-success {
+    background: var(--saico-exito);
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover,
+.button-success:hover {
+    background: #0ea472;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-error,
+.button-error {
+    background: var(--saico-error);
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-error:hover,
+.button-error:hover {
+    background: #dc2626;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-warning,
+.button-warning {
+    background: var(--saico-advertencia);
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover,
+.button-warning:hover {
+    background: #d97706;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.btn-info,
+.button-info {
+    background: var(--saico-info);
+    color: white !important;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-info:hover,
+.button-info:hover {
+    background: #2563eb;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* ============================================================================
+   BOTONES OUTLINE (Borde con fondo transparente)
+   ============================================================================ */
+
+.btn-outline-primary,
+.button-outline-primary {
+    background: transparent;
+    color: var(--saico-primario) !important;
+    border: 2px solid var(--saico-primario);
+    padding: 10px 22px;
+    border-radius: var(--saico-radius-lg);
+    font-weight: var(--saico-font-weight-semibold);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-outline-primary:hover,
+.button-outline-primary:hover {
+    background: var(--saico-primario);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 153, 110, 0.2);
+}
+
+/* ============================================================================
+   BOTONES PEQUEÑOS
+   ============================================================================ */
+
+.btn-small,
+.button-small {
+    padding: 8px 16px;
+    font-size: var(--saico-font-sm);
+}
+
+/* ============================================================================
+   BOTONES GRANDES
+   ============================================================================ */
+
+.btn-large,
+.button-large {
+    padding: 16px 32px;
+    font-size: var(--saico-font-lg);
+}
+
+/* ============================================================================
+   BOTONES DISABLED
+   ============================================================================ */
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-success:disabled,
+.btn-error:disabled,
+.btn-warning:disabled,
+.btn-info:disabled,
+.button-primary:disabled,
+.button-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ============================================================================
+   CORRECCIONES ESPECÍFICAS
+   ============================================================================ */
+
+/* ============================================================================
+   CORRECCIONES ESPECÍFICAS PARA ELEMENTOS CON FONDO OSCURO
+   ============================================================================ */
+
+/* Header CTA - Verde oscuro necesita texto blanco */
+.saico-header .saico-cta-btn,
+.saico-header .saico-cta-btn:hover,
+.saico-header .saico-cta-btn:focus,
+.saico-header .saico-cta-btn:visited {
+    color: white !important;
+}
+
+/* Popup de Login Invite */
+#popup-login-invite .login-btn,
+#popup-login-invite button[type="submit"],
+.popup-login-invite .login-btn,
+.popup-login-invite button[type="submit"] {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white !important;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#popup-login-invite .login-btn:hover,
+#popup-login-invite button[type="submit"]:hover,
+.popup-login-invite .login-btn:hover,
+.popup-login-invite button[type="submit"]:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+/* Modal Login - Todos los botones de submit */
+.saico-login-modal .saico-btn-primario,
+.saico-login-modal button[type="submit"],
+.saico-login-modal .woocommerce-button,
+.login-modal-content .saico-btn-primario,
+.login-modal-content button[type="submit"],
+.login-modal-content .woocommerce-button,
+.btn-login,
+.btn-register,
+.btn-recover {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.saico-login-modal .saico-btn-primario:hover,
+.saico-login-modal button[type="submit]:hover,
+.login-modal-content .saico-btn-primario:hover,
+.login-modal-content button[type="submit]:hover {
+    background: linear-gradient(135deg, #059669, #047857) !important;
+    color: white !important;
+}
+
+/* Botón de descarga principal en sidebar */
+.saico-cta-container .saico-cta-btn-primary,
+.saico-sidebar-modern .saico-cta-btn-primary {
+    color: white !important;
+}
+
+/* Popup de login invite - Botones */
+.saico-login-invite-popup .invite-btn-primary,
+.login-invite-card .invite-btn-primary {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+}
+
+/* Excluir explícitamente elementos que NO deben tener fondo/color modificado */
+/* Estos elementos deben mantener sus estilos originales */
+.product-tab,
+.saico-product-tab,
+.tab-button,
+.action-btn:not(.btn-primary),
+.saico-action-btn:not(.btn-primary),
+.social-btn:not(.btn-primary),
+.saico-social-btn:not(.btn-primary),
+.toggle-description,
+.like-btn,
+.share-btn,
+.quick-actions button:not(.btn-primary),
+.saico-quick-actions button:not(.btn-primary),
+.saico-quick-actions-3 button,
+button.action-btn,
+button[data-tab],
+.product-tabs button,
+.saico-product-tabs button {
+    background: initial;
+    color: initial;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .btn-primary,
+    .btn-secondary,
+    .button-primary,
+    .button-secondary {
+        padding: 10px 20px;
+        font-size: var(--saico-font-sm);
+    }
+
+    .btn-large,
+    .button-large {
+        padding: 14px 24px;
+        font-size: var(--saico-font-base);
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-primary,
+    .btn-secondary,
+    .button-primary,
+    .button-secondary {
+        padding: 10px 16px;
+        font-size: var(--saico-font-sm);
+    }
+}

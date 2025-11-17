@@ -11,6 +11,7 @@ if (!$product) return;
 // Verificar si la vista por página está habilitada
 $page_view_enabled = get_theme_mod('enable_download_page_view', false);
 $countdown_time = get_theme_mod('animated_button_time', 10);
+$is_logged_in = is_user_logged_in();
 ?>
 
 <div id="saico-download-view" class="saico-download-view" style="display: none;">
@@ -45,42 +46,21 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
             <p>Tu descarga estará lista en unos segundos</p>
 
             <!-- ANUNCIO ADSENSE - Posición estratégica durante la espera -->
-            <div class="adsense-container adsense-waiting">
-                <?php
-                $ad_code = get_theme_mod('adsense_download_waiting', '');
-                if (!empty($ad_code)) {
-                    // Mostrar código AdSense sin escapar para que se ejecute correctamente
-                    echo saico_display_adsense_code($ad_code);
-                } else {
-                    echo '<div class="ad-placeholder">
-                        <p>ESPACIO PUBLICITARIO</p>
-                        <small>Configure AdSense en Personalizar → AdSense</small>
-                    </div>';
-                }
-                ?>
-            </div>
+            <?php
+            // Usar función sanitizada de AdSense
+            saico_get_adsense('adsense_page_waiting', 'page-waiting');
+            ?>
         </div>
 
         <!-- PASO 2: Links de descarga COMPACTO -->
         <div class="download-step download-step2" style="display: none;">
             <h2>¡Tu descarga está lista!</h2>
-            <p class="download-subtitle">Elige tu servidor de descarga preferido</p>
 
             <!-- ANUNCIO ADSENSE - Encima de los links (posición premium) -->
-            <div class="adsense-container adsense-before-links">
-                <?php
-                $ad_code_before = get_theme_mod('adsense_before_download_links', '');
-                if (!empty($ad_code_before)) {
-                    // Mostrar código AdSense sin escapar para que se ejecute correctamente
-                    echo saico_display_adsense_code($ad_code_before);
-                } else {
-                    echo '<div class="ad-placeholder">
-                        <p>ESPACIO PUBLICITARIO PREMIUM</p>
-                        <small>Configure AdSense en Personalizar → AdSense</small>
-                    </div>';
-                }
-                ?>
-            </div>
+            <?php
+            // Usar función sanitizada de AdSense
+            saico_get_adsense('adsense_page_before_links', 'page-before');
+            ?>
 
             <div class="download-links-container">
                 <?php
@@ -93,20 +73,10 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
             </div>
 
             <!-- ANUNCIO ADSENSE - Después de los links -->
-            <div class="adsense-container adsense-after-links">
-                <?php
-                $ad_code_after = get_theme_mod('adsense_after_download_links', '');
-                if (!empty($ad_code_after)) {
-                    // Mostrar código AdSense sin escapar para que se ejecute correctamente
-                    echo saico_display_adsense_code($ad_code_after);
-                } else {
-                    echo '<div class="ad-placeholder">
-                        <p>ESPACIO PUBLICITARIO</p>
-                        <small>Configure AdSense en Personalizar → AdSense</small>
-                    </div>';
-                }
-                ?>
-            </div>
+            <?php
+            // Usar función sanitizada de AdSense
+            saico_get_adsense('adsense_page_after_links', 'page-after');
+            ?>
         </div>
     </div>
 </div>
@@ -120,13 +90,16 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
     height: 100%;
     background: #fff;
     z-index: 9999;
-    overflow-y: auto;
+    overflow-y: auto; /* Solo un scroll: el principal */
 }
 
 .download-view-container {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    /* ELIMINADO overflow-x: hidden - genera scroll doble */
 }
 
 .download-view-header {
@@ -152,32 +125,21 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
 
 .download-step {
     text-align: center;
-    padding: 20px;
-    animation: fadeInUp 0.4s ease;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    padding: 16px 8px;
+    animation: saicoFadeInUp 0.4s ease;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .download-step h2 {
     font-size: 28px;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     color: #1f2937;
     font-weight: 700;
-}
-
-.download-subtitle {
-    font-size: 15px;
-    color: #6b7280;
-    margin-bottom: 24px;
+    word-wrap: break-word;
+    max-width: 100%;
 }
 
 .download-step > p {
@@ -216,59 +178,100 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
 .download-links-container {
     margin: 20px auto;
     max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-/* ESTILOS PARA ADSENSE - Optimizado para clics */
-.adsense-container {
-    margin: 24px auto;
-    padding: 16px;
-    background: #f9fafb;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    max-width: 728px;
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.download-links-container a,
+.download-links-container button {
+    max-width: 100%;
+    word-wrap: break-word;
+    box-sizing: border-box;
 }
 
-.adsense-waiting {
-    margin-top: 30px;
-}
+/* Estilos de AdSense gestionados desde inc/adsense.php */
 
-.adsense-before-links {
-    margin: 30px auto 20px;
-    background: #fff;
-    border: 2px dashed #10b981;
-}
-
-.adsense-after-links {
-    margin: 30px auto;
-}
-
-.ad-placeholder {
-    text-align: center;
-    padding: 30px;
-    color: #9ca3af;
-}
-
-.ad-placeholder p {
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-/* Responsive */
+/* Responsive - Optimizado para móvil */
 @media (max-width: 768px) {
+    .saico-download-view {
+        padding: 0;
+    }
+
     .download-view-container {
-        padding: 16px;
+        padding: 16px 12px;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .download-view-header {
+        margin-bottom: 16px;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 10;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .back-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .back-btn svg {
+        width: 16px;
+        height: 16px;
     }
 
     .download-step {
-        padding: 16px;
+        padding: 16px 8px;
     }
 
     .download-step h2 {
-        font-size: 20px;
+        font-size: 22px;
+        margin-bottom: 16px;
+        line-height: 1.3;
+    }
+
+    .download-step > p {
+        font-size: 13px;
+        margin: 12px 0;
+        line-height: 1.5;
+    }
+
+    .timer-circle {
+        width: 140px;
+        height: 140px;
+        margin: 24px auto;
+    }
+
+    .timer-svg {
+        width: 140px;
+        height: 140px;
+    }
+
+    .timer-number {
+        font-size: 40px;
+    }
+
+    .download-links-container {
+        margin: 20px auto;
+        padding: 0 8px;
+    }
+
+    /* Estilos de AdSense gestionados desde inc/adsense.php - NO duplicar */
+}
+
+@media (max-width: 480px) {
+    .download-view-container {
+        padding: 12px 8px;
+    }
+
+    .download-step h2 {
+        font-size: 18px;
     }
 
     .timer-circle {
@@ -280,9 +283,9 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
         font-size: 28px;
     }
 
-    .adsense-container {
-        margin: 16px auto;
-        padding: 12px;
+    .back-btn {
+        font-size: 12px;
+        padding: 6px 12px;
     }
 }
 </style>
@@ -291,12 +294,14 @@ $countdown_time = get_theme_mod('animated_button_time', 10);
 jQuery(document).ready(function($) {
     // Solo ejecutar si la vista por página está habilitada
     const pageViewEnabled = <?php echo $page_view_enabled ? 'true' : 'false'; ?>;
+    let isLoggedIn = <?php echo $is_logged_in ? 'true' : 'false'; ?>;
 
     if (!pageViewEnabled) {
         return; // Salir si no está habilitado
     }
 
     let isDownloadViewActive = false;
+    let userWantsDownload = false; // Flag para saber si el usuario quiere descargar
 
     // Función para obtener parámetro de URL
     function getUrlParameter(name) {
@@ -321,7 +326,21 @@ jQuery(document).ready(function($) {
         $('#saico-download-view').fadeIn(300);
         isDownloadViewActive = true;
         $('html, body').scrollTop(0);
-        initCountdown();
+
+        // Si está logueado, saltar al paso 2 directamente
+        if (isLoggedIn) {
+            mostrarLinksDirectamente();
+        } else {
+            initCountdown();
+        }
+    }
+
+    function mostrarLinksDirectamente() {
+        const $step1 = $('.download-step1');
+        const $step2 = $('.download-step2');
+
+        $step1.hide();
+        $step2.show();
     }
 
     function switchToMainView() {
@@ -374,9 +393,44 @@ jQuery(document).ready(function($) {
     // Click en botón de descarga
     $('#saico-download-button').on('click', function(e) {
         e.preventDefault();
+
+        // Si NO está logueado, mostrar popup de invitación primero
+        if (!isLoggedIn) {
+            userWantsDownload = true; // Marcar que quiere descargar
+
+            if (typeof saicoShowLoginInvite === 'function') {
+                saicoShowLoginInvite();
+            }
+            return;
+        }
+
+        // Si está logueado, continuar normalmente
         updateUrl('download', 'links');
         switchToDownloadView();
     });
+
+    // Función para usuarios no logueados que eligen continuar con espera
+    window.saicoPageViewContinuarConEspera = function() {
+        userWantsDownload = false; // Reset flag
+        updateUrl('download', 'links');
+        switchToDownloadView();
+    };
+
+    // Función llamada DESPUÉS de login exitoso
+    window.saicoPageViewAfterLoginSuccess = function() {
+        isLoggedIn = true;
+
+        // Solo proceder si el usuario había intentado descargar antes de loguearse
+        if (userWantsDownload) {
+            userWantsDownload = false; // Reset flag
+
+            // Esperar un momento para que el modal de login se cierre
+            setTimeout(function() {
+                updateUrl('download', 'links');
+                switchToDownloadView();
+            }, 400);
+        }
+    };
 
     // Click en botón volver
     $('#saico-download-back-btn').on('click', function(e) {

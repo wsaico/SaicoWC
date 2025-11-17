@@ -1053,16 +1053,7 @@
 /* ============================================================================
    ANIMACIONES Y TRANSICIONES
    ============================================================================ */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* Animación saicoFadeInUp ahora en modals.css */
 
 @keyframes pulse {
     0%, 100% {
@@ -1074,11 +1065,11 @@
 }
 
 .esaico-myaccount-main .woocommerce-MyAccount-content {
-    animation: fadeInUp 0.5s ease-out;
+    animation: saicoFadeInUp 0.5s ease-out;
 }
 
 .esaico-myaccount-nav {
-    animation: fadeInUp 0.5s ease-out 0.1s backwards;
+    animation: saicoFadeInUp 0.5s ease-out 0.1s backwards;
 }
 
 /* ============================================================================

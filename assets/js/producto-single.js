@@ -401,25 +401,58 @@
         const $progressBar = $('.button-progress');
         const $countdownNumber = $('.countdown-number');
         const $downloadContainer = $('.saico-real-download-container');
+        const isLoggedIn = (typeof saicoData !== 'undefined' && saicoData.isLoggedIn) ? saicoData.isLoggedIn : false;
 
 
         if ($animatedButton.length) {
             // Ocultar contenedor de descarga al inicio
             $downloadContainer.hide();
 
+            // Función para mostrar links directamente
+            function mostrarLinksDirectamente() {
+                $animatedButton.fadeOut(300, function() {
+                    $downloadContainer.fadeIn(300);
+                });
 
-            $animatedButton.on('click', function(e) {
-                e.preventDefault();
+                // Incrementar contador de vistas
+                if (typeof ajaxurl !== 'undefined') {
+                    const productId = $('body').find('[data-product-id]').data('product-id');
+                    if (productId) {
+                        $.ajax({
+                            url: ajaxurl,
+                            type: 'POST',
+                            data: {
+                                action: 'saico_increment_view',
+                                product_id: productId
+                            }
+                        });
+                    }
+                }
+            }
 
-                if ($(this).hasClass('loading')) {
+            // Función para usuarios no logueados que eligen continuar con espera
+            window.saicoAnimatedButtonContinuarConEspera = function() {
+                // SOLO iniciar animación si el usuario eligió explícitamente "continuar con espera"
+                iniciarAnimacion();
+            };
+
+            // Función llamada DESPUÉS de login exitoso (para botón animado)
+            window.saicoAnimatedButtonAfterLoginSuccess = function() {
+                isLoggedIn = true;
+
+                // Mostrar links directamente sin temporizador
+                mostrarLinksDirectamente();
+            };
+
+            function iniciarAnimacion() {
+                if ($animatedButton.hasClass('loading')) {
                     return;
                 }
 
                 const loadingTime = (typeof saicoData !== 'undefined' && saicoData.animatedButtonTime) ? saicoData.animatedButtonTime : 10;
                 const timeInSeconds = Math.max(1, parseFloat(loadingTime));
 
-
-                $(this).addClass('loading');
+                $animatedButton.addClass('loading');
                 $countdownNumber.show().text(timeInSeconds.toFixed(1));
 
                 $progressBar.css({
@@ -442,7 +475,7 @@
                     }
                 }, 100);
 
-                $(this).prop('disabled', true).css('cursor', 'wait');
+                $animatedButton.prop('disabled', true).css('cursor', 'wait');
 
                 setTimeout(() => {
                     $animatedButton.css('cursor', 'default');
@@ -450,7 +483,7 @@
                         $downloadContainer.fadeIn(300);
                     });
 
-                    // Incrementar contador de vistas si existe el endpoint
+                    // Incrementar contador de vistas
                     if (typeof ajaxurl !== 'undefined') {
                         const productId = $('body').find('[data-product-id]').data('product-id');
                         if (productId) {
@@ -465,7 +498,15 @@
                         }
                     }
                 }, timeInSeconds * 1000);
-            });
+            }
+
+            // NOTA: El click del botón de descarga se maneja en modal-descarga.php o vista-descarga.php
+            // NO agregar listener aquí para evitar conflictos
+            // Solo mantener las funciones callback para cuando se necesiten
+
+            // $animatedButton.on('click', function(e) {
+            //     // Desactivado - manejado en modal-descarga.php
+            // });
         }
     });
 

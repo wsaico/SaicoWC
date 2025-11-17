@@ -549,86 +549,12 @@ function saico_customizer_register($wp_customize) {
      * ========================================================================
      * SECCIÓN: ADSENSE
      * ========================================================================
+     * NOTA: La configuración de AdSense se gestiona desde inc/adsense.php
      */
-    $wp_customize->add_section('saico_adsense', array(
-        'title' => __('AdSense', 'saico-wc'),
-        'priority' => 36,
-        'description' => __('Configura los códigos de AdSense para monetización', 'saico-wc'),
-    ));
-
-    // AdSense - Durante espera de descarga
-    $wp_customize->add_setting('adsense_download_waiting', array(
-        'default' => '',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('adsense_download_waiting', array(
-        'label' => __('AdSense - Durante Espera', 'saico-wc'),
-        'description' => __('Código AdSense que se muestra mientras el usuario espera el countdown (Vista por Página)', 'saico-wc'),
-        'section' => 'saico_adsense',
-        'type' => 'textarea',
-    ));
-
-    // AdSense - Antes de links de descarga (Posición Premium)
-    $wp_customize->add_setting('adsense_before_download_links', array(
-        'default' => '',
-        'sanitize_callback' => 'saico_sanitize_adsense_code',
-    ));
-    $wp_customize->add_control('adsense_before_download_links', array(
-        'label' => __('AdSense - Antes de Links (Premium)', 'saico-wc'),
-        'description' => __('Código AdSense que se muestra ANTES de los links de descarga - Posición con mayor probabilidad de clics', 'saico-wc'),
-        'section' => 'saico_adsense',
-        'type' => 'textarea',
-    ));
-
-    // AdSense - Después de links de descarga
-    $wp_customize->add_setting('adsense_after_download_links', array(
-        'default' => '',
-        'sanitize_callback' => 'saico_sanitize_adsense_code',
-    ));
-    $wp_customize->add_control('adsense_after_download_links', array(
-        'label' => __('AdSense - Después de Links', 'saico-wc'),
-        'description' => __('Código AdSense que se muestra DESPUÉS de los links de descarga', 'saico-wc'),
-        'section' => 'saico_adsense',
-        'type' => 'textarea',
-    ));
-
-    // === AdSense para MODAL ===
-
-    // AdSense Modal - Durante espera
-    $wp_customize->add_setting('adsense_modal_waiting', array(
-        'default' => '',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('adsense_modal_waiting', array(
-        'label' => __('Modal - Durante Espera', 'saico-wc'),
-        'description' => __('Código AdSense en modal mientras espera countdown (usuario cautivo)', 'saico-wc'),
-        'section' => 'saico_adsense',
-        'type' => 'textarea',
-    ));
-
-    // AdSense Modal - Antes de links
-    $wp_customize->add_setting('adsense_modal_before_links', array(
-        'default' => '',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('adsense_modal_before_links', array(
-        'label' => __('Modal - Antes de Links (Premium)', 'saico-wc'),
-        'description' => __('Código AdSense en modal ANTES de links - Posición con mayor CTR', 'saico-wc'),
-        'section' => 'saico_adsense',
-        'type' => 'textarea',
-    ));
-
-    // AdSense Modal - Después de links
-    $wp_customize->add_setting('adsense_modal_after_links', array(
-        'default' => '',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('adsense_modal_after_links', array(
-        'label' => __('Modal - Después de Links', 'saico-wc'),
-        'description' => __('Código AdSense en modal DESPUÉS de links de descarga', 'saico-wc'),
-        'section' => 'saico_adsense',
-        'type' => 'textarea',
-    ));
+    // Registrar controles de AdSense desde el módulo centralizado
+    if (function_exists('saico_register_adsense_customizer')) {
+        saico_register_adsense_customizer($wp_customize);
+    }
 
     /**
      * ========================================================================
@@ -830,3 +756,423 @@ function saico_customizer_css() {
     }
 }
 add_action('wp_head', 'saico_customizer_css');
+
+/**
+ * ============================================================================
+ * SECCIÓN: LOGIN PERSONALIZADO
+ * ============================================================================
+ */
+function saico_login_customizer($wp_customize) {
+
+    // Sección de Login
+    $wp_customize->add_section('saico_login_section', array(
+        'title' => __('Configuración de Login', 'saico-wc'),
+        'priority' => 100,
+        'description' => __('Personaliza la página de login y opciones de seguridad', 'saico-wc'),
+    ));
+
+    // ========================================================================
+    // TEXTOS DEL LOGIN
+    // ========================================================================
+
+    // Título de bienvenida
+    $wp_customize->add_setting('login_welcome_title', array(
+        'default' => '¡Bienvenido de vuelta!',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('login_welcome_title', array(
+        'label' => __('Título de Bienvenida', 'saico-wc'),
+        'description' => __('Texto principal en el panel izquierdo', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // Texto de bienvenida
+    $wp_customize->add_setting('login_welcome_text', array(
+        'default' => 'Inicia sesión para acceder a tu cuenta y disfrutar de todos nuestros servicios.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('login_welcome_text', array(
+        'label' => __('Texto de Bienvenida', 'saico-wc'),
+        'description' => __('Descripción debajo del título', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'textarea',
+    ));
+
+    // ========================================================================
+    // SEGURIDAD Y reCAPTCHA
+    // ========================================================================
+
+    // reCAPTCHA Site Key
+    $wp_customize->add_setting('recaptcha_site_key', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('recaptcha_site_key', array(
+        'label' => __('reCAPTCHA Site Key (v3)', 'saico-wc'),
+        'description' => __('Clave del sitio de Google reCAPTCHA v3. <a href="https://www.google.com/recaptcha/admin" target="_blank">Obtener claves</a>', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // reCAPTCHA Secret Key
+    $wp_customize->add_setting('recaptcha_secret_key', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('recaptcha_secret_key', array(
+        'label' => __('reCAPTCHA Secret Key (v3)', 'saico-wc'),
+        'description' => __('Clave secreta de Google reCAPTCHA v3', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // Intentos máximos de login
+    $wp_customize->add_setting('max_login_attempts', array(
+        'default' => 5,
+        'sanitize_callback' => 'absint',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('max_login_attempts', array(
+        'label' => __('Intentos Máximos de Login', 'saico-wc'),
+        'description' => __('Número de intentos fallidos antes de bloquear (1-10)', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+            'max' => 10,
+            'step' => 1,
+        ),
+    ));
+
+    // Tiempo de bloqueo
+    $wp_customize->add_setting('lockout_duration', array(
+        'default' => 15,
+        'sanitize_callback' => 'absint',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('lockout_duration', array(
+        'label' => __('Tiempo de Bloqueo (minutos)', 'saico-wc'),
+        'description' => __('Duración del bloqueo después de exceder intentos (5-60 minutos)', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'number',
+        'input_attrs' => array(
+            'min' => 5,
+            'max' => 60,
+            'step' => 5,
+        ),
+    ));
+
+    // ========================================================================
+    // LOGIN SOCIAL
+    // ========================================================================
+
+    // Habilitar Google Login
+    $wp_customize->add_setting('enable_google_login', array(
+        'default' => false,
+        'sanitize_callback' => 'rest_sanitize_boolean',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('enable_google_login', array(
+        'label' => __('Habilitar Login con Google', 'saico-wc'),
+        'description' => __('Permite login con cuenta de Google', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'checkbox',
+    ));
+
+    // Google Client ID
+    $wp_customize->add_setting('google_client_id', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('google_client_id', array(
+        'label' => __('Google Client ID', 'saico-wc'),
+        'description' => __('ID de cliente de OAuth 2.0. <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Obtener en Google Cloud Console</a>', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // Google Client Secret
+    $wp_customize->add_setting('google_client_secret', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('google_client_secret', array(
+        'label' => __('Google Client Secret', 'saico-wc'),
+        'description' => __('Secreto de cliente de OAuth 2.0', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // Habilitar Facebook Login
+    $wp_customize->add_setting('enable_facebook_login', array(
+        'default' => false,
+        'sanitize_callback' => 'rest_sanitize_boolean',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('enable_facebook_login', array(
+        'label' => __('Habilitar Login con Facebook', 'saico-wc'),
+        'description' => __('Permite login con cuenta de Facebook', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'checkbox',
+    ));
+
+    // Facebook App ID
+    $wp_customize->add_setting('facebook_app_id', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('facebook_app_id', array(
+        'label' => __('Facebook App ID', 'saico-wc'),
+        'description' => __('ID de aplicación de Facebook. <a href="https://developers.facebook.com/apps/" target="_blank">Obtener en Facebook Developers</a>', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // Facebook App Secret
+    $wp_customize->add_setting('facebook_app_secret', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('facebook_app_secret', array(
+        'label' => __('Facebook App Secret', 'saico-wc'),
+        'description' => __('Secreto de aplicación de Facebook', 'saico-wc'),
+        'section' => 'saico_login_section',
+        'type' => 'text',
+    ));
+
+    // ========================================================================
+    // COLORES DEL FORMULARIO
+    // ========================================================================
+
+    // Color primario del login
+    $wp_customize->add_setting('saico_primary_color', array(
+        'default' => '#667eea',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'saico_primary_color', array(
+        'label' => __('Color Primario del Login', 'saico-wc'),
+        'description' => __('Color de botones y elementos activos', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+
+    // Color de fondo del gradiente 1
+    $wp_customize->add_setting('login_bg_gradient_1', array(
+        'default' => '#f5f7fa',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'login_bg_gradient_1', array(
+        'label' => __('Color de Fondo 1', 'saico-wc'),
+        'description' => __('Primer color del gradiente de fondo', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+
+    // Color de fondo del gradiente 2
+    $wp_customize->add_setting('login_bg_gradient_2', array(
+        'default' => '#c3cfe2',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'login_bg_gradient_2', array(
+        'label' => __('Color de Fondo 2', 'saico-wc'),
+        'description' => __('Segundo color del gradiente de fondo', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+
+    // Color del panel izquierdo
+    $wp_customize->add_setting('login_panel_color', array(
+        'default' => '#667eea',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'login_panel_color', array(
+        'label' => __('Color del Panel Izquierdo', 'saico-wc'),
+        'description' => __('Color de fondo del panel de bienvenida', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+
+    // Color de enlaces y textos destacados
+    $wp_customize->add_setting('login_link_color', array(
+        'default' => '#4f46e5',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'login_link_color', array(
+        'label' => __('Color de Enlaces', 'saico-wc'),
+        'description' => __('Color de enlaces y textos destacados', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+
+    // Color de texto del panel izquierdo
+    $wp_customize->add_setting('login_panel_text_color', array(
+        'default' => '#ffffff',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'login_panel_text_color', array(
+        'label' => __('Color de Texto del Panel', 'saico-wc'),
+        'description' => __('Color del texto en el panel izquierdo', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+
+    // Color de texto de formularios
+    $wp_customize->add_setting('login_form_text_color', array(
+        'default' => '#1f2937',
+        'sanitize_callback' => 'sanitize_hex_color',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'login_form_text_color', array(
+        'label' => __('Color de Texto de Formularios', 'saico-wc'),
+        'description' => __('Color del texto en campos de formulario', 'saico-wc'),
+        'section' => 'saico_login_section',
+    )));
+}
+add_action('customize_register', 'saico_login_customizer');
+
+/**
+ * ============================================================================
+ * CUSTOMIZER - SEO FALLBACK DESCRIPTION
+ * ============================================================================
+ */
+function saico_seo_fallback_customizer($wp_customize) {
+    // Sección de SEO Fallback Description
+    $wp_customize->add_section('saico_seo_fallback', array(
+        'title' => __('SEO - Descripción Automática', 'saico-wc'),
+        'priority' => 37,
+        'description' => __('Genera descripciones automáticas para productos sin descripción. Usa ganchos como {titulo}, {tipo}, {categoria}, etc.', 'saico-wc'),
+    ));
+
+    // ========================================================================
+    // HABILITAR FALLBACK
+    // ========================================================================
+
+    $wp_customize->add_setting('enable_seo_fallback_description', array(
+        'default' => true,
+        'sanitize_callback' => 'rest_sanitize_boolean',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('enable_seo_fallback_description', array(
+        'label' => __('Habilitar Descripción Automática', 'saico-wc'),
+        'description' => __('Genera automáticamente descripciones SEO cuando un producto no tiene descripción', 'saico-wc'),
+        'section' => 'saico_seo_fallback',
+        'type' => 'checkbox',
+    ));
+
+    // ========================================================================
+    // TEMPLATE DE DESCRIPCIÓN
+    // ========================================================================
+
+    $wp_customize->add_setting('seo_fallback_template', array(
+        'default' => saico_get_default_fallback_template(),
+        'sanitize_callback' => 'wp_kses_post',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('seo_fallback_template', array(
+        'label' => __('Plantilla de Descripción', 'saico-wc'),
+        'description' => __('Usa ganchos para crear descripciones dinámicas. <a href="#" onclick="alert(\'Ganchos disponibles:\\n\\n{titulo} - Título del producto\\n{tipo} - Gratis/Premium\\n{categoria} - Categoría principal\\n{categorias} - Todas las categorías\\n{precio} - Precio formateado\\n{tags} - Etiquetas\\n{descripcion_corta} - Resumen\\n{atributos} - Atributos del producto\\n{fecha} - Fecha de publicación\\n{autor} - Nombre del autor\\n{rating} - Calificación\\n{reviews} - Número de opiniones\\n{sitio} - Nombre del sitio\\n\\nY muchos más...\'); return false;">Ver todos los ganchos</a>', 'saico-wc'),
+        'section' => 'saico_seo_fallback',
+        'type' => 'textarea',
+        'input_attrs' => array(
+            'rows' => 12,
+            'placeholder' => 'Descarga {titulo} - {tipo} y de alta calidad...',
+        ),
+    ));
+
+    // ========================================================================
+    // AYUDA - GANCHOS DISPONIBLES
+    // ========================================================================
+
+    $wp_customize->add_setting('seo_fallback_help', array(
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $placeholders_list = saico_get_available_placeholders_list();
+    $help_html = '<div style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin-top: 10px;">';
+    $help_html .= '<h4 style="margin-top: 0;">📌 Ganchos Disponibles:</h4>';
+
+    foreach ($placeholders_list as $category => $items) {
+        $help_html .= '<p style="margin: 10px 0; font-weight: 600; color: #10b981;">' . $category . ':</p>';
+        $help_html .= '<ul style="margin: 5px 0; padding-left: 20px; font-size: 12px;">';
+        foreach ($items as $placeholder => $description) {
+            $help_html .= '<li><code>' . esc_html($placeholder) . '</code> - ' . esc_html($description) . '</li>';
+        }
+        $help_html .= '</ul>';
+    }
+
+    $help_html .= '<p style="margin-top: 15px; font-size: 12px; color: #666;"><strong>Ejemplo:</strong><br>';
+    $help_html .= '<code>Descarga {titulo} - {tipo} de {categoria}. {descripcion_corta}</code></p>';
+    $help_html .= '</div>';
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'seo_fallback_help', array(
+        'label' => __('Guía de Ganchos', 'saico-wc'),
+        'section' => 'saico_seo_fallback',
+        'type' => 'hidden',
+        'description' => $help_html,
+    )));
+
+    // ========================================================================
+    // TEMPLATE EJEMPLO 1
+    // ========================================================================
+
+    $wp_customize->add_setting('seo_fallback_example1', array(
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $example1 = "Descarga {titulo} - {tipo} y de alta calidad. Disponible en {categorias}.\n\n{descripcion_corta}\n\nCaracterísticas:\n• Tipo: {tipo}\n• Categoría: {categoria}\n• Formato: Digital\n\n¡Obtén {titulo} ahora de forma {tipo_minuscula}!";
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'seo_fallback_example1', array(
+        'label' => __('📝 Plantilla de Ejemplo 1', 'saico-wc'),
+        'section' => 'saico_seo_fallback',
+        'type' => 'hidden',
+        'description' => '<div style="background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;"><pre style="white-space: pre-wrap; margin: 0;">' . esc_html($example1) . '</pre><button type="button" onclick="document.querySelector(\'#_customize-input-seo_fallback_template\').value = ' . esc_js(json_encode($example1)) . '; document.querySelector(\'#_customize-input-seo_fallback_template\').dispatchEvent(new Event(\'change\'));" style="margin-top: 10px; padding: 5px 10px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">Usar esta plantilla</button></div>',
+    )));
+
+    // ========================================================================
+    // TEMPLATE EJEMPLO 2
+    // ========================================================================
+
+    $wp_customize->add_setting('seo_fallback_example2', array(
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $example2 = "{titulo} - {tipo} para descargar en {sitio}\n\nDescubre {titulo}, un recurso {tipo_minuscula} de {categoria} disponible para descarga inmediata.\n\n✓ Calidad premium\n✓ Descarga instantánea\n✓ Formato digital\n\n{descripcion_corta}";
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'seo_fallback_example2', array(
+        'label' => __('📝 Plantilla de Ejemplo 2 (Más Simple)', 'saico-wc'),
+        'section' => 'saico_seo_fallback',
+        'type' => 'hidden',
+        'description' => '<div style="background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;"><pre style="white-space: pre-wrap; margin: 0;">' . esc_html($example2) . '</pre><button type="button" onclick="document.querySelector(\'#_customize-input-seo_fallback_template\').value = ' . esc_js(json_encode($example2)) . '; document.querySelector(\'#_customize-input-seo_fallback_template\').dispatchEvent(new Event(\'change\'));" style="margin-top: 10px; padding: 5px 10px; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">Usar esta plantilla</button></div>',
+    )));
+}
+add_action('customize_register', 'saico_seo_fallback_customizer');

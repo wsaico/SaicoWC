@@ -1,10 +1,16 @@
 <?php
 /**
- * Template: Product Reviews (Reseñas de Producto)
- * Versión WooCommerce personalizada con sistema de estrellas
+ * Display single product reviews (comments)
  *
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product-reviews.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility.
+ *
+ * @see https://woocommerce.com/document/template-structure/
  * @package SaicoWC
- * @version 1.0.0
+ * @version 9.7.0
  */
 
 defined('ABSPATH') || exit;

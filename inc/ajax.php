@@ -129,7 +129,7 @@ function saico_ajax_filtrar_productos() {
 
     $filtro = isset($_POST['filtro']) ? sanitize_text_field($_POST['filtro']) : 'todos';
     $pagina = isset($_POST['pagina']) ? intval($_POST['pagina']) : 1;
-    $por_pagina = 12;
+    $por_pagina = function_exists('saico_productos_por_pagina') ? saico_productos_por_pagina() : 12;
 
     $args = array(
         'post_type' => 'product',
@@ -226,7 +226,7 @@ function saico_ajax_infinite_scroll() {
     check_ajax_referer('saico_ajax_nonce', 'nonce');
 
     $pagina = isset($_POST['pagina']) ? intval($_POST['pagina']) : 1;
-    $por_pagina = 12;
+    $por_pagina = function_exists('saico_productos_por_pagina') ? saico_productos_por_pagina() : 12;
 
     $args = array(
         'post_type' => 'product',

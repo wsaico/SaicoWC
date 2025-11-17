@@ -159,15 +159,3 @@
     --saico-container-xl: 1280px;
     --saico-container-2xl: 1536px;
 }
-
-/* Modo oscuro (opcional - para implementar en futuro) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --saico-bg-primario: #1a1a1a;
-        --saico-bg-secundario: #2d2d2d;
-        --saico-bg-terciario: #3a3a3a;
-        --saico-texto-primario: #ffffff;
-        --saico-texto-secundario: #d1d5db;
-        --saico-texto-terciario: #9ca3af;
-    }
-}

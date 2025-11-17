@@ -12,6 +12,12 @@
     height: fit-content;
 }
 
+.saico-sidebar-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: var(--saico-spacing-lg);
+}
+
 /* ============================================================================
    WIDGETS
    ============================================================================ */

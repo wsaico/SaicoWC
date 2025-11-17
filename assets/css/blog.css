@@ -16,8 +16,12 @@
    ============================================================================ */
 .saico-blog-layout {
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: 1fr;
     gap: var(--saico-spacing-2xl);
+}
+
+.saico-blog-layout.con-sidebar {
+    grid-template-columns: 1fr 350px;
 }
 
 .saico-blog-layout.sin-sidebar {

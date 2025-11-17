@@ -1,0 +1,199 @@
+/**
+ * Estilos Compartidos de Modales
+ * Centraliza CSS común para todos los modales del theme
+ *
+ * @package SaicoWC
+ * @version 1.0.0
+ */
+
+/* ============================================================================
+   BASE MODAL
+   ============================================================================ */
+
+.saico-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--saico-z-modal-backdrop, 9999);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.saico-modal.activo {
+    display: flex;
+    animation: saicoFadeIn 0.3s ease;
+}
+
+/* Overlay */
+.saico-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+/* Contenido del modal - MÁS ANCHO para mejor visualización de AdSense */
+.saico-modal-contenido {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 700px;
+    width: 92%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    animation: saicoSlideUp 0.4s ease;
+    box-sizing: border-box;
+}
+
+/* Botón cerrar */
+.saico-modal-cerrar {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.saico-modal-cerrar:hover {
+    background: #e5e7eb;
+    transform: rotate(90deg);
+}
+
+/* Bloqueo de scroll cuando modal está abierto */
+body.modal-abierto {
+    overflow: hidden;
+}
+
+/* ============================================================================
+   ANIMACIONES COMPARTIDAS
+   ============================================================================ */
+
+@keyframes saicoFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes saicoSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes saicoFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+/* ============================================================================
+   LOGIN MODAL - Estilos específicos
+   ============================================================================ */
+
+.saico-login-modal .saico-modal-contenido {
+    max-width: 500px;
+    padding: 40px;
+}
+
+.saico-login-modal .login-form-container {
+    width: 100%;
+}
+
+/* Mensajes de éxito/error en modal */
+#saico-login-messages-modal {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+#saico-login-messages-modal.success {
+    background-color: #d1fae5;
+    border: 1px solid #6ee7b7;
+    color: #065f46;
+}
+
+#saico-login-messages-modal.error {
+    background-color: #fee2e2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+}
+
+/* ============================================================================
+   RESPONSIVE
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .saico-modal {
+        align-items: flex-end;
+    }
+
+    .saico-modal-contenido {
+        padding: 20px 16px;
+        max-width: 100%;
+        width: 100%;
+        max-height: 95vh;
+        border-radius: 20px 20px 0 0;
+        margin: 0;
+    }
+
+    .saico-modal-cerrar {
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .saico-modal-cerrar svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Login modal responsive */
+    .saico-login-modal .saico-modal-contenido {
+        padding: 24px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-modal-contenido {
+        padding: 16px 12px;
+    }
+}

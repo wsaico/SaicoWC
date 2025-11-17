@@ -12,7 +12,7 @@ get_header();
 
 <div class="saico-blog">
     <div class="saico-contenedor">
-        <div class="saico-blog-layout">
+        <div class="saico-blog-layout <?php echo saico_get_layout_class(); ?>">
 
             <!-- Contenido Principal -->
             <main class="saico-blog-main">
@@ -181,8 +181,10 @@ get_header();
                 <?php endwhile; ?>
             </main>
 
-            <!-- Sidebar -->
-            <?php get_sidebar(); ?>
+            <!-- Sidebar (según configuración) -->
+            <?php if (saico_should_show_sidebar()) : ?>
+                <?php get_sidebar(); ?>
+            <?php endif; ?>
 
         </div>
     </div>

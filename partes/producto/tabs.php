@@ -14,7 +14,8 @@ if (!$product) {
 }
 
 $producto_id = $product->get_id();
-$descripcion = $product->get_description();
+// Obtener descripción y aplicar filtro de WooCommerce para fallback SEO
+$descripcion = apply_filters('woocommerce_product_description', $product->get_description(), $product);
 $reviews_habilitados = comments_open($producto_id);
 ?>
 
@@ -59,11 +60,6 @@ $reviews_habilitados = comments_open($producto_id);
                 <?php else : ?>
                     <p class="sin-descripcion">No hay descripción disponible para este producto.</p>
                 <?php endif; ?>
-
-                <?php
-                // Información adicional (atributos, etc.)
-                do_action('woocommerce_product_additional_information', $product);
-                ?>
             </div>
 
             <!-- Tab: Reviews -->
@@ -242,6 +238,15 @@ $reviews_habilitados = comments_open($producto_id);
     text-align: center;
     color: var(--saico-texto-terciario);
     font-style: italic;
+}
+
+/* Ocultar tabla de atributos de WooCommerce */
+.woocommerce-product-attributes {
+    display: none !important;
+}
+
+.shop_attributes {
+    display: none !important;
 }
 
 @media (max-width: 768px) {

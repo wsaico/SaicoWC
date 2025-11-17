@@ -77,41 +77,61 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    background: none;
-    border: none;
+    gap: 5px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
     cursor: pointer;
     padding: 12px;
-    border-radius: 8px;
-    transition: background 0.2s;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .saico-menu-hamburguesa:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+    border-color: #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+    transform: translateY(-1px);
 }
 
 .saico-menu-hamburguesa:active {
-    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
 }
 
 .saico-hamburguesa-linea {
-    width: 24px;
-    height: 2px;
+    width: 22px;
+    height: 2.5px;
     background: #1a1a1a;
-    border-radius: 2px;
-    transition: all 0.3s ease;
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.saico-menu-hamburguesa:hover .saico-hamburguesa-linea {
+    background: #10b981;
+}
+
+.saico-menu-hamburguesa.activo {
+    background: #10b981;
+    border-color: #10b981;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+}
+
+.saico-menu-hamburguesa.activo .saico-hamburguesa-linea {
+    background: #ffffff;
 }
 
 .saico-menu-hamburguesa.activo .saico-hamburguesa-linea:nth-child(1) {
-    transform: rotate(45deg) translateY(6px);
+    transform: rotate(45deg) translate(6px, 6px);
 }
 
 .saico-menu-hamburguesa.activo .saico-hamburguesa-linea:nth-child(2) {
     opacity: 0;
+    transform: scale(0);
 }
 
 .saico-menu-hamburguesa.activo .saico-hamburguesa-linea:nth-child(3) {
-    transform: rotate(-45deg) translateY(-6px);
+    transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* ============================================
@@ -210,7 +230,7 @@ body {
     justify-content: center;
     padding: 10px 20px;
     background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
+    color: white !important;
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
@@ -222,6 +242,7 @@ body {
 
 .saico-cta-btn:hover {
     background: linear-gradient(135deg, #059669, #047857);
+    color: white !important;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
 }
@@ -273,13 +294,15 @@ body {
     top: 0;
     left: -100%;
     width: 85%;
-    max-width: 360px;
+    max-width: 380px;
     height: 100%;
-    background: white;
+    background: #ffffff;
     z-index: 1100;
-    transition: left 0.3s ease;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
 }
 
 .saico-menu-lateral.activo {
@@ -290,42 +313,94 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 24px 20px;
     border-bottom: 1px solid #e5e7eb;
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    border-top-right-radius: 24px;
 }
 
 .saico-menu-lateral-header h3 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     margin: 0;
     color: #1a1a1a;
+    background: linear-gradient(135deg, #10b981, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .saico-menu-cerrar {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #f3f4f6;
-    border: none;
-    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .saico-menu-cerrar:hover {
-    background: #e5e7eb;
+    background: #fee2e2;
+    border-color: #fca5a5;
     transform: rotate(90deg);
 }
 
+.saico-menu-cerrar:hover svg {
+    color: #ef4444;
+}
+
 .saico-menu-busqueda {
-    padding: 16px;
+    padding: 20px;
     border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+    position: relative;
 }
 
 .saico-menu-busqueda .saico-search-input {
     width: 100%;
+    height: 48px;
+    padding: 0 48px 0 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 15px;
+    background: #ffffff;
+    transition: all 0.2s;
+}
+
+.saico-menu-busqueda .saico-search-input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.saico-menu-busqueda .saico-search-btn {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.saico-menu-busqueda .saico-search-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.saico-menu-busqueda .saico-search-btn svg {
+    color: #ffffff;
 }
 
 .saico-menu-contenido {
@@ -335,51 +410,43 @@ body {
 .saico-menu-lista {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 12px;
 }
 
 .saico-menu-lista li {
-    margin: 0;
+    margin: 0 0 4px 0;
 }
 
 .saico-menu-lista a {
     display: flex;
     align-items: center;
-    padding: 14px 20px;
+    padding: 14px 16px;
     color: #374151;
     text-decoration: none;
     font-size: 15px;
     font-weight: 500;
-    transition: all 0.2s;
+    border-radius: 12px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .saico-menu-lista a:hover {
-    background: #f3f4f6;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
     color: #10b981;
+    transform: translateX(4px);
+}
+
+.saico-menu-lista a.current-menu-item,
+.saico-menu-lista a.current_page_item {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
 }
 
 /* ============================================
    OVERLAY
    ============================================ */
-
-.saico-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1050;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
-    backdrop-filter: blur(2px);
-}
-
-.saico-overlay.activo {
-    opacity: 1;
-    visibility: visible;
-}
+/* NOTA: .saico-overlay está definido en base.css para evitar duplicación */
 
 /* ============================================
    BOTTOM NAVIGATION (Móvil)
@@ -439,6 +506,7 @@ body {
    RESPONSIVE: TABLET Y DESKTOP
    ============================================ */
 
+/* Tablet y Desktop (769px en adelante) */
 @media (min-width: 769px) {
     /* Header desktop */
     .saico-header-container {
@@ -558,6 +626,73 @@ body {
 
     .saico-bottom-nav {
         display: grid !important;
+    }
+
+    /* Hamburger más compacto en móvil pequeño */
+    .saico-menu-hamburguesa {
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+    }
+
+    .saico-hamburguesa-linea {
+        width: 20px;
+    }
+
+    /* Menú lateral optimizado para móvil */
+    .saico-menu-lateral {
+        width: 90%;
+        max-width: 340px;
+        border-radius: 0 20px 20px 0;
+    }
+
+    .saico-menu-lateral-header {
+        padding: 20px 16px;
+        border-radius: 0 20px 0 0;
+    }
+
+    .saico-menu-lateral-header h3 {
+        font-size: 18px;
+    }
+
+    .saico-menu-cerrar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .saico-menu-busqueda {
+        padding: 16px;
+    }
+
+    .saico-menu-busqueda .saico-search-input {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .saico-menu-busqueda .saico-search-btn {
+        right: 20px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .saico-menu-lista {
+        padding: 0 8px;
+    }
+
+    .saico-menu-lista a {
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .saico-menu-lateral {
+        width: 92%;
+        max-width: 320px;
+    }
+
+    .saico-menu-lateral-header h3 {
+        font-size: 16px;
     }
 }
 

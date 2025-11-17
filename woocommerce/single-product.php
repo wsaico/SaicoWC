@@ -2,8 +2,15 @@
 /**
  * The Template for displaying all single products
  *
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility.
+ *
+ * @see https://woocommerce.com/document/template-structure/
  * @package SaicoWC
- * @version 1.0.0
+ * @version 1.6.4
  */
 
 defined('ABSPATH') || exit;
@@ -93,9 +100,6 @@ get_header('shop');
                                             <?php
                                             // Hook para insertar código de AdSense
                                             do_action('saico_before_download_button');
-
-                                            // O directamente insertar el código de AdSense aquí
-                                            // Ejemplo: echo get_theme_mod('adsense_code_product', '');
                                             ?>
                                         </div>
 
@@ -335,5 +339,10 @@ if ($is_free_product) {
 
 // Modal de compartir - Siempre incluido
 get_template_part('partes/producto/modal-compartir');
+
+// Popup de invitación al login (para usuarios no logueados)
+if ($is_free_product && !is_user_logged_in()) {
+    get_template_part('partes/producto/popup-login-invite');
+}
 
 get_footer('shop');

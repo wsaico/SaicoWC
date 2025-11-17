@@ -61,17 +61,7 @@ add_action('init', 'saico_remover_acciones_wc');
 /**
  * Agregar wrappers personalizados
  */
-function saico_wrapper_inicio() {
-    echo '<div class="saico-contenedor saico-woo-contenedor">';
-    echo '<main class="saico-contenido-principal">';
-}
-add_action('woocommerce_before_main_content', 'saico_wrapper_inicio', 10);
-
-function saico_wrapper_fin() {
-    echo '</main>';
-    echo '</div>';
-}
-add_action('woocommerce_after_main_content', 'saico_wrapper_fin', 10);
+// Wrappers personalizados deshabilitados para evitar duplicación con templates
 
 /**
  * Localizar templates personalizados de WooCommerce
